@@ -1,0 +1,87 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// DB config
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+
+//DB schema
+
+model event {
+  id            String     @id @unique @default(cuid())
+  start_date    DateTime
+  end_date      DateTime
+  title         String?    @unique
+  description   String?
+  bill          Bytes
+  event_type_id event_type @relation(fields: [event_typeId], references: [id])
+  event_typeId  String
+}
+
+model event_type {
+  id    String  @id @unique @default(cuid())
+  type  String  @unique
+  event event[]
+}
+
+model item {
+  id          String      @id @unique @default(cuid())
+  title       String      @unique
+  description String
+  price       Float
+  item_size   item_size[]
+}
+
+model size {
+  id        String      @id @unique @default(cuid())
+  size      String      @unique
+  item_size item_size[]
+}
+
+model item_size {
+  id              String            @id @unique @default(cuid())
+  item_id         item              @relation(fields: [itemId], references: [id])
+  size_id         size              @relation(fields: [sizeId], references: [id])
+  stock           Int
+  itemId          String
+  sizeId          String
+  order_item_size order_item_size[]
+}
+
+model user {
+  id         String  @id @unique @default(cuid())
+  first_name String
+  last_name  String
+  email      String
+  phone      String
+  order      order[]
+}
+
+model order {
+  id              String            @id @unique @default(cuid())
+  user_id         user              @relation(fields: [userId], references: [id])
+  status          String
+  order_date      DateTime
+  payment_date    DateTime?
+  ship_date       DateTime?
+  userId          String
+  order_item_size order_item_size[]
+}
+
+model order_item_size {
+  id           String    @id @unique @default(cuid())
+  order_id     order     @relation(fields: [orderId], references: [id])
+  item_size_id item_size @relation(fields: [item_sizeId], references: [id])
+  orderId      String
+  item_sizeId  String
+}

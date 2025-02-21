@@ -1,0 +1,48 @@
+version: "3.8"
+
+services:
+  nextjs:
+    image: node:18-alpine  # or node:20-alpine for the latest Node.js version
+    working_dir: /app
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: sh -c "npm install && npm run dev"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:17.3  # Latest stable PostgreSQL version
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  pgadmin:
+    image: dpage/pgadmin4  # Official pgAdmin Docker image
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=${PG_USER} # Set admin email
+      - PGADMIN_DEFAULT_PASSWORD=${PG_PWD}      # Set admin password
+    ports:
+      - "8080:80"  # Access pgAdmin on port 8080
+    depends_on:
+      - db
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin  # Persist pgAdmin data
+
+volumes:
+  postgres_data:
+  pgadmin_data:
