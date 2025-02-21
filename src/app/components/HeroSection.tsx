@@ -4,7 +4,7 @@ export default function HeroSection() {
   return (
     <div className="relative w-full h-screen flex flex-col items-center justify-center text-white">
       <Image
-        src="/image/lenaentier.jpg" // ✅ Toujours depuis public/
+        src="/image/Team-bed.jpg" // ✅ Toujours depuis public/
         alt="Team BDE"
         layout="fill"
         objectFit="cover"
