@@ -32,16 +32,16 @@ services:
       - "5432:5432"
 
   pgadmin:
-    image: dpage/pgadmin4  # Official pgAdmin Docker image
+    image: dpage/pgadmin4:latest  # Use the latest version of pgAdmin
     environment:
-      - PGADMIN_DEFAULT_EMAIL=${PG_USER} # Set admin email
-      - PGADMIN_DEFAULT_PASSWORD=${PG_PWD}      # Set admin password
+      - PGADMIN_DEFAULT_EMAIL=${PG_USER}
+      - PGADMIN_DEFAULT_PASSWORD=${PG_PWD}
     ports:
-      - "8080:80"  # Access pgAdmin on port 8080
+      - "8080:80"
     depends_on:
       - db
     volumes:
-      - pgadmin_data:/var/lib/pgadmin  # Persist pgAdmin data
+      - pgadmin_data:/var/lib/pgadmin
 
 volumes:
   postgres_data:
