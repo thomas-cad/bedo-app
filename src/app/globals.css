@@ -1,23 +1,53 @@
+@font-face {
+  font-family: 'Orkney';
+  src: url('/fonts/Orkney-Regular.woff2') format('woff2'),
+       url('/fonts/Orkney-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Orkney';
+  src: url('/fonts/Orkney-Bold.woff2') format('woff2'),
+       url('/fonts/Orkney-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: #ffffff; /* Fond blanc */
+  --foreground: #171717; /* Texte sombre */
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Orkney', Arial, Helvetica, sans-serif;
+  margin: 0; /* Supprime les marges par défaut */
+  padding: 0; /* Supprime les paddings par défaut */
 }
 
+/* Appliquer la police Orkney aux éléments de base */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Orkney', Arial, Helvetica, sans-serif;
+  font-weight: bold; /* Utilise Orkney-Bold pour les titres */
+}
 
+p, a, span, li, button {
+  font-family: 'Orkney', Arial, Helvetica, sans-serif;
+  font-weight: normal; /* Utilise Orkney-Regular pour le texte */
+}
+
+/* Styles supplémentaires pour les liens */
+a {
+  color: inherit; /* Hérite de la couleur du texte parent */
+  text-decoration: none; /* Supprime le soulignement par défaut */
+}
+
+a:hover {
+  text-decoration: underline; /* Souligne les liens au survol */
+}

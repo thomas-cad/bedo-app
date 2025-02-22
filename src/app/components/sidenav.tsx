@@ -9,6 +9,7 @@ const navLinks = [
   { name: "HomePage", href: "/", icon: <Home size={20} /> },
   { name: "Projets", href: "/projets", icon: <Folder size={20} /> },
   { name: "Events", href: "/event", icon: <Calendar size={20} /> },
+  { name: "Shop", href: "/shop", icon: <Calendar size={20} /> }
 ];
 
 export default function SideNav() {

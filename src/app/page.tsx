@@ -8,7 +8,7 @@ const HeroSection = dynamic(() => import("@/app/components/HeroSection"), { ssr:
 const SubscribeSection = dynamic(() => import("@/app/components/SubscribeSection"), { ssr: false });
 const VideoSection = dynamic(() => import("@/app/components/VideoSection"), { ssr: false });
 const TeamSection = dynamic(() => import("@/app/components/TeamSection"), { ssr: false });
-const TextSection = dynamic(() => import("@/app/components/TextSection"), { ssr: false });
+//const TextSection = dynamic(() => import("@/app/components/TextSection"), { ssr: false });
 
 export default function HomePage() {
   const [showSubscribe, setShowSubscribe] = useState(false);
@@ -30,7 +30,7 @@ export default function HomePage() {
       {showSubscribe && <SubscribeSection />}
       {showVideo && <VideoSection />}
       {showTeam && <TeamSection />} 
-      {showTeam && <TextSection />}
+      {/* {showTeam && <TextSection />} */}
     </div>
   );
 }

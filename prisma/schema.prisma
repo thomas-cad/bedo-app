@@ -39,6 +39,7 @@ model item {
   title       String      @unique
   description String
   price       Float
+  image       String
   item_size   item_size[]
 }
 

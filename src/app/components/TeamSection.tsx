@@ -1,5 +1,5 @@
 const members = [
-    { name: "Thomas Rivol", role: "Président", image: "/images/alice.jpg" },
+    { name: "Thomas Revol", role: "Président", image: "/images/alice.jpg" },
     { name: "Alessandro", role: "Vice-Président", image: "/images/jean.jpg" },
     { name: "Téophile", role: "Trésorier", image: "/images/sophie.jpg" },
     { name: "Carl", role: "Vice-Trésorier", image: "/images/sophie.jpg" },
