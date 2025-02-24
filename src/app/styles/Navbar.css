@@ -9,30 +9,30 @@
 }
 
 .navbar-wrapper {
-  @apply flex justify-between items-center px-10 h-full;
+  @apply flex justify-between items-center px-6 md:px-10 h-full;
 }
 
 /* Logo */
 .logo {
-  @apply h-16 cursor-pointer;
+  @apply h-12 md:h-16 cursor-pointer;
 }
 
 /* Navigation Menu */
 .nav-menu {
-  @apply flex gap-10;
+  @apply flex gap-6 md:gap-10 text-center;
 }
 
 .nav-item {
-  @apply text-black text-lg transition hover:text-[#0CFF21] hover:text-xl no-underline;
+  @apply text-black text-base md:text-lg transition hover:text-[#0CFF21] hover:text-lg md:hover:text-xl no-underline;
 }
 
 /* Right Section */
 .nav-right {
-  @apply flex items-center gap-5;
+  @apply flex items-center gap-4 md:gap-5;
 }
 
 .language {
-  @apply text-black text-lg cursor-pointer transition hover:text-[#0CFF21] hover:text-xl;
+  @apply text-black text-base md:text-lg cursor-pointer transition hover:text-[#0CFF21] hover:text-lg md:hover:text-xl;
 }
 
 /* Shopping Cart Icon */
@@ -40,8 +40,7 @@
   @apply text-black hover:text-[#0CFF21] hover:no-underline;
 }
 
+/* Active Link */
 .active-nav {
-  color: #0CFF21; /* Highlight color for active link */
-  font-weight: bold;
-  border-bottom: 2px solid #0CFF21; /* Optional underline effect */
+  @apply text-[#0CFF21] font-bold border-b-2 border-[#0CFF21];
 }
