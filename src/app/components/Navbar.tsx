@@ -34,7 +34,15 @@ const Navbar = () => {
         <div className="nav-right">
           <span className="language">EN</span>
           <IconButton aria-label="cart">
-            <Badge badgeContent={cartCount} color="primary">
+          <Badge
+            badgeContent={cartCount}
+            color="primary"
+            sx={{
+                '& .MuiBadge-badge': {
+                backgroundColor: '#0CFF21', // Replace with your desired color
+                },
+            }}
+            >
               <ShoppingCartOutlinedIcon className="cart-icon" />
             </Badge>
           </IconButton>
