@@ -8,6 +8,9 @@ export default {
   ],
   theme: {
     extend: {
+      maskImage: {
+        "gradient": "linear-gradient(to bottom, black 70%, transparent 100%)",
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",

@@ -42,12 +42,3 @@ p, a, span, li, button {
   font-weight: normal; /* Utilise Orkney-Regular pour le texte */
 }
 
-/* Styles supplémentaires pour les liens */
-a {
-  color: inherit; /* Hérite de la couleur du texte parent */
-  text-decoration: none; /* Supprime le soulignement par défaut */
-}
-
-a:hover {
-  text-decoration: underline; /* Souligne les liens au survol */
-}
