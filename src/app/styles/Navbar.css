@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Navbar Styles */
+.navbar {
+  @apply fixed top-0 w-full z-50 backdrop-blur-md bg-white/10 h-20;
+  mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+}
+
+.navbar-wrapper {
+  @apply flex justify-between items-center px-10 h-full;
+}
+
+/* Logo */
+.logo {
+  @apply h-16 cursor-pointer;
+}
+
+/* Navigation Menu */
+.nav-menu {
+  @apply flex gap-10;
+}
+
+.nav-item {
+  @apply text-black text-lg transition hover:text-[#0CFF21] hover:text-xl no-underline;
+}
+
+/* Right Section */
+.nav-right {
+  @apply flex items-center gap-5;
+}
+
+.language {
+  @apply text-black text-lg cursor-pointer transition hover:text-[#0CFF21] hover:text-xl;
+}
+
+/* Shopping Cart Icon */
+.cart-icon {
+  @apply text-black hover:text-[#0CFF21] hover:no-underline;
+}
