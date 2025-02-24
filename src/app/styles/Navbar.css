@@ -39,3 +39,9 @@
 .cart-icon {
   @apply text-black hover:text-[#0CFF21] hover:no-underline;
 }
+
+.active-nav {
+  color: #0CFF21; /* Highlight color for active link */
+  font-weight: bold;
+  border-bottom: 2px solid #0CFF21; /* Optional underline effect */
+}
