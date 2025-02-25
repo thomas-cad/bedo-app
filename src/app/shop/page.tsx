@@ -1,10 +1,19 @@
-import React from 'react'
-import { default as Banner } from "@/app/components/BannerShop"
+import React from 'react';
+import { default as Banner } from './components/Banner';
+import Products from './components/Products';
+import { getItems } from '@/lib/prisma_GetItems'; // Import the data-fetching function
 
-const Shop = () => {
-    return (
-        <Banner />
-    )
-}
+// Make this a Server Component (remove "use client")
+const Shop = async () => {
+  // Fetch data on the server
+  const items = await getItems();
 
-export default Shop
+  return (
+    <div>
+      <Banner />
+      <Products items={items} />
+    </div>
+  );
+};
+
+export default Shop;
