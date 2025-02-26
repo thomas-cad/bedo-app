@@ -33,7 +33,7 @@ const Product: React.FC<ProductProps> = ({ item }) => {
         </div>
       </div>
       <div className="mt-4 text-center">
-        <h3 className="text-xl uppercase hover:text-[#0CFF21] hover:cursor-pointer text-left">{item.title}</h3>
+        <h3 className="text-xl uppercase hover:text-[#0CFF21] hover:cursor-pointer text-left font-normal">{item.title}</h3>
         <p className="text-gray-700 uppercase text-left font-medium">{item.price}€</p>
       </div>
     </div>
