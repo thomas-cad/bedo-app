@@ -11,9 +11,11 @@ interface ProductProps {
 
 const MainImage: React.FC<ProductProps> = ({ images_path }) => {
     const [imageId, setImageId] = React.useState(1);
-    const image = "image/" + images_path + "/" + imageId + ".jpg";
-    const image1 = "image/" + images_path + "/" + 1 + ".jpg"
-    const image2 = "image/" + images_path + "/" + 2 + ".jpg"
+    const PUBLIC_URL = process.env.PUBLIC_URL || '';
+    const image = PUBLIC_URL + "/image/" + images_path + "/" + imageId + ".jpg";
+    const image1 = PUBLIC_URL + "/image/" + images_path + "/" + 1 + ".jpg"
+    const image2 = PUBLIC_URL + "/image/" + images_path + "/" + 2 + ".jpg"
+    
     
     return (
         <div className="py-10">
