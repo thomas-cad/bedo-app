@@ -1,5 +1,8 @@
+"use client"
+
 import React from "react";
-import AddIcon from '@mui/icons-material/Add';
+import AddIcon from "@mui/icons-material/Add";
+import { useRouter } from "next/navigation";
 
 interface ProductProps {
   item: {
@@ -12,8 +15,17 @@ interface ProductProps {
 }
 
 const Product: React.FC<ProductProps> = ({ item }) => {
+  const router = useRouter();
+
+  const goToProduct = (id: string) => {
+    router.push(`/shop/product?id=${id}`);
+  };
+
   return (
-    <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 px-4 mb-8"> {/* Ajout de mb-8 pour l'espacement */}
+    <div
+      onClick={() => goToProduct(item.id)}
+      className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 px-4 mb-8 cursor-pointer"
+    >
       <div className="relative w-full aspect-[3/4] overflow-hidden cursor-pointer group">
         {/* Première image */}
         <img

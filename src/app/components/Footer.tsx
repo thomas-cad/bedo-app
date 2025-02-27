@@ -10,7 +10,7 @@ const Footer = () => {
     return (
         <footer className="px-4 divide-y dark:bg-gray-100 dark:text-gray-800 h-auto">
             <div className="container flex flex-col py-6 justify-between mx-auto space-y-8 lg:flex-row lg:space-y-0">
-                <img src= {PUBLIC_URL+ "/image/logo_BedBusters_couleur.png"} alt="Logo" className="h-32 w-auto object-contain" />
+                <img src= {"/image/logo_BedBusters_couleur.png"} alt="Logo" className="h-32 w-auto object-contain" />
                 <div className="grid grid-cols-2  text-sm gap-x-3 gap-y-8 lg:w-2/3 sm:grid-cols-4">
                         <div className="space-y-3">
                             <h3 className="uppercase dark:text-gray-900 font-normal">Code source</h3>
