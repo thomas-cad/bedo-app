@@ -1,29 +1,39 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import Return from "./components/Return";
 import Image from "./components/Image";
 import Description from "./components/Description";
 import AddToCard from "./components/AddToCard";
+import { useSearchParams } from 'next/navigation';
+import error from "next/error";
 
-interface ProductProps {
-    item: {
-        id: string;
+const Product = () => {
+
+    const [item, setItems] = useState<{ id: string;
         title: string;
         description: string;
         price: number;
-        image: string;
-    };
-}
+        image: string; }[]>([]);
+    const searchParams = useSearchParams();
+    const id = searchParams.get('id');
 
-const defaultItem = {
-    id: "1",
-    title: "Sweat Shirt BedBusters",
-    description: "This is a default product description.",
-    price: 40,
-    image: "/shop/pull"
-};
+    useEffect(() => {
+        const fetchItems = async () => {
+            try {
+                const response = await fetch('/api/item/' + id);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                setItems(data);
+            } catch (error) {
+                return(<div>Error</div>)
+            }
+        };
 
-const Product = () => {
-    const item = defaultItem;
+        fetchItems();
+    }, []);
 
     return (
         <div className="flex flex-col items-center px-10">
@@ -50,7 +60,5 @@ const Product = () => {
         </div>
     );
 };
-
-
 
 export default Product;

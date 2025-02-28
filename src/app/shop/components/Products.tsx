@@ -1,7 +1,6 @@
-import React from 'react';
-import Product from './Product';
+import React from "react";
+import Product from "./Product";
 
-// Define the type for an item
 interface Item {
   id: string;
   title: string;
@@ -10,17 +9,18 @@ interface Item {
   image: string;
 }
 
-// Define the props for the Products component
 interface ProductsProps {
   items: Item[];
 }
 
 const Products: React.FC<ProductsProps> = ({ items }) => {
   return (
-    <div className="py-12 flex justify-center p-4">
-      {items.map((item) => (
-        <Product item={item} key={item.id} />
-      ))}
+    <div className="py-12 p-4">
+      <div className="flex flex-wrap -mx-4"> {/* Conteneur flexible */}
+        {items.map((item) => (
+          <Product key={item.id} item={item} />
+        ))}
+      </div>
     </div>
   );
 };
