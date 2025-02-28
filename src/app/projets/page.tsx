@@ -195,8 +195,11 @@ const projets = [
         description:
           "Le pôle sport organise des tournois et encourage la pratique sportive au sein de l'école.",
           membres: [
-            { nom: "Camille Durand", photo: "/images/camille.jpg" },
-            { nom: "Nicolas Petit", photo: "/images/nicolas.jpg" },
+            { nom: "Alessandro", photo: "/images/alessandro.jpg" },
+            { nom: "Ismail", photo: "/images/ismail.jpg" },
+            { nom: "Khalil", photo: "/images/khalil.jpg" },
+            { nom: "Tara", photo: "/images/tara.jpg" },
+            { nom: "Sylvia", photo: "/images/sylvia.jpg" },
             ],
       },
       {
@@ -204,8 +207,12 @@ const projets = [
         description:
           "Le pôle partenariats établit des collaborations avec des entreprises pour offrir des avantages aux étudiants.",
           membres: [
-            { nom: "Camille Durand", photo: "/images/camille.jpg" },
-            { nom: "Nicolas Petit", photo: "/images/nicolas.jpg" },
+            { nom: "Ismail", photo: "/images/ismail.jpg" },
+            { nom: "Mao", photo: "/images/mao.jpg" },
+            { nom: "Carl", photo: "/images/carl.jpg" },
+            { nom: "Théophile", photo: "/images/théophile.jpg" },
+            { nom: "Yahya", photo: "/images/yahya.jpg" },
+            
             ],
       },
       {
@@ -213,8 +220,9 @@ const projets = [
         description:
           "Le pôle événementiel organise des soirées, conférences et activités pour animer la vie étudiante.",
           membres: [
-            { nom: "Camille Durand", photo: "/images/camille.jpg" },
-            { nom: "Nicolas Petit", photo: "/images/nicolas.jpg" },
+            { nom: "Tara", photo: "/images/tara.jpg" },
+            { nom: "Sarah", photo: "/images/sarah.jpg" },
+            { nom: "Thomas C", photo: "/images/thomas-c.jpg" },
             ],
       },
       {
@@ -222,8 +230,11 @@ const projets = [
         description:
           "Le pôle communication gère les réseaux sociaux et assure la promotion des événements du BDE.",
           membres: [
-            { nom: "Camille Durand", photo: "/images/camille.jpg" },
-            { nom: "Nicolas Petit", photo: "/images/nicolas.jpg" },
+            { nom: "Tara", photo: "/images/tara.jpg" },
+            { nom: "Carl", photo: "/images/carl.jpg" },
+            { nom: "Théophile", photo: "/images/théophile.jpg" },
+            { nom: "Yahya", photo: "/images/yahya.jpg" },
+            { nom: "Thomas R", photo: "/images/thomas-r.jpg" },
             ],
       },
       {
@@ -231,8 +242,10 @@ const projets = [
         description:
           "Le pôle sport organise des tournois et encourage la pratique sportive au sein de l'école.",
           membres: [
-            { nom: "Camille Durand", photo: "/images/camille.jpg" },
-            { nom: "Nicolas Petit", photo: "/images/nicolas.jpg" },
+            { nom: "Ismail", photo: "/images/ismail.jpg" },
+            { nom: "Khalil", photo: "/images/khalil.jpg" },
+            { nom: "Adam", photo: "/images/adam.jpg" },
+            { nom: "Lylia", photo: "/images/lylia.jpg" },
             ],
       },
       {
@@ -240,8 +253,9 @@ const projets = [
         description:
           "Le pôle partenariats établit des collaborations avec des entreprises pour offrir des avantages aux étudiants.",
           membres: [
-            { nom: "Camille Durand", photo: "/images/camille.jpg" },
-            { nom: "Nicolas Petit", photo: "/images/nicolas.jpg" },
+            { nom: "Yahya", photo: "/images/yahya.jpg" },
+            { nom: "Aristide", photo: "/images/aristide.jpg" },
+            { nom: "Alessandro", photo: "/images/alessandro.jpg" },
             ],
       },
       {
@@ -249,8 +263,10 @@ const projets = [
         description:
           "Le pôle partenariats établit des collaborations avec des entreprises pour offrir des avantages aux étudiants.",
           membres: [
-            { nom: "Camille Durand", photo: "/images/camille.jpg" },
-            { nom: "Nicolas Petit", photo: "/images/nicolas.jpg" },
+            { nom: "Sarah", photo: "/images/sarah.jpg" },
+            { nom: "Thomas C", photo: "/images/thomas-c.jpg" },
+            { nom: "Sebastien", photo: "/images/sebastien.jpg" }
+            { nom: "Thomas R", photo: "/images/thomas-r.jpg" },
             ],
       },
 ];
