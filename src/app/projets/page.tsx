@@ -187,7 +187,7 @@ const projets = [
             { nom: "Thomas R", photo: "/images/thomas-r.jpg" },
             { nom: "Alessandro", photo: "/images/alessandro.jpg" },
             { nom: "Sylvia", photo: "/images/sylvia.jpg" },
-            { nom: "Aristide", photo: "/images/aristide.jpg" },git 
+            { nom: "Aristide", photo: "/images/aristide.jpg" },
             ],
       },
       {
