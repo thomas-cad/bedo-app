@@ -30,7 +30,7 @@ export default function SubscribeSection() {
 
   return (
     <div className="text-center space-y-4">
-      <h2 className="text-3xl font-semibold">Inscrivez-vous aux événements</h2>
+      <h2 className="text-3xl text-[#0CFF21] font-semibold">Inscrivez-vous aux événements</h2>
       <input
         type="email"
         placeholder="Votre email"
@@ -38,7 +38,7 @@ export default function SubscribeSection() {
         onChange={(e) => setEmail(e.target.value)}
         className="p-2 border border-gray-300 rounded-md"
       />
-      <button onClick={handleSubscribe} className="px-4 py-2 bg-blue-600 text-white rounded-md">
+      <button onClick={handleSubscribe} className="px-4 py-2 bg-[#0CFF21] text-white rounded-md">
         S'abonner
       </button>
       {message && <p className="text-green-500">{message}</p>}
