@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   nextjs:
-    image: node:18-alpine  # or node:20-alpine for the latest Node.js version
+    image: node:18-alpine
     working_dir: /app
     ports:
       - "3000:3000"
@@ -13,10 +13,12 @@ services:
       - DB_USER=${DB_USER}
       - DB_PASSWORD=${DB_PASSWORD}
       - DB_NAME=${DB_NAME}
+      - NEXT_PUBLIC_RECAPTCHA_SITE_KEY=${NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+      - RECAPTCHA_SECRET_KEY=${RECAPTCHA_SECRET_KEY}
     volumes:
       - .:/app
       - /app/node_modules
-    command: sh -c "npm install && npm run dev"
+    command: sh -c "npm install && npx prisma generate && npm run dev"
     depends_on:
       - db
 

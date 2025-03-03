@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { useState } from "react";
 import Link from "next/link";
@@ -6,19 +6,22 @@ import { usePathname } from "next/navigation";
 import { Badge, IconButton } from "@mui/material";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import MenuIcon from "@mui/icons-material/Menu";
+import { useCart } from '@/app/context/CartContext';
 
 const Navbar = () => {
-  const [cartCount, setCartCount] = useState(4);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isDisappointed, setIsDisappointed] = useState(false); // Nouvel état pour la déception
   const pathname = usePathname();
+  const { cart } = useCart();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const toggleDisappointment = () => {
-    setIsDisappointed(!isDisappointed);
+  // Fonction utilitaire pour déterminer la classe active
+  const getActiveClass = (path: string) => {
+    return pathname === path
+      ? "text-[#0cff20] font-bold border-b-2 border-[#0cff21]"
+      : "text-black";
   };
 
   return (
@@ -61,36 +64,28 @@ const Navbar = () => {
         >
           <Link
             href="/"
-            className={`text-black text-base md:text-lg transition hover:text-[#0cff21] hover:text-lg md:hover:text-xl no-underline ${
-              pathname === "/" ? "text-[#0cff20] font-bold border-b-2 border-[#0cff21]" : ""
-            } ${isDisappointed ? "text-green-500" : ""}`}
+            className={`text-base md:text-lg transition hover:text-[#0cff21] hover:text-lg md:hover:text-xl no-underline ${getActiveClass("/")}`}
             onClick={toggleMenu}
           >
             NOTRE LISTE
           </Link>
           <Link
             href="/projets"
-            className={`text-black text-base md:text-lg transition hover:text-[#0cff21] hover:text-lg md:hover:text-xl no-underline ${
-              pathname === "/projets" ? "text-[#0cff20] font-bold border-b-2 border-[#0cff21]" : ""
-            } ${isDisappointed ? "text-green-500" : ""}`}
+            className={`text-base md:text-lg transition hover:text-[#0cff21] hover:text-lg md:hover:text-xl no-underline ${getActiveClass("/projets")}`}
             onClick={toggleMenu}
           >
             PROJETS
           </Link>
           <Link
             href="/event"
-            className={`text-black text-base md:text-lg transition hover:text-[#0cff21] hover:text-lg md:hover:text-xl no-underline ${
-              pathname === "/event" ? "text-[#0cff20] font-bold border-b-2 border-[#0cff21]" : ""
-            } ${isDisappointed ? "text-green-500" : ""}`}
+            className={`text-base md:text-lg transition hover:text-[#0cff21] hover:text-lg md:hover:text-xl no-underline ${getActiveClass("/event")}`}
             onClick={toggleMenu}
           >
             EVENTS
           </Link>
           <Link
             href="/shop"
-            className={`text-black text-base md:text-lg transition hover:text-[#0cff21] hover:text-lg md:hover:text-xl no-underline ${
-              pathname === "/shop" ? "text-[#0cff20] font-bold border-b-2 border-[#0cff21]" : ""
-            } ${isDisappointed ? "text-green-500" : ""}`}
+            className={`text-base md:text-lg transition hover:text-[#0cff21] hover:text-lg md:hover:text-xl no-underline ${getActiveClass("/shop")}`}
             onClick={toggleMenu}
           >
             BOUTIQUE
@@ -99,19 +94,21 @@ const Navbar = () => {
 
         {/* Right - Language & Cart */}
         <div className="flex items-center gap-4 md:gap-5">
-          <IconButton aria-label="cart">
-            <Badge
-              badgeContent={cartCount}
-              color="primary"
-              sx={{
-                "& .MuiBadge-badge": {
-                  backgroundColor: "#0cff21",
-                },
-              }}
-            >
-              <ShoppingCartOutlinedIcon className="text-black hover:text-[#0cff21]" />
-            </Badge>
-          </IconButton>
+          <Link href="/shop/cart">
+            <IconButton aria-label="cart">
+              <Badge
+          badgeContent={cart.length.toString()}
+          color="primary"
+          sx={{
+            "& .MuiBadge-badge": {
+              backgroundColor: "#0cff21",
+            },
+          }}
+              >
+          <ShoppingCartOutlinedIcon className="text-black hover:text-[#0cff21]" />
+              </Badge>
+            </IconButton>
+          </Link>
         </div>
       </div>
     </div>

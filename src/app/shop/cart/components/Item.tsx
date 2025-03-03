@@ -1,37 +1,107 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState, useMemo } from 'react';
 import Add from '@mui/icons-material/Add';
 import Remove from '@mui/icons-material/Remove';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { useCart } from '@/app/context/CartContext';
 
+interface Item {
+    id: string;
+    title: string;
+    size: string;
+    price: number;
+    image: string;
+    unique_item_size_id: string;
+}
 
-const Item: React.FC<ItemProps> = ({ id }) => {
-  return (
+const Item = ({ id }: { id: string }) => {
+    const [item, setItem] = useState<Item | null>(null);
+    const [error, setError] = useState<string | null>(null);
+    
+    const { cart, removeFromCart, AddOneToCart, RemoveOneFromCart } = useCart();
+
+    const getArticleQuantity = (uniqueItemId: string): number => {
+        const articleInCart = cart.find((item) => item.id === uniqueItemId);
+        return articleInCart ? articleInCart.quantity : 0;
+    };
+
+    const quantity = useMemo(() => getArticleQuantity(id), [cart, id]);
+
+    useEffect(() => {
+        const fetchItem = async () => {
+            try {
+                const response = await fetch(`/api/item_stock/${id}`);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch item details');
+                }
+                const data = await response.json();
+                const item_date = data[0]
+                setItem(item_date);
+            } catch (error: any) {
+                setError('Failed to load item details. Please try again later.');
+            }
+        };
+
+        fetchItem();
+    }, [id]);
+
+    if (error) {
+        return <div className="text-red-500">Erreur: {error}</div>;
+    }
+
+    if (!item) {
+        return <div>Chargement...</div>;
+    }
+
+    return (
         <div className="flex-1 lg:flex-[3]">
             <div className="flex flex-col md:flex-row justify-between mb-5">
                 <div className="relative flex flex-col md:flex-row flex-[2]">
-                    <img className="w-52 mx-auto md:mx-0" src="https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1614188818-TD1MTHU_SHOE_ANGLE_GLOBAL_MENS_TREE_DASHERS_THUNDER_b01b1013-cd8d-48e7-bed9-52db26515dc4.png?crop=1xw:1.00xh;center,top&resize=480%3A%2A" alt="" />
-                    
-                    <div className="p-5 flex flex-col justify-around">
-                        <span><b>Product:</b> JESSIE THUNDER SHOES</span>
-                        <span><b>ID:</b> 93813718293</span>
-                        <span><b>Size:</b> 37.5</span>
-                    </div>
+                    <img
+                        className="w-52 mx-auto md:mx-0"
+                        src={"/image/" + item.image + "/1.jpg"}
+                        alt={item.title}
+                        onError={(e) => {
+                            e.currentTarget.src = "/path/to/fallback/image.jpg";
+                        }}
+                    />
 
-                    {/* Conteneur des boutons centré */}
-                    <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
-                        <Add className="hover:cursor-pointer hover:text-[#0CFF21]"/>
-                        <span className="text-xl mx-1.5">2</span>
-                        <Remove className="hover:cursor-pointer hover:text-[#0CFF21]"/>
+                    <div className="p-5 flex flex-col justify-around">
+                        <span><b>Product:</b> {item.title}</span>
+                        <span><b>ID:</b> {item.unique_item_size_id}</span>
+                        <span><b>Size:</b> {item.size}</span>
                     </div>
 
                     <div className="p-5 flex flex-col justify-center items-center ml-auto">
-                        <span className="text-2xl font-light pb-4">30€</span>
+                        <span className="text-2xl font-light pb-4">{item.price}€</span>
+
+                        <div className="flex items-center space-x-3 mt-2">
+                            <Remove
+                                className={`hover:cursor-pointer hover:text-red-500 ${quantity === 0 ? "opacity-50 cursor-not-allowed" : ""}`}
+                                onClick={() => RemoveOneFromCart(id)}
+                                disabled={quantity === 0}
+                            />
+                            <span className="text-xl">{quantity}</span>
+                            <Add
+                                className="hover:cursor-pointer hover:text-green-500"
+                                onClick={() => AddOneToCart(id)}
+                            />
+                        </div>
+
+                        <button
+                            className="mt-3 px-3 py-1 bg-red-500 text-white text-sm rounded hover:bg-red-700"
+                            onClick={() => removeFromCart(id)}
+                            aria-label="Supprimer l'article"
+                        >
+                            <DeleteIcon fontSize="small" /> Supprimer
+                        </button>
                     </div>
                 </div>
             </div>
             <hr className="bg-gray-300 border-none h-px" />
         </div>
     );
-
 };
 
 export default Item;
