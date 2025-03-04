@@ -28,14 +28,20 @@ export default function CheckoutPage() {
   };
 
   const handleCaptchaChange = (token: string | null) => {
-    setIsVerified(!!token);
+    if (token) {
+      setIsVerified(true);
+    } else {
+      setIsVerified(false);
+    }
   };
 
   const handleExpired = () => {
     setIsVerified(false);
   };
 
-  const validateEmailDomain = (email: string) => email.endsWith('@telecom-paris.fr');
+  const validateEmailDomain = (email: string) => {
+    return email.endsWith('@telecom-paris.fr');
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -62,9 +68,9 @@ export default function CheckoutPage() {
 
     const body = JSON.stringify({
       ...formData,
-      cart,
+      cart: cart.cart,
       captchaToken,
-    });
+    })
 
     try {
       const response = await fetch('/api/checkout/new', {
@@ -72,8 +78,10 @@ export default function CheckoutPage() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body,
+        body: body,
       });
+
+
 
       const data = await response.json();
 
@@ -81,9 +89,10 @@ export default function CheckoutPage() {
         throw new Error(data.error || 'Erreur lors du traitement du paiement');
       }
 
+      // Rediriger l'utilisateur vers une page de succès
       window.location.href = '/success';
     } catch (err: any) {
-      setError(err.message);
+      setError(err.message + body);
     } finally {
       setIsSubmitting(false);
     }

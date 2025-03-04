@@ -10,8 +10,8 @@ const projets = [
         description:
           "Le pôle événementiel organise des soirées, conférences et activités pour animer la vie étudiante.",
         membres: [
-        { nom: "Sebastien", photo: "/images/sebastien.jpg" },
-        { nom: "Thomas R", photo: "/images/thomas-r.jpg" },
+        // { nom: "Sebastien", photo: "/images/sebastien.jpg" },
+        // { nom: "Thomas R", photo: "/images/thomas-r.jpg" },
         ],
       },
       {
@@ -19,8 +19,8 @@ const projets = [
         description:
           "Le pôle communication gère les réseaux sociaux et assure la promotion des événements du BDE.",
         membres: [
-        { nom: "Sylvia", photo: "/image/sylvia.jpg" },
-        { nom: "Tara", photo: "/images/tara.jpg" },
+        // { nom: "Sylvia", photo: "/image/sylvia.jpg" },
+        // { nom: "Tara", photo: "/images/tara.jpg" },
         ],
       },
       {
@@ -28,10 +28,10 @@ const projets = [
         description:
           "Le pôle sport organise des tournois et encourage la pratique sportive au sein de l'école.",
         membres: [
-        { nom: "Aristide", photo: "/images/aristide.jpg" },
-        { nom: "Thomas R", photo: "/images/thomas-r.jpg" },
-        { nom: "Sylvia", photo: "/images/sylvia.jpg" },
-        { nom: "Khalil", photo: "/images/khalil.jpg" },
+        // { nom: "Aristide", photo: "/images/aristide.jpg" },
+        // { nom: "Thomas R", photo: "/images/thomas-r.jpg" },
+        // { nom: "Sylvia", photo: "/images/sylvia.jpg" },
+        // { nom: "Khalil", photo: "/images/khalil.jpg" },
         ],
       },
       {
@@ -39,9 +39,9 @@ const projets = [
         description:
           "Le pôle partenariats établit des collaborations avec des entreprises pour offrir des avantages aux étudiants.",
           membres: [
-            { nom: "Sylvia", photo: "/images/sylvia.jpg" },
-            { nom: "Sarah", photo: "/images/sarah.jpg" },
-            { nom: "Lylia", photo: "/images/lylia.jpg" },
+            // { nom: "Sylvia", photo: "/images/sylvia.jpg" },
+            // { nom: "Sarah", photo: "/images/sarah.jpg" },
+            // { nom: "Lylia", photo: "/images/lylia.jpg" },
             ],
       },
       {
@@ -49,11 +49,11 @@ const projets = [
         description:
           "Le pôle événementiel organise des soirées, conférences et activités pour animer la vie étudiante.",
           membres: [
-            { nom: "Adam", photo: "/images/adam.jpg" },
-            { nom: "Thomas C", photo: "/images/thomas-c.jpg" },
-            { nom: "Lylia", photo: "/images/lylia.jpg" },
-            { nom: "Sebastien", photo: "/images/sebastien.jpg" },
-            { nom: "Yahya", photo: "/images/yahya.jpg" },
+            // { nom: "Adam", photo: "/images/adam.jpg" },
+            // { nom: "Thomas C", photo: "/images/thomas-c.jpg" },
+            // { nom: "Lylia", photo: "/images/lylia.jpg" },
+            // { nom: "Sebastien", photo: "/images/sebastien.jpg" },
+            // { nom: "Yahya", photo: "/images/yahya.jpg" },
             ],
       },
       {
@@ -61,9 +61,9 @@ const projets = [
         description:
           "Le pôle communication gère les réseaux sociaux et assure la promotion des événements du BDE.",
           membres: [
-            { nom: "Sarah", photo: "/images/sarah.jpg" },
-            { nom: "Khalil", photo: "/images/khalil.jpg" },
-            { nom: "Aristide", photo: "/images/aristide.jpg" },
+            // { nom: "Sarah", photo: "/images/sarah.jpg" },
+            // { nom: "Khalil", photo: "/images/khalil.jpg" },
+            // { nom: "Aristide", photo: "/images/aristide.jpg" },
             ],
       },
       {
@@ -71,10 +71,10 @@ const projets = [
         description:
           "Le pôle sport organise des tournois et encourage la pratique sportive au sein de l'école.",
           membres: [
-            { nom: "Lylia", photo: "/images/lylia.jpg" },
-            { nom: "Sebastien", photo: "/images/sebastien.jpg" },
-            { nom: "Sarah", photo: "/images/sarah.jpg" },
-            { nom: "Mao", photo: "/images/mao.jpg" },
+            // { nom: "Lylia", photo: "/images/lylia.jpg" },
+            // { nom: "Sebastien", photo: "/images/sebastien.jpg" },
+            // { nom: "Sarah", photo: "/images/sarah.jpg" },
+            // { nom: "Mao", photo: "/images/mao.jpg" },
             ],
       },
       {
@@ -82,8 +82,8 @@ const projets = [
         description:
           "Le pôle partenariats établit des collaborations avec des entreprises pour offrir des avantages aux étudiants.",
           membres: [
-            { nom: "Alessandro", photo: "/images/alessandro.jpg" },
-            { nom: "Tara", photo: "/images/tara.jpg" },
+            // { nom: "Alessandro", photo: "/images/alessandro.jpg" },
+            // { nom: "Tara", photo: "/images/tara.jpg" },
             ],
       },
       {
@@ -91,9 +91,9 @@ const projets = [
         description:
           "Le pôle événementiel organise des soirées, conférences et activités pour animer la vie étudiante.",
           membres: [
-            { nom: "Théophile", photo: "/images/théophile.jpg" },
-            { nom: "Arnaud", photo: "/images/arnaud.jpg" },
-            { nom: "Adam", photo: "/images/adam.jpg" },
+            // { nom: "Théophile", photo: "/images/théophile.jpg" },
+            // { nom: "Arnaud", photo: "/images/arnaud.jpg" },
+            // { nom: "Adam", photo: "/images/adam.jpg" },
             ],
       },
       {
@@ -101,10 +101,10 @@ const projets = [
         description:
           "Le pôle communication gère les réseaux sociaux et assure la promotion des événements du BDE.",
           membres: [
-            { nom: "Arnaud", photo: "/images/arnaud.jpg" },
-            { nom: "Sylvia", photo: "/images/sylvia.jpg" },
-            { nom: "Aristide", photo: "/images/aristide.jpg" },
-            { nom: "Thomas R", photo: "/images/thomas-r.jpg" },
+            // { nom: "Arnaud", photo: "/images/arnaud.jpg" },
+            // { nom: "Sylvia", photo: "/images/sylvia.jpg" },
+            // { nom: "Aristide", photo: "/images/aristide.jpg" },
+            // { nom: "Thomas R", photo: "/images/thomas-r.jpg" },
             ],
       },
       {
@@ -112,18 +112,18 @@ const projets = [
         description:
           "Le pôle sport organise des tournois et encourage la pratique sportive au sein de l'école.",
           membres: [
-            { nom: "Sylvia", photo: "/images/sylvia.jpg" },
-            { nom: "Sarah", photo: "/images/sarah.jpg" },
-            { nom: "Lylia", photo: "/images/lylia.jpg" },
+            // { nom: "Sylvia", photo: "/images/sylvia.jpg" },
+            // { nom: "Sarah", photo: "/images/sarah.jpg" },
+            // { nom: "Lylia", photo: "/images/lylia.jpg" },
             ],
       },
       {
         nom: "Pôle Informatique",
         description:
           "Le pôle partenariats établit des collaborations avec des entreprises pour offrir des avantages aux étudiants.",membres: [
-            { nom: "Yahya", photo: "/images/yahya.jpg" },
-            { nom: "Arnaud", photo: "/images/arnaud.jpg" },
-            { nom: "Thomas C", photo: "/images/thomas-c.jpg" },
+            // { nom: "Yahya", photo: "/images/yahya.jpg" },
+            // { nom: "Arnaud", photo: "/images/arnaud.jpg" },
+            // { nom: "Thomas C", photo: "/images/thomas-c.jpg" },
             ],
       },
       {
@@ -131,10 +131,10 @@ const projets = [
         description:
           "Le pôle événementiel organise des soirées, conférences et activités pour animer la vie étudiante.",
           membres: [
-            { nom: "Arnaud", photo: "/images/arnaud.jpg" },
-            { nom: "Mao", photo: "/images/mao.jpg" },
-            { nom: "Sebastien", photo: "/images/sebastien.jpg" },
-            { nom: "Khalil", photo: "/images/khalil.jpg" },
+            // { nom: "Arnaud", photo: "/images/arnaud.jpg" },
+            // { nom: "Mao", photo: "/images/mao.jpg" },
+            // { nom: "Sebastien", photo: "/images/sebastien.jpg" },
+            // { nom: "Khalil", photo: "/images/khalil.jpg" },
             ],
       },
       {
@@ -142,8 +142,8 @@ const projets = [
         description:
           "Le pôle communication gère les réseaux sociaux et assure la promotion des événements du BDE.",
           membres: [
-            { nom: "Arnaud", photo: "/images/arnaud.jpg" },
-            { nom: "Mao", photo: "/images/mao.jpg" },
+            // { nom: "Arnaud", photo: "/images/arnaud.jpg" },
+            // { nom: "Mao", photo: "/images/mao.jpg" },
             ],
       },
       {
@@ -151,10 +151,10 @@ const projets = [
         description:
           "Le pôle sport organise des tournois et encourage la pratique sportive au sein de l'école.",
           membres: [
-            { nom: "Mao", photo: "/images/mao.jpg" },
-            { nom: "Carl", photo: "/images/carl.jpg" },
-            { nom: "Théophile", photo: "/images/théophile.jpg" },
-            { nom: "Ismail", photo: "/images/ismail.jpg" },
+            // { nom: "Mao", photo: "/images/mao.jpg" },
+            // { nom: "Carl", photo: "/images/carl.jpg" },
+            // { nom: "Théophile", photo: "/images/théophile.jpg" },
+            // { nom: "Ismail", photo: "/images/ismail.jpg" },
             ],
       },
       {
@@ -162,10 +162,10 @@ const projets = [
         description:
           "Le pôle partenariats établit des collaborations avec des entreprises pour offrir des avantages aux étudiants.",
           membres: [
-            { nom: "Ismail", photo: "/images/ismail.jpg" },
-            { nom: "Yahya", photo: "/images/yahya.jpg" },
-            { nom: "Aristide", photo: "/images/aristide.jpg" },
-            { nom: "Adam", photo: "/images/adam.jpg" },
+            // { nom: "Ismail", photo: "/images/ismail.jpg" },
+            // { nom: "Yahya", photo: "/images/yahya.jpg" },
+            // { nom: "Aristide", photo: "/images/aristide.jpg" },
+            // { nom: "Adam", photo: "/images/adam.jpg" },
             ],
       },
       {
@@ -173,8 +173,8 @@ const projets = [
         description:
           "Le pôle événementiel organise des soirées, conférences et activités pour animer la vie étudiante.",
           membres: [
-            { nom: "Adam", photo: "/images/adam.jpg" },
-            { nom: "Ismail", photo: "/images/ismail.jpg" },
+            // { nom: "Adam", photo: "/images/adam.jpg" },
+            // { nom: "Ismail", photo: "/images/ismail.jpg" },
             ],
       },
       {
@@ -182,12 +182,12 @@ const projets = [
         description:
           "Le pôle communication gère les réseaux sociaux et assure la promotion des événements du BDE.",
           membres: [
-            { nom: "Carl", photo: "/images/carl.jpg" },
-            { nom: "Thomas C", photo: "/images/thomas-c.jpg" },
-            { nom: "Thomas R", photo: "/images/thomas-r.jpg" },
-            { nom: "Alessandro", photo: "/images/alessandro.jpg" },
-            { nom: "Sylvia", photo: "/images/sylvia.jpg" },
-            { nom: "Aristide", photo: "/images/aristide.jpg" },
+            // { nom: "Carl", photo: "/images/carl.jpg" },
+            // { nom: "Thomas C", photo: "/images/thomas-c.jpg" },
+            // { nom: "Thomas R", photo: "/images/thomas-r.jpg" },
+            // { nom: "Alessandro", photo: "/images/alessandro.jpg" },
+            // { nom: "Sylvia", photo: "/images/sylvia.jpg" },
+            // { nom: "Aristide", photo: "/images/aristide.jpg" },
             ],
       },
       {
@@ -195,11 +195,11 @@ const projets = [
         description:
           "Le pôle sport organise des tournois et encourage la pratique sportive au sein de l'école.",
           membres: [
-            { nom: "Alessandro", photo: "/images/alessandro.jpg" },
-            { nom: "Ismail", photo: "/images/ismail.jpg" },
-            { nom: "Khalil", photo: "/images/khalil.jpg" },
-            { nom: "Tara", photo: "/images/tara.jpg" },
-            { nom: "Sylvia", photo: "/images/sylvia.jpg" },
+            // { nom: "Alessandro", photo: "/images/alessandro.jpg" },
+            // { nom: "Ismail", photo: "/images/ismail.jpg" },
+            // { nom: "Khalil", photo: "/images/khalil.jpg" },
+            // { nom: "Tara", photo: "/images/tara.jpg" },
+            // { nom: "Sylvia", photo: "/images/sylvia.jpg" },
             ],
       },
       {
@@ -207,11 +207,11 @@ const projets = [
         description:
           "Le pôle partenariats établit des collaborations avec des entreprises pour offrir des avantages aux étudiants.",
           membres: [
-            { nom: "Ismail", photo: "/images/ismail.jpg" },
-            { nom: "Mao", photo: "/images/mao.jpg" },
-            { nom: "Carl", photo: "/images/carl.jpg" },
-            { nom: "Théophile", photo: "/images/théophile.jpg" },
-            { nom: "Yahya", photo: "/images/yahya.jpg" },
+            // { nom: "Ismail", photo: "/images/ismail.jpg" },
+            // { nom: "Mao", photo: "/images/mao.jpg" },
+            // { nom: "Carl", photo: "/images/carl.jpg" },
+            // { nom: "Théophile", photo: "/images/théophile.jpg" },
+            // { nom: "Yahya", photo: "/images/yahya.jpg" },
             
             ],
       },
@@ -220,9 +220,9 @@ const projets = [
         description:
           "Le pôle événementiel organise des soirées, conférences et activités pour animer la vie étudiante.",
           membres: [
-            { nom: "Tara", photo: "/images/tara.jpg" },
-            { nom: "Sarah", photo: "/images/sarah.jpg" },
-            { nom: "Thomas C", photo: "/images/thomas-c.jpg" },
+            // { nom: "Tara", photo: "/images/tara.jpg" },
+            // { nom: "Sarah", photo: "/images/sarah.jpg" },
+            // { nom: "Thomas C", photo: "/images/thomas-c.jpg" },
             ],
       },
       {
@@ -230,11 +230,11 @@ const projets = [
         description:
           "Le pôle communication gère les réseaux sociaux et assure la promotion des événements du BDE.",
           membres: [
-            { nom: "Tara", photo: "/images/tara.jpg" },
-            { nom: "Carl", photo: "/images/carl.jpg" },
-            { nom: "Théophile", photo: "/images/théophile.jpg" },
-            { nom: "Yahya", photo: "/images/yahya.jpg" },
-            { nom: "Thomas R", photo: "/images/thomas-r.jpg" },
+            // { nom: "Tara", photo: "/images/tara.jpg" },
+            // { nom: "Carl", photo: "/images/carl.jpg" },
+            // { nom: "Théophile", photo: "/images/théophile.jpg" },
+            // { nom: "Yahya", photo: "/images/yahya.jpg" },
+            // { nom: "Thomas R", photo: "/images/thomas-r.jpg" },
             ],
       },
       {
@@ -242,10 +242,10 @@ const projets = [
         description:
           "Le pôle sport organise des tournois et encourage la pratique sportive au sein de l'école.",
           membres: [
-            { nom: "Ismail", photo: "/images/ismail.jpg" },
-            { nom: "Khalil", photo: "/images/khalil.jpg" },
-            { nom: "Adam", photo: "/images/adam.jpg" },
-            { nom: "Lylia", photo: "/images/lylia.jpg" },
+            // { nom: "Ismail", photo: "/images/ismail.jpg" },
+            // { nom: "Khalil", photo: "/images/khalil.jpg" },
+            // { nom: "Adam", photo: "/images/adam.jpg" },
+            // { nom: "Lylia", photo: "/images/lylia.jpg" },
             ],
       },
       {
@@ -253,9 +253,9 @@ const projets = [
         description:
           "Le pôle partenariats établit des collaborations avec des entreprises pour offrir des avantages aux étudiants.",
           membres: [
-            { nom: "Yahya", photo: "/images/yahya.jpg" },
-            { nom: "Aristide", photo: "/images/aristide.jpg" },
-            { nom: "Alessandro", photo: "/images/alessandro.jpg" },
+            // { nom: "Yahya", photo: "/images/yahya.jpg" },
+            // { nom: "Aristide", photo: "/images/aristide.jpg" },
+            // { nom: "Alessandro", photo: "/images/alessandro.jpg" },
             ],
       },
       {
@@ -263,10 +263,10 @@ const projets = [
         description:
           "Le pôle partenariats établit des collaborations avec des entreprises pour offrir des avantages aux étudiants.",
           membres: [
-            { nom: "Sarah", photo: "/images/sarah.jpg" },
-            { nom: "Thomas C", photo: "/images/thomas-c.jpg" },
-            { nom: "Sebastien", photo: "/images/sebastien.jpg" }
-            { nom: "Thomas R", photo: "/images/thomas-r.jpg" },
+            // { nom: "Sarah", photo: "/images/sarah.jpg" },
+            // { nom: "Thomas C", photo: "/images/thomas-c.jpg" },
+            // { nom: "Sebastien", photo: "/images/sebastien.jpg" }
+            // { nom: "Thomas R", photo: "/images/thomas-r.jpg" },
             ],
       },
 ];
