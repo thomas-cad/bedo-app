@@ -24,16 +24,16 @@ export async function POST(req: Request) {
     );
 
     if (response.data.success) {
-      return new Response(JSON.stringify({ message: "Success" }), {
+      return new Response(JSON.stringify({ success: true, message: "success" }), {
         status: 200,
       });
     } else {
-      return new Response(JSON.stringify({ message: "Failed to verify" }), {
+      return new Response(JSON.stringify({ success: false, message: "Failed to verify", errorCodes: response.data }), {
         status: 405,
       });
     }
   } catch (error) {
-    return new Response(JSON.stringify({ message: "Internal Server Error" }), {
+    return new Response(JSON.stringify({ success: false, message: "Internal Server Error" }), {
       status: 500,
     });
   }

@@ -8,6 +8,6 @@ export async function GET(request: NextRequest) {
         const items = await prisma.item.findMany();
         return NextResponse.json(items);
     } catch (error) {
-        return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+        return NextResponse.json({ error: 'Internal Server Error', details: (error as any).message}, { status: 500 });
     }
 }
