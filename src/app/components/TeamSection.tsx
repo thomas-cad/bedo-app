@@ -1,9 +1,9 @@
 const members = [
-    { name: "Thomas Revol", role: "Président", image: "/images/alice.jpg" },
-    { name: "Alessandro", role: "Vice-Président", image: "/images/jean.jpg" },
-    { name: "Téophile", role: "Trésorier", image: "/images/sophie.jpg" },
-    { name: "Carl", role: "Vice-Trésorier", image: "/images/sophie.jpg" },
-    { name: "Sylvia", role: "Sec G", image: "/images/sophie.jpg" },
+    { name: "Thomas Revol", role: "Président", image: "/image/thomas-r.jpg" },
+    { name: "Alessandro", role: "Vice-Président", image: "/image/alessandro.jpg" },
+    { name: "Téophile", role: "Trésorier", image: "/image/théophile.jpg" },
+    { name: "Carl", role: "Vice-Trésorier", image: "/image/carl.jpg" },
+    { name: "Sylvia", role: "Sec G", image: "/image/sylvia.jpg" },
   ];
   
   export default function TeamSection() {
