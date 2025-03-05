@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function HeroSection() {
   return (
-    <div className="relative w-full h-screen flex flex-col items-center justify-center text-white">
+    <div className="relative w-full h-screen flex flex-col items-center justify-center text-[#0CFF21]">
       <Image
         src="/image/Team-bed.jpg" // ✅ Toujours depuis public/
         alt="Team BDE"
@@ -10,7 +10,7 @@ export default function HeroSection() {
         objectFit="cover"
         className="opacity-70"
       />
-      <h1 className="relative text-8xl font-bold">BED Marley</h1>
+      <h1 className="relative text-8xl font-bold">BED Buster</h1>
     </div>
   );
 }

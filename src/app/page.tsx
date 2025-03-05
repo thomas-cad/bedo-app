@@ -16,12 +16,12 @@ export default function HomePage() {
   const [showTeam, setShowTeam] = useState(false);
 
   // Chargement progressif des composants
-  useEffect(() => {
+  /* useEffect(() => {
     setTimeout(() => setShowSubscribe(true), 50);
     setTimeout(() => setShowVideo(true), 100);
     setTimeout(() => setShowTeam(true), 200);
   }, []);
-
+ */
   return (
 
     <div className="flex flex-col items-center justify-center bg-whote space-y-10 p-6">
