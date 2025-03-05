@@ -62,7 +62,7 @@ const Navbar = () => {
             isMenuOpen ? "flex" : "hidden"
           } md:flex flex-col md:flex-row gap-6 md:gap-10 text-center absolute md:static top-20 left-0 w-full md:w-auto bg-white md:bg-transparent p-4 md:p-0`}
         >
-          <Link
+          {/* <Link
             href="/"
             className={`text-base md:text-lg transition hover:text-[#0cff21] hover:text-lg md:hover:text-xl no-underline ${getActiveClass("/")}`}
             onClick={toggleMenu}
@@ -82,14 +82,14 @@ const Navbar = () => {
             onClick={toggleMenu}
           >
             EVENTS
-          </Link>
-          <Link
+          </Link> */}
+          {/* <Link
             href="/shop"
             className={`text-base md:text-lg transition hover:text-[#0cff21] hover:text-lg md:hover:text-xl no-underline ${getActiveClass("/shop")}`}
             onClick={toggleMenu}
           >
             BOUTIQUE
-          </Link>
+          </Link> */}
         </nav>
 
         {/* Right - Language & Cart */}
