@@ -36,8 +36,7 @@ const Item = ({ id }: { id: string }) => {
                     throw new Error('Failed to fetch item details');
                 }
                 const data = await response.json();
-                const item_date = data[0]
-                setItem(item_date);
+                setItem(data);
             } catch (error: any) {
                 setError('Failed to load item details. Please try again later.');
             }

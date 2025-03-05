@@ -3,6 +3,15 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
+interface Item {
+    id: string;
+    title: string;
+    size: string;
+    price: number;
+    image: string;
+    unique_item_size_id: string;
+}
+
 // Regex officielle pour un CUID (commence par "c" suivi de 24 caractères alphanumériques)
 const CUID_REGEX = /^c[a-z0-9]{24}$/;
 
@@ -15,17 +24,39 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
     }
 
     try {
-        // 2. Requête sécurisée sur la vue (prisma.$queryRaw gère les paramètres liés)
-        const itemWithSizes = await prisma.$queryRaw`
-            SELECT * FROM item_size_view WHERE unique_item_size_id = ${itemId}
-        `;
+        const item_stock = await prisma.item_size.findFirst({
+            where: {
+                id: itemId
+            }
+        });
+
+        const item_product = await prisma.item.findFirst({
+            where: {
+                id: item_stock?.itemId
+            }
+        });
+
+        const size = await prisma.size.findFirst({
+            where: {
+                id: item_stock?.sizeId
+            }
+        });
+
+        const item = {
+            id: item_product?.id,
+            title: item_product?.title,
+            size: size?.size,
+            price: item_product?.price,
+            image: item_product?.image,
+            unique_item_size_id: item_stock?.id,
+        }
 
         // 3. Retourne l'élément trouvé (ou une 404 si rien n'est trouvé)
-        if (!itemWithSizes || itemWithSizes.length === 0) {
+        if (!item_stock || !item_product) {
             return NextResponse.json({ error: 'Item not found' }, { status: 404 });
         }
 
-        return NextResponse.json(itemWithSizes);
+        return NextResponse.json(item);
     } catch (error) {
         console.error('Error fetching item with sizes:', error);
         return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });

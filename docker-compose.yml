@@ -15,6 +15,7 @@ services:
       - DB_NAME=${DB_NAME}
       - NEXT_PUBLIC_RECAPTCHA_SITE_KEY=${NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
       - RECAPTCHA_SECRET_KEY=${RECAPTCHA_SECRET_KEY}
+      - RESEND_KEY=${RESEND_KEY}
     volumes:
       - .:/app
       - /app/node_modules

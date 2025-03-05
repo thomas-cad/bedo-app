@@ -105,7 +105,7 @@ const CheckoutPage = () => {
     );
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!verified) {
       return;
@@ -119,8 +119,8 @@ const CheckoutPage = () => {
       return;
     }
     if (isFormValid()) {
-      if (createOrder()) {
-        alert("Formulaire soumis avec succès !");
+      const rv = await createOrder();
+      if (rv === true) {
         clearCart(); // Vider le panier après la soumission
       } else {
         alert("Une erreur s'est produite lors de la création de la commande.");
@@ -130,21 +130,40 @@ const CheckoutPage = () => {
     }
   };
 
-  const createOrder = () => {
+  const createOrder = async () => {
     const orderData: RequestBody = {
-      firstName: formData.firstName,
-      lastName: formData.lastName,
-      phone: formData.phone,
-      email: formData.email,
-      agreeToPay: agreementChecked, // Utilisation de la valeur de la case à cocher
-      cart: cart,
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        phone: formData.phone,
+        email: formData.email,
+        agreeToPay: agreementChecked,
+        cart: cart,
     };
     setRequestBody(orderData);
 
-    // Ici, vous pouvez envoyer les données à votre API
-    console.log("Données de la commande :", orderData);
-    return true;
-  };
+    try {
+        const response = await fetch("/api/checkout/new", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(orderData),
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            return true;
+        } else {
+            alert("Erreur lors de la création de la commande.");
+            return false;
+        }
+    } catch (error) {
+        alert("Une erreur réseau s'est produite.");
+        return false;
+    }
+};
+
 
   return (
     <div className="min-h-screen bg-gray-100 py-8 flex items-center justify-center">
@@ -255,7 +274,6 @@ const CheckoutPage = () => {
             >
               Passer la commande
             </button>
-            <p>{requestBody ? JSON.stringify(requestBody) : ""}</p>
           </div>
         </form>
       </div>
