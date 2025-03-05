@@ -1,58 +1,53 @@
-"use client";
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 
-import { useState } from "react";
-import ReCAPTCHA from "react-google-recaptcha";
+const CommandePage = () => {
+    const router = useRouter();
+    const { id } = router.query; // Récupère l'ID de la commande depuis l'URL
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState('');
 
-export default function SuccessPage() {
-    const [verified, setVerified] = useState(false);
-    const [response, setResponse] = useState<any>(null);
-    const [captchaError, setCaptchaError] =  useState<string>();
+    useEffect(() => {
+        if (!id) return; // Attend que l'ID soit disponible
 
-    const handleRecaptchaChange = (value: string | null) => {
-        fetch("/api/recaptcha", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ token: value }),
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            setResponse(data);
-            if (data.success) {
-              setVerified(true);
-              setCaptchaError(""); // Effacer l'erreur si le ReCAPTCHA est vérifié
-            } else {
-              setVerified(false);
-              setCaptchaError(`Veuillez vérifier que vous n'êtes pas un robot. Success: ${data.success}`);
+        // Appel à l'API pour vérifier l'existence de la commande
+        const checkOrderExistence = async () => {
+            try {
+                const response = await fetch(`/api/checkout/exist/${id}`);
+                const data = await response.json();
+
+                if (data.success) {
+                    // Si la commande existe, on affiche un message de succès
+                    setError(null);
+                } else {
+                    // Si la commande n'existe pas, on redirige vers la home page
+                    router.push('/');
+                }
+            } catch (err) {
+                setError('Une erreur est survenue lors de la vérification de la commande.');
+                console.error(err);
+            } finally {
+                setLoading(false);
             }
-          })
-          .catch((error) => {
-            console.error("Error verifying ReCAPTCHA:", error);
-            setVerified(false);
-            setCaptchaError("Une erreur s'est produite lors de la vérification du ReCAPTCHA.");
-          });
-    
-        if (value) {
-          setVerified(true);
-          setCaptchaError(""); // Effacer l'erreur si le ReCAPTCHA est vérifié
-        } else {
-          setVerified(false);
-          setCaptchaError("Veuillez vérifier que vous n'êtes pas un robot by value.");
-        }
-      };
+        };
+
+        checkOrderExistence();
+    }, [id, router]);
+
+    if (loading) {
+        return <p>Chargement en cours...</p>;
+    }
+
+    if (error) {
+        return <p>{error}</p>;
+    }
 
     return (
         <div>
-            <h1 className="mt-16">Test ReCAPTCHA</h1>
-            <ReCAPTCHA
-                sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
-                onChange={handleRecaptchaChange}
-                onExpired={() => setVerified(false)}
-            />
-            {verified && <p>ReCAPTCHA verified!</p>}
-            {response && <pre>{JSON.stringify(response, null, 2)}</pre>}
-            {captchaError && <p className="text-red-500 text-sm mt-2">{captchaError}</p>}
+            <h1>Commande validée !</h1>
+            <p>Votre commande avec l'ID <strong>{id}</strong> a été confirmée.</p>
         </div>
     );
-}
+};
+
+export default CommandePage;

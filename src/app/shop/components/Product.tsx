@@ -29,13 +29,13 @@ const Product: React.FC<ProductProps> = ({ item }) => {
       <div className="relative w-full aspect-[3/4] overflow-hidden cursor-pointer group">
         {/* Première image */}
         <img
-          src={`/image${item.image}/1.jpg`}
+          src={`/image${item.image}/1.png`}
           alt={item.title}
           className="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-110"
         />
         {/* Deuxième image (au survol) */}
         <img
-          src={`/image${item.image}/2.jpg`}
+          src={`/image${item.image}/2.png`}
           alt={item.title}
           className="w-full h-full object-cover transition-opacity duration-300 ease-in-out opacity-0 group-hover:opacity-100 absolute top-0 left-0"
         />

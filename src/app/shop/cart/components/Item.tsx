@@ -59,10 +59,10 @@ const Item = ({ id }: { id: string }) => {
                 <div className="relative flex flex-col md:flex-row flex-[2]">
                     <img
                         className="w-52 mx-auto md:mx-0"
-                        src={"/image/" + item.image + "/1.jpg"}
+                        src={"/image/" + item.image + "/1.png"}
                         alt={item.title}
                         onError={(e) => {
-                            e.currentTarget.src = "/path/to/fallback/image.jpg";
+                            e.currentTarget.src = "/path/to/fallback/image.png";
                         }}
                     />
 

@@ -122,6 +122,7 @@ const CheckoutPage = () => {
       const rv = await createOrder();
       if (rv === true) {
         clearCart(); // Vider le panier après la soumission
+        //IMPLEMENTER GO TO SUCCESS ICI + RECUPERER DANS LE JSON LE NUMERO DE COMMANDE
       } else {
         alert("Une erreur s'est produite lors de la création de la commande.");
       }

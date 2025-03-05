@@ -12,9 +12,9 @@ interface ProductProps {
 const MainImage: React.FC<ProductProps> = ({ images_path }) => {
     const [imageId, setImageId] = React.useState(1);
     const PUBLIC_URL = process.env.PUBLIC_URL || '';
-    const image = PUBLIC_URL + "/image/" + images_path + "/" + imageId + ".jpg";
-    const image1 = PUBLIC_URL + "/image/" + images_path + "/" + 1 + ".jpg"
-    const image2 = PUBLIC_URL + "/image/" + images_path + "/" + 2 + ".jpg"
+    const image = PUBLIC_URL + "/image/" + images_path + "/" + imageId + ".png";
+    const image1 = PUBLIC_URL + "/image/" + images_path + "/" + 1 + ".png"
+    const image2 = PUBLIC_URL + "/image/" + images_path + "/" + 2 + ".png"
     
     
     return (
