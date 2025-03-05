@@ -244,7 +244,7 @@ export async function POST(req: Request) {
     }
 
     const token = generateOrderVerificationToken(orderId, email)
-    //sendVerificationEmail(email, token)
+    sendVerificationEmail(email, token)
 
     // Retourner une réponse réussie
     return new Response(

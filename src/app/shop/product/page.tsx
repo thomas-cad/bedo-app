@@ -8,6 +8,8 @@ import AddToCard from "./components/AddToCard";
 import { useSearchParams } from 'next/navigation';
 import error from "next/error";
 
+import type { Metadata } from 'next';
+
 const Product = () => {
 
     const [item, setItems] = useState<{ id: string;

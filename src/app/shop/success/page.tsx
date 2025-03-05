@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
+import type { Metadata } from 'next';
+
 
 const CommandePage = () => {
     const searchParams = useSearchParams();

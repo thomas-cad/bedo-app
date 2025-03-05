@@ -3,6 +3,8 @@
 import React, { useState } from 'react';
 import ReCAPTCHA from "react-google-recaptcha";
 import { useCart, CartItem } from '@/app/context/CartContext';
+import type { Metadata } from 'next';
+
 
 interface RequestBody {
   firstName: string;

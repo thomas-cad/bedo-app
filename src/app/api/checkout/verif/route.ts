@@ -196,17 +196,17 @@ export async function GET(req: Request) {
     // Calcul du total de la commande
     const total = totalOrder(orderDetail);
 
-    // const emailBody = generateEmailBody(user?.first_name ?? '', orderDetail, total)
-    // const subject = "👻 BedBusters - Ta commande est confirmée !"; 
+    const emailBody = generateEmailBody(user?.first_name ?? '', orderDetail, total)
+    const subject = "👻 BedBusters - Ta commande est confirmée !"; 
 
-    // if (user?.email) {
-    //     sendEmail(user.email, subject, emailBody);
-    // } else {
-    //     return new Response(
-    //         JSON.stringify({ success: false, message: "E-mail non définie" }),
-    //         { status: 400 }
-    //     );
-    // }
+    if (user?.email) {
+        sendEmail(user.email, subject, emailBody);
+    } else {
+        return new Response(
+            JSON.stringify({ success: false, message: "E-mail non définie" }),
+            { status: 400 }
+        );
+    }
 
     try {
         await prisma.order.update({ 

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
+import type { Metadata } from 'next';
 import Banner from './components/Banner';
 import Products from './components/Products';
 
