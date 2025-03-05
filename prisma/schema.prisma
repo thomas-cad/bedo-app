@@ -62,9 +62,8 @@ model order {
   id              String            @id @unique @default(cuid())
   status          String
   order_date      DateTime
-  payment_date    DateTime?
-  ship_date       DateTime?
   userId          String
+  total           Float
   user_id         user              @relation(fields: [userId], references: [id])
   order_item_size order_item_size[]
 }
@@ -73,6 +72,7 @@ model order_item_size {
   id           String    @id @unique @default(cuid())
   orderId      String
   item_sizeId  String
+  quantity     Int
   item_size_id item_size @relation(fields: [item_sizeId], references: [id])
   order_id     order     @relation(fields: [orderId], references: [id])
 }

@@ -38,6 +38,6 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
         return NextResponse.json(itemWithSizes);
     } catch (error) {
         console.error('Error fetching item:', error); // Log the error for debugging
-        return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+        return NextResponse.json({ error: 'Internal Server Error', details: (error as any).message }, { status: 500 });
     }
 }

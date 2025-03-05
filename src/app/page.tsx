@@ -24,7 +24,7 @@ export default function HomePage() {
 
   return (
 
-    <div className="flex flex-col items-center justify-center bg-white space-y-10 p-6">
+    <div className="flex flex-col items-center justify-center bg-whote space-y-10 p-6">
       <HeroSection />
 
       {showSubscribe && <SubscribeSection />}
