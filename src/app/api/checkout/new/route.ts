@@ -1,5 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import { CartItem } from '@/app/context/CartContext';
+import jwt from 'jsonwebtoken';
+import nodemailer from 'nodemailer';
 
 const prisma = new PrismaClient();
 
@@ -12,65 +14,88 @@ interface RequestBody {
     cart: CartItem[];
   }
 
-interface OrderDetail{ id: string; stockAvailable: number; stockToOrder: number; quantity: number; name: string; price: number; description: string}
-
-function generateEmailBody(firstName: string, orderDetails: OrderDetail[], total: number): string {
-    // Construction du message
-    let emailBody = `Salut ${firstName} ! 👻\n\n`;
-    emailBody += `Un grand **merci** pour ta commande chez nous ! 💖 On est super heureux de t’avoir parmi nos clients et on espère que tu vas adorer ce que tu as choisi. 😊\n\n`;
-
-    // Tableau des détails de la commande
-    emailBody += `**Détails de ta commande :**\n`;
-    emailBody += `| Nom                | Référence | Description         | Quantité | Prix   |\n`;
-    emailBody += `|--------------------|-----------|---------------------|----------|--------|\n`;
-    orderDetails.forEach((item) => {
-        emailBody += `| ${item.name.padEnd(20)} | ${item.id.padEnd(10)} | ${item.description.padEnd(20)} | ${item.quantity.toString().padEnd(8)} | ${item.price.toFixed(2).padEnd(6)} € |\n`;
-    });
-    emailBody += `\n**Total de la commande : ${total.toFixed(2)} €**\n\n`;
-
-    // Vérification des articles en précommande
-    const preorderItems = orderDetails.filter((item) => item.stockToOrder > 0);
-    if (preorderItems.length > 0) {
-        emailBody += `**⚠️ Informations sur les articles en précommande :**\n`;
-        emailBody += `Certains articles de ta commande sont actuellement en précommande. Ils seront disponibles sous **2 semaines**. Voici la liste :\n`;
-        preorderItems.forEach((item) => {
-            emailBody += `- **${item.name}** (Réf: ${item.id}) : ${item.stockToOrder} unité(s) en précommande.\n`;
-        });
-        emailBody += `\n`;
-    }
-
-    // Options de paiement
-    emailBody += `Pour le règlement, tu as plusieurs options :\n`;
-    const rib = process.env.RIB;
-    emailBody += `✅ **Par virement** : Tu trouveras ci-joint notre RIB pour effectuer le paiement : ${rib}\n`;
-    emailBody += `✅ **Via Lydia QR code** : Tu pourras payer directement au moment de récupérer ta commande.\n`;
-    emailBody += `✅ **En espèces** : Tu peux aussi régler sur place lors de la récupération.\n\n`;
-
-    // Instructions pour récupérer la commande
-    emailBody += `Pour récupérer ta commande, tu peux passer **durant les perms au local** 🏠 ou, si tu préfères, envoyer un **DM à @bedbusers** sur instagram. 📩\n\n`;
-
-    // Appel à voter pour BedBusters
-    emailBody += `Enfin, on a une petite faveur à te demander… 😇 Si tu as aimé ton expérience avec nous, n’hésite pas à **voter pour 👻👻BedBusters👻👻** !;`
-
-    // Signature
-    emailBody += `Merci encore pour ta confiance, et à très vite ! 🚀\n\n`;
-    emailBody += `BedBusters 👻`;
-
-    return emailBody;
-}
-
-// Validation du numéro de téléphone (exemple international simple)
-function isValidPhoneNumber(phone: string): boolean {
-    const phoneRegex = /^(\+?[1-9]\d{1,14}|0\d{9})$/;
-    return phoneRegex.test(phone);
-}
-
 function totalOrder(cart: CartItem[]): number {
     let total = 0;
     for (const item of cart) {
         total += item.price * item.quantity;
     }
     return total;
+}
+
+async function sendEmail(email: string, subject: string, body: string) {
+    const transporter = nodemailer.createTransport({
+        host: process.env.SMTP_HOST,
+        port: Number(process.env.SMTP_PORT),
+        secure: process.env.SMTP_SECURE === 'true', // true pour 465, false pour 587
+        auth: {
+            user: process.env.SMTP_USER,
+            pass: process.env.SMTP_PASS,
+        },
+    });
+
+    try {
+        await transporter.sendMail({
+            from: `"BedBusters" <${process.env.SMTP_USER}>`,
+            to: email,
+            subject: subject,
+            text: body,
+        });
+
+        return new Response(
+            JSON.stringify({ success: false, message: "Impossible d'envoyer le mail" }),
+            { status: 400 }
+        );
+    } catch (error) {
+        console.error('Erreur envoi email:', error);
+        return new Response(
+            JSON.stringify({ success: false, message: "Impossible d'envoyer le mail" }),
+            { status: 400 }
+        );
+    }
+}
+
+function generateOrderVerificationToken(orderId: string, email: string) {
+    return jwt.sign(
+        { orderId, email },
+        process.env.TJW_SECRET_KEY as string, // Clé secrète bien gardée !
+        { expiresIn: '1h' } // Expiration facultative (reco : 1h ou 24h max)
+    );
+}
+
+async function sendVerificationEmail(email: string, token: string) {
+    const url = process.env.PUBLIC_URL;
+    const verifyUrl = url + `/api/checkout/verif?token=${token}`;
+    const body = generateVerificationEmailBody(verifyUrl)
+    const subject = "👻 BedBusters - Confirme ta commande (c’est rapide !)"; 
+    await sendEmail(email, subject, body)
+}
+
+function generateVerificationEmailBody(verifyUrl: string): string {
+    let emailBody = `Salut ! 👻\n\n`;
+
+    emailBody += `On a bien reçu ta commande chez **BedBusters** et on est trop chauds de te compter parmi nous ! 🔥\n\n`;
+
+    emailBody += `🛡️ **Pour finaliser ta commande**, il te reste une petite étape : la **valider** en cliquant sur le lien ci-dessous. Ça nous permet de vérifier que c’est bien toi (et pas un fantôme qui passe commande à ta place 👀).\n\n`;
+
+    emailBody += `👉 **Valide ta commande ici :**\n`;
+    emailBody += `${verifyUrl}\n\n`;
+
+    emailBody += `⚠️ **Attention**, ce lien expire dans **1 heure**, donc ne traîne pas trop !\n\n`;
+
+    emailBody += `Si jamais tu n’es pas à l’origine de cette commande, ou si tu penses qu’il y a une erreur, n’hésite pas à nous contacter directement via **@bedbusters** sur Insta.\n\n`;
+
+    emailBody += `Merci encore pour ta confiance, et prépare-toi à recevoir des articles monstrueux ! 👻\n\n`;
+
+    emailBody += `👻 La team BedBusters 👻`;
+
+    return emailBody;
+}
+
+
+// Validation du numéro de téléphone (exemple international simple)
+function isValidPhoneNumber(phone: string): boolean {
+    const phoneRegex = /^(\+?[1-9]\d{1,14}|0\d{9})$/;
+    return phoneRegex.test(phone);
 }
 
 export async function POST(req: Request) {
@@ -218,78 +243,12 @@ export async function POST(req: Request) {
         );
     }
 
-    let orderDetail: OrderDetail[] = [];
-    // Edit stock
-    try {
-        for (const item of cart) {
-            const item_stock = await prisma.item_size.findFirst({
-                where: {
-                    id: item.id
-                }
-            });
-
-            const item_product = await prisma.item.findFirst({
-                where: {
-                    id: item_stock?.itemId
-                }
-            });
-
-            let stockAvailable;
-            let stockToOrder;
-            let newStock;
-            if(item_stock && item_stock.stock >= item.quantity){
-                stockAvailable =  item_stock.stock - item.quantity;
-                stockToOrder = 0;
-                newStock = item_stock.stock - item.quantity;
-            } else if(item_stock && item_stock.stock < item.quantity){
-                stockAvailable =  item_stock.stock;
-                stockToOrder = item.quantity - item_stock.stock;
-                newStock = 0;
-            } else {
-                return new Response(
-                    JSON.stringify({ success: false, message: "Erreur lors de l'édition des stocks" }),
-                    { status: 400 }
-                );
-            }
-
-            const newItem = {
-                id: item.id,
-                stockAvailable: stockAvailable,
-                stockToOrder: stockToOrder,
-                quantity: item.quantity,
-                name: item_product?.title ?? '',
-                price: item.quantity * (item_product?.price ?? 0),
-                description: item_product?.description ?? '',
-            }
-
-            orderDetail.push(newItem);
-
-            await prisma.item_size.update({
-                where: { id: item.id },
-                data: {
-                    stock: newStock,
-                },
-            });
-        }
-    }catch (error) {
-    return new Response(
-            JSON.stringify({ success: false, message: "Erreur lors de la création du détail de la commande" }),
-            { status: 400 }
-        );
-    }
-
-    // Calcul du total de la commande
-    const total = totalOrder(cart);
-
-    const emailBody = generateEmailBody(firstName, orderDetail, total)
-
-    //
-    // IMPLEMENTER ENVOYER MAIL ICI
-    //
+    const token = generateOrderVerificationToken(orderId, email)
+    //sendVerificationEmail(email, token)
 
     // Retourner une réponse réussie
     return new Response(
-        JSON.stringify({ success: true, orderId: orderId, userId:userId, orderDetail: orderDetail, total:total}),
+        JSON.stringify({ success: true, orderId: orderId, userId:userId, token: token}),
         { status: 200 }
     );
 }

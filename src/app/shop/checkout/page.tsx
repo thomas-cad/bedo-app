@@ -120,16 +120,18 @@ const CheckoutPage = () => {
     }
     if (isFormValid()) {
       const rv = await createOrder();
-      if (rv === true) {
+      if (rv.success == true) {
         clearCart(); // Vider le panier après la soumission
-        //IMPLEMENTER GO TO SUCCESS ICI + RECUPERER DANS LE JSON LE NUMERO DE COMMANDE
+        window.location.href = `/shop/success?id=${rv.orderId}`;
       } else {
-        alert("Une erreur s'est produite lors de la création de la commande.");
+        alert(`Une erreur s'est produite lors de la création de la commande. ${rv.success}`);
       }
     } else {
       alert("Veuillez remplir tous les champs correctement.");
     }
   };
+
+
 
   const createOrder = async () => {
     const orderData: RequestBody = {
@@ -152,13 +154,8 @@ const CheckoutPage = () => {
         });
 
         const data = await response.json();
+        return data
 
-        if (data.success) {
-            return true;
-        } else {
-            alert("Erreur lors de la création de la commande.");
-            return false;
-        }
     } catch (error) {
         alert("Une erreur réseau s'est produite.");
         return false;
