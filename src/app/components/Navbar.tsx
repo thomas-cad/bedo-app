@@ -2,15 +2,16 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+// import { usePathname } from "next/navigation";
 import { Badge, IconButton } from "@mui/material";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useCart } from '@/app/context/CartContext';
+import Image from "next/image";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const pathname = usePathname();
+  // const pathname = usePathname();
   const { cart } = useCart();
 
   const toggleMenu = () => {
@@ -18,11 +19,11 @@ const Navbar = () => {
   };
 
   // Fonction utilitaire pour déterminer la classe active
-  const getActiveClass = (path: string) => {
-    return pathname === path
-      ? "text-[#0cff20] font-bold border-b-2 border-[#0cff21]"
-      : "text-black";
-  };
+  // const getActiveClass = (path: string) => {
+  //   return pathname === path
+  //     ? "text-[#0cff20] font-bold border-b-2 border-[#0cff21]"
+  //     : "text-black";
+  // };
 
   return (
     <div
@@ -48,10 +49,12 @@ const Navbar = () => {
 
           {/* Logo */}
           <Link href="/">
-            <img
+            <Image
               src="/image/navbar/logo_navbar.png"
               alt="Logo"
-              className="h-12 md:h-16 cursor-pointer"
+              width={120} // Adjust the width as needed
+              height={64} // Adjust the height as needed
+              className="cursor-pointer"
             />
           </Link>
         </div>
@@ -97,15 +100,15 @@ const Navbar = () => {
           <Link href="/shop/cart">
             <IconButton aria-label="cart">
               <Badge
-          badgeContent={cart.length.toString()}
-          color="primary"
-          sx={{
-            "& .MuiBadge-badge": {
-              backgroundColor: "#0cff21",
-            },
-          }}
+                badgeContent={cart.length.toString()}
+                color="primary"
+                sx={{
+                  "& .MuiBadge-badge": {
+                    backgroundColor: "#0cff21",
+                  },
+                }}
               >
-          <ShoppingCartOutlinedIcon className="text-black hover:text-[#0cff21]" />
+                <ShoppingCartOutlinedIcon className="text-black hover:text-[#0cff21]" />
               </Badge>
             </IconButton>
           </Link>

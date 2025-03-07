@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import ReCAPTCHA from "react-google-recaptcha";
 import { useCart, CartItem } from '@/app/context/CartContext';
-import type { Metadata } from 'next';
 
 
 interface RequestBody {
@@ -28,8 +27,6 @@ const CheckoutPage = () => {
   const [captchaError, setCaptchaError] = useState("");
   const [agreementChecked, setAgreementChecked] = useState(false); // État pour la case à cocher
   const [agreementError, setAgreementError] = useState(""); // Message d'erreur pour la case à cocher
-  const [cartError, setCartError] = useState(""); // Message d'erreur pour le panier vide
-  const [requestBody, setRequestBody] = useState<RequestBody>();
   const { clearCart } = useCart();
   const { cart } = useCart();
 
@@ -116,8 +113,7 @@ const CheckoutPage = () => {
       setAgreementError("Vous devez accepter les conditions de paiement.");
       return;
     }
-    if (cart.length === 0) {
-      setCartError("Votre panier est vide. Ajoutez des articles avant de passer la commande.");
+    if (cart.length == 0) {
       return;
     }
     if (isFormValid()) {
@@ -144,7 +140,6 @@ const CheckoutPage = () => {
         agreeToPay: agreementChecked,
         cart: cart,
     };
-    setRequestBody(orderData);
 
     try {
         const response = await fetch("/api/checkout/new", {
@@ -159,7 +154,7 @@ const CheckoutPage = () => {
         return data
 
     } catch (error) {
-        alert("Une erreur réseau s'est produite.");
+        alert(error);
         return false;
     }
 };
@@ -239,7 +234,7 @@ const CheckoutPage = () => {
                 className="form-checkbox h-4 w-4 text-[#0CFF21] border-gray-300 rounded"
               />
               <span className="text-sm text-gray-700">
-                Je m'engage à payer le montant de la commande auprès des <strong>BedBusters</strong>.
+                Je m&apos;engage à payer le montant de la commande auprès des <strong>BedBusters</strong>.
               </span>
             </label>
             {agreementError && <p className="text-red-500 text-sm mt-1">{agreementError}</p>}

@@ -3,14 +3,20 @@
 import React from "react";
 import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
+import Image from 'next/image';
 
 const Footer = () => {
-    const PUBLIC_URL = process.env.PUBLIC_URL || '';
-
     return (
         <footer className="px-4 divide-y dark:bg-gray-100 dark:text-gray-800 h-auto">
             <div className="container flex flex-col py-6 justify-between mx-auto space-y-8 lg:flex-row lg:space-y-0">
-                <img src= {"/image/logo_BedBusters_couleur.png"} alt="Logo" className="h-32 w-auto object-contain" />
+                <div className="object-contain">
+                    <Image
+                        src="/image/logo_BedBusters_couleur.png"
+                        width={100}
+                        height={500}
+                        alt="Logo"
+                    />
+                </div>
                 <div className="grid grid-cols-2  text-sm gap-x-3 gap-y-8 lg:w-2/3 sm:grid-cols-4">
                         <div className="space-y-3">
                             <h3 className="uppercase dark:text-gray-900 font-normal">Code source</h3>

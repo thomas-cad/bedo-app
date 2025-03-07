@@ -1,7 +1,8 @@
 
 "use client";
 
-import React from "react";
+import React from "react"; 
+import Image from "next/image";
 
 const projets = [
   
@@ -340,10 +341,10 @@ export default function ProjetsPage() {
       <section className="max-w-3xl mx-auto text-center bg-white shadow-md rounded-lg p-6 mb-10 mt-16">
         <h1 className="text-3xl font-bold text-[#0CFF21]">Message du Président</h1>
         <p className="mt-4 text-lg">
-          "Bienvenue sur la page des projets du BDE ! Notre équipe travaille
+          &quot;Bienvenue sur la page des projets du BDE ! Notre équipe travaille
           chaque jour pour améliorer la vie étudiante en proposant des
           événements, des partenariats et des activités enrichissantes. Découvrez
-          nos pôles et leurs projets passionnants !"
+          nos pôles et leurs projets passionnants !&quot;
         </p>
       </section>
 
@@ -358,9 +359,11 @@ export default function ProjetsPage() {
             <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
               {p.membres.map((membre, idx) => (
                 <div key={idx} className="text-center">
-                  <img
+                  <Image
                     src={membre.photo}
                     alt={membre.nom}
+                    width={100}
+                    height={100}
                     className="w-20 h-20 rounded-full mx-auto shadow-md"
                   />
                   <p className="mt-2 text-sm font-medium">{membre.nom}</p>

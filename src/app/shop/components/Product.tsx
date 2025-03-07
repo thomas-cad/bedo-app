@@ -3,6 +3,7 @@
 import React from "react";
 import AddIcon from "@mui/icons-material/Add";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 interface ProductProps {
   item: {
@@ -28,16 +29,20 @@ const Product: React.FC<ProductProps> = ({ item }) => {
     >
       <div className="relative w-full aspect-[3/4] overflow-hidden cursor-pointer group">
         {/* Première image */}
-        <img
+        <Image
           src={`/image${item.image}/1.png`}
           alt={item.title}
-          className="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-110"
+          width={100}
+          height={100}
+          className="object-cover transition-transform duration-300 ease-in-out group-hover:scale-110"
         />
         {/* Deuxième image (au survol) */}
-        <img
+        <Image
           src={`/image${item.image}/2.png`}
           alt={item.title}
-          className="w-full h-full object-cover transition-opacity duration-300 ease-in-out opacity-0 group-hover:opacity-100 absolute top-0 left-0"
+          width={100}
+          height={100}
+          className="object-cover transition-opacity duration-300 ease-in-out opacity-0 group-hover:opacity-100 absolute top-0 left-0"
         />
         {/* AddIcon en bas à droite */}
         <div className="absolute bottom-0 right-0 m-2 group-hover:text-[#0CFF21]">

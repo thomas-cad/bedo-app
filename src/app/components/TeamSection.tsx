@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 const members = [
     { name: "Thomas Revol", role: "Président", image: "/image/thomas-r.jpg" },
     { name: "Alessandro", role: "Vice-Président", image: "/image/alessandro.jpg" },
@@ -13,7 +15,7 @@ const members = [
         <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
           {members.map((member) => (
             <div key={member.name} className="p-4 bg-gray-200 rounded-lg">
-              <img src={member.image} alt={member.name} className="w-32 h-32 rounded-full mx-auto" />
+              <Image src={member.image} alt={member.name} className="w-32 h-32 rounded-full mx-auto" />
               <h3 className="text-xl font-semibold mt-2">{member.name}</h3>
               <p className="text-gray-600">{member.role}</p>
             </div>

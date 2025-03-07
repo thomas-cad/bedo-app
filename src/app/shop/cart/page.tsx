@@ -4,7 +4,6 @@ import React from 'react';
 import Item from "./components/Item";
 import { useCart } from '@/app/context/CartContext'; 
 import Link from 'next/link';
-import type { Metadata } from 'next';
 
 const Cart = () => {
     const { cart } = useCart();

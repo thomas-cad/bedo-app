@@ -1,22 +1,16 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-interface Item {
-    id: string;
-    title: string;
-    size: string;
-    price: number;
-    image: string;
-    unique_item_size_id: string;
-}
-
 // Regex officielle pour un CUID (commence par "c" suivi de 24 caractères alphanumériques)
 const CUID_REGEX = /^c[a-z0-9]{24}$/;
 
-export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
-    const itemId = params.id;
+export async function GET(
+    request: Request,
+    { params }: { params: Promise<{ id: string }> }
+) {
+    const { id: itemId } = await params
 
     // 1. Validation stricte de l'ID (doit être un CUID)
     if (!CUID_REGEX.test(itemId)) {

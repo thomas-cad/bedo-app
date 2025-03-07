@@ -1,10 +1,13 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
-    const itemId = params.id; // Keep itemId as a string since it's defined as text in the schema
+export async function GET(
+    request: Request,
+    { params }: { params: Promise<{ id: string }> }
+) {
+    const { id: itemId } = await params
 
     try {
         const item = await prisma.item.findUnique({
@@ -28,7 +31,7 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
                 });
                 return {
                     size_id: size.id,
-                    size: size_name.size,
+                    size: size_name ? size_name.size : null,
                     stock: size.stock,
                     uniqueItemId: size.id
                 };
@@ -38,6 +41,6 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
         return NextResponse.json(itemWithSizes);
     } catch (error) {
         console.error('Error fetching item:', error); // Log the error for debugging
-        return NextResponse.json({ error: 'Internal Server Error', details: (error as any).message }, { status: 500 });
+        return NextResponse.json({ error: error }, { status: 500 });
     }
 }

@@ -2,40 +2,46 @@
 
 import React, { useEffect, useState } from "react";
 import Return from "./components/Return";
-import Image from "./components/Image";
+import ImageProduct from "./components/ImageProduct";
 import Description from "./components/Description";
 import AddToCard from "./components/AddToCard";
 import { useSearchParams } from 'next/navigation';
-import error from "next/error";
-
-import type { Metadata } from 'next';
 
 const Product = () => {
-
-    const [item, setItems] = useState<{ id: string;
-        title: string;
-        description: string;
-        price: number;
-        image: string; }[]>([]);
+    const [item, setItem] = useState<{ id: string; title: string; description: string; price: number; image: string } | null>(null);
+    const [error, setError] = useState<string | null>(null);
     const searchParams = useSearchParams();
     const id = searchParams.get('id');
 
     useEffect(() => {
-        const fetchItems = async () => {
+        if (!id) {
+            setError('No product ID provided');
+            return;
+        }
+
+        const fetchItem = async () => {
             try {
                 const response = await fetch('/api/item/' + id);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
                 const data = await response.json();
-                setItems(data);
+                setItem(data);
             } catch (error) {
-                return(<div>Error</div>)
+                setError((error as Error).message);
             }
         };
 
-        fetchItems();
-    }, []);
+        fetchItem();
+    }, [id]);
+
+    if (error) {
+        return <div className="text-red-500">Erreur: {error}</div>;
+    }
+
+    if (!item) {
+        return <div>Chargement...</div>;
+    }
 
     return (
         <div className="flex flex-col items-center px-10">
@@ -50,7 +56,7 @@ const Product = () => {
             <div className="flex flex-col lg:flex-row w-full max-w-4xl items-center justify-center gap-8">
                 {/* Image component */}
                 <div>
-                    <Image images_path={item.image} />
+                    <ImageProduct images_path={item.image} />
                 </div>
 
                 {/* Description component*/}

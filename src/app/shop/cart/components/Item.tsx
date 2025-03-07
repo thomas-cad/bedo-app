@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import Add from '@mui/icons-material/Add';
 import Remove from '@mui/icons-material/Remove';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useCart } from '@/app/context/CartContext';
+import Image from 'next/image';
 
 interface Item {
     id: string;
@@ -21,12 +22,12 @@ const Item = ({ id }: { id: string }) => {
     
     const { cart, removeFromCart, AddOneToCart, RemoveOneFromCart } = useCart();
 
-    const getArticleQuantity = (uniqueItemId: string): number => {
+    const getArticleQuantity = useCallback((uniqueItemId: string): number => {
         const articleInCart = cart.find((item) => item.id === uniqueItemId);
         return articleInCart ? articleInCart.quantity : 0;
-    };
+    }, [cart]);
 
-    const quantity = useMemo(() => getArticleQuantity(id), [cart, id]);
+    const quantity = useMemo(() => getArticleQuantity(id), [id, getArticleQuantity]);
 
     useEffect(() => {
         const fetchItem = async () => {
@@ -37,8 +38,8 @@ const Item = ({ id }: { id: string }) => {
                 }
                 const data = await response.json();
                 setItem(data);
-            } catch (error: any) {
-                setError('Failed to load item details. Please try again later.');
+            } catch (error) {
+                setError((error as Error).message);
             }
         };
 
@@ -57,14 +58,14 @@ const Item = ({ id }: { id: string }) => {
         <div className="flex-1 lg:flex-[3]">
             <div className="flex flex-col md:flex-row justify-between mb-5">
                 <div className="relative flex flex-col md:flex-row flex-[2]">
-                    <img
-                        className="w-52 mx-auto md:mx-0"
-                        src={"/image/" + item.image + "/1.png"}
-                        alt={item.title}
-                        onError={(e) => {
-                            e.currentTarget.src = "/path/to/fallback/image.png";
-                        }}
-                    />
+                <Image
+                    className="w-52 mx-auto md:mx-0"
+                    width={150}
+                    height={150}
+                    src={"/image/" + item.image + "/1.png"}
+                    alt={item.title}
+                />
+
 
                     <div className="p-5 flex flex-col justify-around">
                         <span><b>Product:</b> {item.title}</span>
@@ -78,8 +79,7 @@ const Item = ({ id }: { id: string }) => {
                         <div className="flex items-center space-x-3 mt-2">
                             <Remove
                                 className={`hover:cursor-pointer hover:text-red-500 ${quantity === 0 ? "opacity-50 cursor-not-allowed" : ""}`}
-                                onClick={() => RemoveOneFromCart(id)}
-                                disabled={quantity === 0}
+                                onClick={quantity === 0 ? undefined : () => RemoveOneFromCart(id)}
                             />
                             <span className="text-xl">{quantity}</span>
                             <Add
