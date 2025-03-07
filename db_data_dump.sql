@@ -18,105 +18,366 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- Data for Name: _prisma_migrations; Type: TABLE DATA; Schema: public; Owner: dev
+-- Name: public; Type: SCHEMA; Schema: -; Owner: dev
 --
 
-COPY public._prisma_migrations (id, checksum, finished_at, migration_name, logs, rolled_back_at, started_at, applied_steps_count) FROM stdin;
-24569667-e153-4e53-9c0f-82d722a02615	6a4c22a57f8b76f0bf637b57b818f31aec502ba554693ade88dda3e86df05852	2025-03-05 00:13:54.453259+00	20250221202301_init	\N	\N	2025-03-05 00:13:54.414636+00	1
-790c9b29-002d-40ef-b074-651829dfe8eb	028cdafa844db431b2dfa62ab4fa7039050d6a2756aabebc1c5d9f14be58817a	2025-03-05 00:13:54.464477+00	20250222173553_init	\N	\N	2025-03-05 00:13:54.455861+00	1
-bd8cf227-5ade-4c71-ba71-688c32d995d7	8ae1da853076950fe0fc4297561d82e5afc94aa58cea3c6eaf6416ddbb8e5687	2025-03-05 00:13:54.475617+00	20250222174559_init	\N	\N	2025-03-05 00:13:54.467455+00	1
-03fbd4ae-067d-4a61-b1ae-31eb4559adaa	d2a3b9fe1068819810a999412594101c09fe0dc5e5064355f18024cd062bdd3b	2025-03-05 00:13:54.485973+00	20250304225302_ajout_champ_total	\N	\N	2025-03-05 00:13:54.478034+00	1
-c7fcee08-a8f4-4fea-9c2c-ef82c3c13b63	99c740faea7d05fbe9dee6da8df0c5bc13126364ba429648218398122674220a	2025-03-05 00:13:54.496812+00	20250304225351_ajout_champ_total	\N	\N	2025-03-05 00:13:54.488662+00	1
-d05ee729-be89-4b85-8809-f4996774093a	eb22197ff88efe0d59643bd01a147093a347b59f32d5924b4ebe92649541a53b	2025-03-05 00:13:54.507132+00	20250304225609_ajout_champ_total	\N	\N	2025-03-05 00:13:54.499209+00	1
-7d270bb1-8cf8-48e6-ae5a-a1a3d27dfd99	4d426fd82705f86d9acce4b1938421f1f7d3d1417895e93fd6432a245bb1b54c	2025-03-05 00:18:27.6297+00	20250305001827_update	\N	\N	2025-03-05 00:18:27.622264+00	1
-\.
+-- *not* creating schema, since initdb creates it
+
+
+ALTER SCHEMA public OWNER TO dev;
+
+--
+-- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: dev
+--
+
+COMMENT ON SCHEMA public IS '';
+
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- Name: _prisma_migrations; Type: TABLE; Schema: public; Owner: dev
+--
+
+CREATE TABLE public._prisma_migrations (
+    id character varying(36) NOT NULL,
+    checksum character varying(64) NOT NULL,
+    finished_at timestamp with time zone,
+    migration_name character varying(255) NOT NULL,
+    logs text,
+    rolled_back_at timestamp with time zone,
+    started_at timestamp with time zone DEFAULT now() NOT NULL,
+    applied_steps_count integer DEFAULT 0 NOT NULL
+);
+
+
+ALTER TABLE public._prisma_migrations OWNER TO dev;
+
+--
+-- Name: event; Type: TABLE; Schema: public; Owner: dev
+--
+
+CREATE TABLE public.event (
+    id text NOT NULL,
+    start_date timestamp(3) without time zone NOT NULL,
+    end_date timestamp(3) without time zone NOT NULL,
+    title text,
+    description text,
+    bill bytea NOT NULL,
+    "event_typeId" text NOT NULL
+);
+
+
+ALTER TABLE public.event OWNER TO dev;
+
+--
+-- Name: event_type; Type: TABLE; Schema: public; Owner: dev
+--
+
+CREATE TABLE public.event_type (
+    id text NOT NULL,
+    type text NOT NULL
+);
+
+
+ALTER TABLE public.event_type OWNER TO dev;
+
+--
+-- Name: item; Type: TABLE; Schema: public; Owner: dev
+--
+
+CREATE TABLE public.item (
+    id text NOT NULL,
+    title text NOT NULL,
+    description text NOT NULL,
+    price double precision NOT NULL,
+    image text NOT NULL
+);
+
+
+ALTER TABLE public.item OWNER TO dev;
+
+--
+-- Name: item_size; Type: TABLE; Schema: public; Owner: dev
+--
+
+CREATE TABLE public.item_size (
+    id text NOT NULL,
+    stock integer NOT NULL,
+    "itemId" text NOT NULL,
+    "sizeId" text NOT NULL
+);
+
+
+ALTER TABLE public.item_size OWNER TO dev;
+
+--
+-- Name: order; Type: TABLE; Schema: public; Owner: dev
+--
+
+CREATE TABLE public."order" (
+    id text NOT NULL,
+    status text NOT NULL,
+    order_date timestamp(3) without time zone NOT NULL,
+    "userId" text NOT NULL,
+    total double precision NOT NULL
+);
+
+
+ALTER TABLE public."order" OWNER TO dev;
+
+--
+-- Name: order_item_size; Type: TABLE; Schema: public; Owner: dev
+--
+
+CREATE TABLE public.order_item_size (
+    id text NOT NULL,
+    "orderId" text NOT NULL,
+    "item_sizeId" text NOT NULL,
+    quantity integer NOT NULL
+);
+
+
+ALTER TABLE public.order_item_size OWNER TO dev;
+
+--
+-- Name: size; Type: TABLE; Schema: public; Owner: dev
+--
+
+CREATE TABLE public.size (
+    id text NOT NULL,
+    size text NOT NULL
+);
+
+
+ALTER TABLE public.size OWNER TO dev;
+
+--
+-- Name: user; Type: TABLE; Schema: public; Owner: dev
+--
+
+CREATE TABLE public."user" (
+    id text NOT NULL,
+    first_name text NOT NULL,
+    last_name text NOT NULL,
+    email text NOT NULL,
+    phone text NOT NULL
+);
+
+
+ALTER TABLE public."user" OWNER TO dev;
+
+--
+-- Name: _prisma_migrations _prisma_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: dev
+--
+
+ALTER TABLE ONLY public._prisma_migrations
+    ADD CONSTRAINT _prisma_migrations_pkey PRIMARY KEY (id);
 
 
 --
--- Data for Name: event_type; Type: TABLE DATA; Schema: public; Owner: dev
+-- Name: event event_pkey; Type: CONSTRAINT; Schema: public; Owner: dev
 --
 
-COPY public.event_type (id, type) FROM stdin;
-\.
-
-
---
--- Data for Name: event; Type: TABLE DATA; Schema: public; Owner: dev
---
-
-COPY public.event (id, start_date, end_date, title, description, bill, "event_typeId") FROM stdin;
-\.
+ALTER TABLE ONLY public.event
+    ADD CONSTRAINT event_pkey PRIMARY KEY (id);
 
 
 --
--- Data for Name: item; Type: TABLE DATA; Schema: public; Owner: dev
+-- Name: event_type event_type_pkey; Type: CONSTRAINT; Schema: public; Owner: dev
 --
 
-COPY public.item (id, title, description, price, image) FROM stdin;
-cuikd1q5s00000gm90pzj72h7	Pull BedBusters	Pull à capuche noir. Design floqué dans le dos et logo floqué sur le cœur	35	/shop/pull
-cuikd1q5s00000gm90pzj72h8	Tee-Shirt BedBusters	Tee-Shirt noir floqué du logo de la liste sur le cœur	12	/shop/teeshirt
-cuikd1q5s00000gm90pzj72h9	Banane BedBusters	Banane premium noire floquée du logo	8	/shop/banane
-cuikd1q5s00000gm90pzj72ha	Bob BedBusters	Bob premium réversible noir floqué du logo	8	/shop/bob
-\.
+ALTER TABLE ONLY public.event_type
+    ADD CONSTRAINT event_type_pkey PRIMARY KEY (id);
 
 
 --
--- Data for Name: size; Type: TABLE DATA; Schema: public; Owner: dev
+-- Name: item item_pkey; Type: CONSTRAINT; Schema: public; Owner: dev
 --
 
-COPY public.size (id, size) FROM stdin;
-cuikd1q5s00000gm90pzj72hf	U
-cuikd1q5s00000gm90pzj72hb	S
-cuikd1q5s00000gm90pzj72hc	M
-cuikd1q5s00000gm90pzj72hd	L
-cuikd1q5s00000gm90pzj72he	XL
-\.
+ALTER TABLE ONLY public.item
+    ADD CONSTRAINT item_pkey PRIMARY KEY (id);
 
 
 --
--- Data for Name: item_size; Type: TABLE DATA; Schema: public; Owner: dev
+-- Name: item_size item_size_pkey; Type: CONSTRAINT; Schema: public; Owner: dev
 --
 
-COPY public.item_size (id, stock, "itemId", "sizeId") FROM stdin;
-cuikd1q5s00000gm90pzj72h1	0	cuikd1q5s00000gm90pzj72h7	cuikd1q5s00000gm90pzj72hb
-cuikd1q5s00000gm90pzj72h2	4	cuikd1q5s00000gm90pzj72h7	cuikd1q5s00000gm90pzj72hc
-cuikd1q5s00000gm90pzj72h3	3	cuikd1q5s00000gm90pzj72h7	cuikd1q5s00000gm90pzj72hd
-cuikd1q5s00000gm90pzj72h4	1	cuikd1q5s00000gm90pzj72h7	cuikd1q5s00000gm90pzj72he
-cuikd1q5s00000gm90pzj72h5	1	cuikd1q5s00000gm90pzj72h8	cuikd1q5s00000gm90pzj72hb
-cuikd1q5s00000gm90pzj72h6	7	cuikd1q5s00000gm90pzj72h8	cuikd1q5s00000gm90pzj72hc
-cuikd1q5s00000gm90pzj72h7	6	cuikd1q5s00000gm90pzj72h8	cuikd1q5s00000gm90pzj72hd
-cuikd1q5s00000gm90pzj72h8	1	cuikd1q5s00000gm90pzj72h8	cuikd1q5s00000gm90pzj72he
-cuikd1q5s00000gm90pzj72h9	5	cuikd1q5s00000gm90pzj72h9	cuikd1q5s00000gm90pzj72hf
-cuikd1q5s00000gm90pzj72ha1	1	cuikd1q5s00000gm90pzj72ha	cuikd1q5s00000gm90pzj72hb
-cuikd1q5s00000gm90pzj72ha2	4	cuikd1q5s00000gm90pzj72ha	cuikd1q5s00000gm90pzj72hc
-\.
+ALTER TABLE ONLY public.item_size
+    ADD CONSTRAINT item_size_pkey PRIMARY KEY (id);
 
 
 --
--- Data for Name: user; Type: TABLE DATA; Schema: public; Owner: dev
+-- Name: order_item_size order_item_size_pkey; Type: CONSTRAINT; Schema: public; Owner: dev
 --
 
-COPY public."user" (id, first_name, last_name, email, phone) FROM stdin;
-cm7yu3zxs0000ox36iwfmq5p8	Thomas	Cadegros	thomas.cadegros@telecom-paris.fr	0695310671
-\.
-
-
---
--- Data for Name: order; Type: TABLE DATA; Schema: public; Owner: dev
---
-
-COPY public."order" (id, status, order_date, "userId", total) FROM stdin;
-cm7yu3zy10002ox3629ahitir	PENDING	2025-03-07 13:51:51.48	cm7yu3zxs0000ox36iwfmq5p8	12
-\.
+ALTER TABLE ONLY public.order_item_size
+    ADD CONSTRAINT order_item_size_pkey PRIMARY KEY (id);
 
 
 --
--- Data for Name: order_item_size; Type: TABLE DATA; Schema: public; Owner: dev
+-- Name: order order_pkey; Type: CONSTRAINT; Schema: public; Owner: dev
 --
 
-COPY public.order_item_size (id, "orderId", "item_sizeId", quantity) FROM stdin;
-cm7yu3zyc0004ox36o08awnfl	cm7yu3zy10002ox3629ahitir	cuikd1q5s00000gm90pzj72h5	1
-\.
+ALTER TABLE ONLY public."order"
+    ADD CONSTRAINT order_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: size size_pkey; Type: CONSTRAINT; Schema: public; Owner: dev
+--
+
+ALTER TABLE ONLY public.size
+    ADD CONSTRAINT size_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: user user_pkey; Type: CONSTRAINT; Schema: public; Owner: dev
+--
+
+ALTER TABLE ONLY public."user"
+    ADD CONSTRAINT user_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: event_id_key; Type: INDEX; Schema: public; Owner: dev
+--
+
+CREATE UNIQUE INDEX event_id_key ON public.event USING btree (id);
+
+
+--
+-- Name: event_title_key; Type: INDEX; Schema: public; Owner: dev
+--
+
+CREATE UNIQUE INDEX event_title_key ON public.event USING btree (title);
+
+
+--
+-- Name: event_type_id_key; Type: INDEX; Schema: public; Owner: dev
+--
+
+CREATE UNIQUE INDEX event_type_id_key ON public.event_type USING btree (id);
+
+
+--
+-- Name: event_type_type_key; Type: INDEX; Schema: public; Owner: dev
+--
+
+CREATE UNIQUE INDEX event_type_type_key ON public.event_type USING btree (type);
+
+
+--
+-- Name: item_id_key; Type: INDEX; Schema: public; Owner: dev
+--
+
+CREATE UNIQUE INDEX item_id_key ON public.item USING btree (id);
+
+
+--
+-- Name: item_size_id_key; Type: INDEX; Schema: public; Owner: dev
+--
+
+CREATE UNIQUE INDEX item_size_id_key ON public.item_size USING btree (id);
+
+
+--
+-- Name: item_title_key; Type: INDEX; Schema: public; Owner: dev
+--
+
+CREATE UNIQUE INDEX item_title_key ON public.item USING btree (title);
+
+
+--
+-- Name: order_id_key; Type: INDEX; Schema: public; Owner: dev
+--
+
+CREATE UNIQUE INDEX order_id_key ON public."order" USING btree (id);
+
+
+--
+-- Name: order_item_size_id_key; Type: INDEX; Schema: public; Owner: dev
+--
+
+CREATE UNIQUE INDEX order_item_size_id_key ON public.order_item_size USING btree (id);
+
+
+--
+-- Name: size_id_key; Type: INDEX; Schema: public; Owner: dev
+--
+
+CREATE UNIQUE INDEX size_id_key ON public.size USING btree (id);
+
+
+--
+-- Name: size_size_key; Type: INDEX; Schema: public; Owner: dev
+--
+
+CREATE UNIQUE INDEX size_size_key ON public.size USING btree (size);
+
+
+--
+-- Name: user_id_key; Type: INDEX; Schema: public; Owner: dev
+--
+
+CREATE UNIQUE INDEX user_id_key ON public."user" USING btree (id);
+
+
+--
+-- Name: event event_event_typeId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: dev
+--
+
+ALTER TABLE ONLY public.event
+    ADD CONSTRAINT "event_event_typeId_fkey" FOREIGN KEY ("event_typeId") REFERENCES public.event_type(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: item_size item_size_itemId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: dev
+--
+
+ALTER TABLE ONLY public.item_size
+    ADD CONSTRAINT "item_size_itemId_fkey" FOREIGN KEY ("itemId") REFERENCES public.item(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: item_size item_size_sizeId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: dev
+--
+
+ALTER TABLE ONLY public.item_size
+    ADD CONSTRAINT "item_size_sizeId_fkey" FOREIGN KEY ("sizeId") REFERENCES public.size(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: order_item_size order_item_size_item_sizeId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: dev
+--
+
+ALTER TABLE ONLY public.order_item_size
+    ADD CONSTRAINT "order_item_size_item_sizeId_fkey" FOREIGN KEY ("item_sizeId") REFERENCES public.item_size(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: order_item_size order_item_size_orderId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: dev
+--
+
+ALTER TABLE ONLY public.order_item_size
+    ADD CONSTRAINT "order_item_size_orderId_fkey" FOREIGN KEY ("orderId") REFERENCES public."order"(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: order order_userId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: dev
+--
+
+ALTER TABLE ONLY public."order"
+    ADD CONSTRAINT "order_userId_fkey" FOREIGN KEY ("userId") REFERENCES public."user"(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: SCHEMA public; Type: ACL; Schema: -; Owner: dev
+--
+
+REVOKE USAGE ON SCHEMA public FROM PUBLIC;
 
 
 --
