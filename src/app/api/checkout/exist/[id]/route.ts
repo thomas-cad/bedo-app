@@ -3,8 +3,8 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export async function GET(request: NextRequest, context: { params: { id: string } }) {
-    const { id } = context.params;  // destructure id from params
+export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
+    const { id } = params;  // destructure id from params
 
     if (!id) {
         return NextResponse.json({ error: 'Order ID is required' }, { status: 400 });
