@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
-
+import { NextRequest } from 'next/server'
 
 const prisma = new PrismaClient();
 
@@ -11,13 +11,23 @@ interface Size {
     stock: number;
 }
 
-export async function GET(
-    request: Request,
-    { params }: { params: { id: string } }
-) {
-    const itemId = params.id;
+type Props = {
+    params: Promise<{
+      provider: string
+    }>
+  }
+
+
+export async function GET (request: NextRequest, props: Props) {
+    const params = await props.params
+    const searchParams = request.nextUrl.searchParams
+    const itemId = searchParams.get('id')
 
     try {
+        if (!itemId) {
+            return NextResponse.json({ error: 'Item ID is missing' }, { status: 400 });
+        }
+
         const item = await prisma.item.findUnique({
             where: { id: itemId },
         });
