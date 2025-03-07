@@ -18,8 +18,7 @@ type Props = {
   }
 
 
-export async function GET (request: NextRequest, props: Props) {
-    const params = await props.params
+export async function GET (request: NextRequest) {
     const searchParams = request.nextUrl.searchParams
     const itemId = searchParams.get('id')
 
