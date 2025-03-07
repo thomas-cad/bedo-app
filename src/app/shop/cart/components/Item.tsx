@@ -62,7 +62,7 @@ const Item = ({ id }: { id: string }) => {
                     className="w-52 mx-auto md:mx-0"
                     width={150}
                     height={150}
-                    src={"/image/" + item.image + "/1.png"}
+                    src={"/image" + item.image + "/1.png"}
                     alt={item.title}
                 />
 

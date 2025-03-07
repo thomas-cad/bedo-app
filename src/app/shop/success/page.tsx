@@ -1,52 +1,51 @@
 "use client"
 
-// import { useEffect, useState } from 'react';
-// import { useSearchParams, useRouter } from 'next/navigation';
-import { useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { useSearchParams, useRouter } from 'next/navigation';
 import { Suspense } from 'react';
 
 
 const CommandePageContent = () => {
     const searchParams = useSearchParams();
-    // const router = useRouter();
+    const router = useRouter();
     const id = searchParams.get('id');
-    // const [loading, setLoading] = useState(true);
-    // const [error, setError] = useState('');
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState('');
 
-    // useEffect(() => {
-    //     if (!id) return; // Attend que l'ID soit disponible
+    useEffect(() => {
+        if (!id) return; // Attend que l'ID soit disponible
 
-    //     // Appel à l'API pour vérifier l'existence de la commande
-    //     const checkOrderExistence = async () => {
-    //         try {
-    //             const response = await fetch(`/api/checkout/exist/${id}`);
-    //             const data = await response.json();
+        // Appel à l'API pour vérifier l'existence de la commande
+        const checkOrderExistence = async () => {
+            try {
+                const response = await fetch(`/api/checkout/exist/${id}`);
+                const data = await response.json();
 
-    //             if (data.success) {
-    //                 // Si la commande existe, on affiche un message de succès
-    //                 setError('');
-    //             } else {
-    //                 // Si la commande n'existe pas, on redirige vers la home page
-    //                 router.push('/');
-    //             }
-    //         } catch (err) {
-    //             setError('Une erreur est survenue lors de la vérification de la commande.');
-    //             console.error(err);
-    //         } finally {
-    //             setLoading(false);
-    //         }
-    //     };
+                if (data.success) {
+                    // Si la commande existe, on affiche un message de succès
+                    setError('');
+                } else {
+                    // Si la commande n'existe pas, on redirige vers la home page
+                    router.push('/');
+                }
+            } catch (err) {
+                setError('Une erreur est survenue lors de la vérification de la commande.');
+                console.error(err);
+            } finally {
+                setLoading(false);
+            }
+        };
 
-    //     checkOrderExistence();
-    // }, [id, router]);
+        checkOrderExistence();
+    }, [id, router]);
 
-    // if (loading) {
-    //     return <p className="text-center text-gray-600">Chargement en cours...</p>;
-    // }
+    if (loading) {
+        return <p className="text-center text-gray-600 mt-20">Chargement en cours...</p>;
+    }
 
-    // if (error) {
-    //     return <p className="text-center text-red-500">{error}</p>;
-    // }
+    if (error) {
+        return <p className="text-center text-red-500 mt-20">{error}</p>;
+    }
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 p-4">
