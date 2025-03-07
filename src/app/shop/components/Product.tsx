@@ -32,17 +32,17 @@ const Product: React.FC<ProductProps> = ({ item }) => {
         <Image
           src={`/image${item.image}/1.png`}
           alt={item.title}
-          width={100}
-          height={100}
-          className="object-cover transition-transform duration-300 ease-in-out group-hover:scale-110"
+          layout="fill"
+          objectFit="cover"
+          className="transition-transform duration-300 ease-in-out group-hover:scale-110"
         />
         {/* Deuxième image (au survol) */}
         <Image
           src={`/image${item.image}/2.png`}
           alt={item.title}
-          width={100}
-          height={100}
-          className="object-cover transition-opacity duration-300 ease-in-out opacity-0 group-hover:opacity-100 absolute top-0 left-0"
+          layout="fill"
+          objectFit="cover"
+          className="transition-opacity duration-300 ease-in-out opacity-0 group-hover:opacity-100 absolute top-0 left-0"
         />
         {/* AddIcon en bas à droite */}
         <div className="absolute bottom-0 right-0 m-2 group-hover:text-[#0CFF21]">
