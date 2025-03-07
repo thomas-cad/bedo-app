@@ -12,10 +12,10 @@ interface Size {
 }
 
 export async function GET(
-    // request: Request,
-    // { params }: { params: { id: string } }
+    request: Request,
+    { params }: { params: { id: string } }
 ) {
-    const itemId = "cm7yu3zy10002ox3629ahitir"
+    const itemId = params.id;
 
     try {
         const item = await prisma.item.findUnique({

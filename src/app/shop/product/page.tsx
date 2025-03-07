@@ -37,11 +37,11 @@ const ProductContent = () => {
     }, [id]);
 
     if (error) {
-        return <div className="text-red-500">Erreur: {error}</div>;
+        return <div className="text-red-500 flex flex-col items-center px-1 mt-20">Erreur: {error}</div>;
     }
 
     if (!item) {
-        return <div>Chargement...</div>;
+        return <div className="flex flex-col items-center px-1 mt-20">Chargement...</div>;
     }
 
     return (
