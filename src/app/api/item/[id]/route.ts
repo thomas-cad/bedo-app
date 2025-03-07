@@ -3,11 +3,18 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
+interface Size {
+    id: string;
+    itemId: string;
+    sizeId: string;
+    stock: number;
+}
+
 export async function GET(
     request: Request,
-    { params }: { params: Promise<{ id: string }> }
+    { params }: { params: { id: string } }
 ) {
-    const { id: itemId } = await params
+    const { id: itemId } = params;
 
     try {
         const item = await prisma.item.findUnique({
@@ -25,7 +32,7 @@ export async function GET(
         // Add sizes information to the item
         const itemWithSizes = {
             ...item,
-            sizes: await Promise.all(sizes.map(async (size) => {
+            sizes: await Promise.all(sizes.map(async (size: Size) => {
                 const size_name = await prisma.size.findUnique({
                     where: { id: size.sizeId },
                 });
