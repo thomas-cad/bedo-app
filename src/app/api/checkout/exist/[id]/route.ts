@@ -1,10 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 
 const prisma = new PrismaClient();
 
-export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
-    const { id } = params;  // destructure id from params
+export async function GET(
+    request: Request,
+    { params }: { params: Promise<{ id: string }> }
+  ) {
+    const { id } = await params
 
     if (!id) {
         return NextResponse.json({ error: 'Order ID is required' }, { status: 400 });
@@ -22,9 +26,16 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
         return NextResponse.json({ success: true, order });
     } catch (error) {
         console.error('Error fetching order:', error);
-        return NextResponse.json({ error: 'Internal Server Error', details: (error as any).message }, { status: 500 });
+
+        if (error instanceof PrismaClientKnownRequestError) {
+            return NextResponse.json({ error: 'Database error', details: error.message }, { status: 500 });
+        }
+
+        return NextResponse.json({ error: 'Internal Server Error', details: (error as Error).message }, { status: 500 });
     } finally {
-        // Optional: Disconnect Prisma client if you're done with it
         await prisma.$disconnect();
     }
 }
+
+// Optional: Ensure this route runs in the Node.js runtime
+export const runtime = 'nodejs';
