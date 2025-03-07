@@ -11,12 +11,6 @@ interface Size {
     stock: number;
 }
 
-type Props = {
-    params: Promise<{
-      provider: string
-    }>
-  }
-
 
 export async function GET (request: NextRequest) {
     const searchParams = request.nextUrl.searchParams
