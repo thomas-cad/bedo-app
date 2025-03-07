@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 
+
 const prisma = new PrismaClient();
 
 interface Size {
@@ -11,10 +12,10 @@ interface Size {
 }
 
 export async function GET(
-    request: Request,
-    { params }: { params: { id: string } }
+    // request: Request,
+    // { params }: { params: { id: string } }
 ) {
-    const { id: itemId } = params;
+    const itemId = "cm7yu3zy10002ox3629ahitir"
 
     try {
         const item = await prisma.item.findUnique({

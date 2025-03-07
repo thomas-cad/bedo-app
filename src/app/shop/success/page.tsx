@@ -3,10 +3,10 @@
 // import { useEffect, useState } from 'react';
 // import { useSearchParams, useRouter } from 'next/navigation';
 import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 
 
-
-const CommandePage = () => {
+const CommandePageContent = () => {
     const searchParams = useSearchParams();
     // const router = useRouter();
     const id = searchParams.get('id');
@@ -65,5 +65,13 @@ const CommandePage = () => {
         </div>
     );
 };
+
+const CommandePage = () => {
+    return (
+      <Suspense>
+        <CommandePageContent />
+      </Suspense>
+    )
+}
 
 export default CommandePage;
