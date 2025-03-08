@@ -20,12 +20,13 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
-    command: 'sh -c "npm install && npx prisma generate && npm run ${START_COMMAND}"'
+    command: 'sh -c "npm install && npx prisma generate && npm run ${BUILD_COMMAND} $$ ${START_COMMAND}"'
     depends_on:
       - bedbusters_db
 
   bedbusters_db:
     image: postgres:17.3
+    restart: always
     environment:
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
