@@ -156,7 +156,7 @@ const projets = [
       {
         nom: "Pôle Informatique",
         description:
-          "Nous avons pour projet de mettre un filtre a nos pots qui permette un meilleur controle des extés par leur adresse mail. Ensuite nous avons aussi pour projet de mettre en place une application permettant de se tenir informé de la vie asso sans etre innondé comme sur whatsapp.",
+          "Nous avons pour projet de mettre un filtre à nos pots qui permette un meilleur controle des extés par leur adresse mail. Ensuite nous avons aussi pour projet de mettre en place une application permettant de se tenir informé de la vie asso sans etre innondé comme sur whatsapp.",
           membres: [
              { nom: "Yahya", photo: "/image/yahya.jpg" },
              { nom: "Arnaud", photo: "/image/arnaud.jpg" },

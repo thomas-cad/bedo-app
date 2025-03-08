@@ -16,14 +16,14 @@ export default function EventsPage() {
   const [events, setEvents] = useState<Event[]>([]);
 
   useEffect(() => {
-    fetch("/api/events")
+    fetch("/api/item/events")
       .then((res) => res.json())
       .then((data) => setEvents(data))
       .catch((error) => console.error("Erreur chargement des événements :", error));
   }, []);
 
   return (
-    <div className="min-h-screen bg-black text-white p-6">
+    <div className="min-h-screen bg-black text-white p-6 mt-16">
       <h1 className="text-4xl font-bold text-center text-[#0CFF21] mb-10">
         Événements à venir
       </h1>
