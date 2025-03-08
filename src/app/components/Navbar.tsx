@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
+// import { usePathname } from "next/navigation";
 import { Badge, IconButton } from "@mui/material";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -10,25 +11,19 @@ import Image from "next/image";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  // const pathname = usePathname();
   const { cart } = useCart();
 
-  // Fonction pour basculer le menu
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  // Détection de la taille de l'écran
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-
-    handleResize(); // Vérifie au montage
-    window.addEventListener("resize", handleResize);
-
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  // Fonction utilitaire pour déterminer la classe active
+  // const getActiveClass = (path: string) => {
+  //   return pathname === path
+  //     ? "text-[#0cff20] font-bold border-b-2 border-[#0cff21]"
+  //     : "text-black";
+  // };
 
   return (
     <div
@@ -38,29 +33,27 @@ const Navbar = () => {
         WebkitMaskImage: "linear-gradient(to bottom, black 70%, transparent 100%)",
       }}
     >
-      <div className="flex justify-between items-center px-6 md:px-10 h-full">
+      <div className="flex justify-between items-center px-6 h-full">
         {/* Left - Hamburger Menu and Logo */}
         <div className="flex items-center gap-4">
           {/* Hamburger Menu for small screens */}
-          {isMobile && (
-            <div className="block md:hidden">
-              <IconButton
-                className="text-black"
-                onClick={toggleMenu}
-                aria-label="menu"
-              >
-                <MenuIcon />
-              </IconButton>
-            </div>
-          )}
+          <div className="block">
+            <IconButton
+              className="text-black"
+              onClick={toggleMenu}
+              aria-label="menu"
+            >
+              <MenuIcon />
+            </IconButton>
+          </div>
 
           {/* Logo */}
           <Link href="/">
             <Image
               src="/image/navbar/logo_navbar.png"
               alt="Logo"
-              width={120}
-              height={64}
+              width={120} // Ajustez la largeur si nécessaire
+              height={64} // Ajustez la hauteur si nécessaire
               className="cursor-pointer"
             />
           </Link>
@@ -69,17 +62,42 @@ const Navbar = () => {
         {/* Center - Navigation */}
         <nav
           className={`${
-            isMenuOpen || !isMobile ? "flex" : "hidden"
-          } md:flex flex-col md:flex-row gap-6 md:gap-10 text-center absolute md:static top-20 left-0 w-full md:w-auto bg-white md:bg-transparent p-4 md:p-0`}
+            isMenuOpen ? "flex" : "hidden"
+          } flex-col gap-6 text-center absolute top-20 left-0 w-full bg-white p-4`}
         >
-          {/* Ajoutez vos liens ici */}
-          <Link href="/" className="hover:text-[#0cff21]">Accueil</Link>
-          <Link href="/shop" className="hover:text-[#0cff21]">Boutique</Link>
-          <Link href="/about" className="hover:text-[#0cff21]">À propos</Link>
+          {/* Exemples de liens (décommentez et ajustez selon vos besoins) */}
+          {/* <Link
+            href="/"
+            className={`text-base transition hover:text-[#0cff21] no-underline ${getActiveClass("/")}`}
+            onClick={toggleMenu}
+          >
+            NOTRE LISTE
+          </Link>
+          <Link
+            href="/projets"
+            className={`text-base transition hover:text-[#0cff21] no-underline ${getActiveClass("/projets")}`}
+            onClick={toggleMenu}
+          >
+            PROJETS
+          </Link>
+          <Link
+            href="/event"
+            className={`text-base transition hover:text-[#0cff21] no-underline ${getActiveClass("/event")}`}
+            onClick={toggleMenu}
+          >
+            EVENTS
+          </Link>
+          <Link
+            href="/shop"
+            className={`text-base transition hover:text-[#0cff21] no-underline ${getActiveClass("/shop")}`}
+            onClick={toggleMenu}
+          >
+            BOUTIQUE
+          </Link> */}
         </nav>
 
-        {/* Right - Language & Cart */}
-        <div className="flex items-center gap-4 md:gap-5">
+        {/* Right - Cart */}
+        <div className="flex items-center gap-4">
           <Link href="/shop/cart">
             <IconButton aria-label="cart">
               <Badge
@@ -97,22 +115,6 @@ const Navbar = () => {
           </Link>
         </div>
       </div>
-
-      {/* Styles pour les media queries personnalisées */}
-      <style jsx>{`
-        @media (max-width: 768px) {
-          .custom-nav {
-            display: ${isMenuOpen ? "flex" : "none"};
-            flex-direction: column;
-            background-color: white;
-            width: 100%;
-            position: absolute;
-            top: 80px;
-            left: 0;
-            padding: 1rem;
-          }
-        }
-      `}</style>
     </div>
   );
 };
