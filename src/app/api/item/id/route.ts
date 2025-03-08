@@ -1,12 +1,26 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
+import { NextRequest } from 'next/server'
 
 const prisma = new PrismaClient();
 
-export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
-    const itemId = params.id; // Keep itemId as a string since it's defined as text in the schema
+interface Size {
+    id: string;
+    itemId: string;
+    sizeId: string;
+    stock: number;
+}
+
+
+export async function GET (request: NextRequest) {
+    const searchParams = request.nextUrl.searchParams
+    const itemId = searchParams.get('id')
 
     try {
+        if (!itemId) {
+            return NextResponse.json({ error: 'Item ID is missing' }, { status: 400 });
+        }
+
         const item = await prisma.item.findUnique({
             where: { id: itemId },
         });
@@ -22,13 +36,13 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
         // Add sizes information to the item
         const itemWithSizes = {
             ...item,
-            sizes: await Promise.all(sizes.map(async (size) => {
+            sizes: await Promise.all(sizes.map(async (size: Size) => {
                 const size_name = await prisma.size.findUnique({
                     where: { id: size.sizeId },
                 });
                 return {
                     size_id: size.id,
-                    size: size_name.size,
+                    size: size_name ? size_name.size : null,
                     stock: size.stock,
                     uniqueItemId: size.id
                 };
@@ -38,6 +52,6 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
         return NextResponse.json(itemWithSizes);
     } catch (error) {
         console.error('Error fetching item:', error); // Log the error for debugging
-        return NextResponse.json({ error: 'Internal Server Error', details: (error as any).message }, { status: 500 });
+        return NextResponse.json({ error: error }, { status: 500 });
     }
 }

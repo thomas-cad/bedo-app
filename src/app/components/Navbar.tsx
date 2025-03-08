@@ -2,26 +2,18 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { Badge, IconButton } from "@mui/material";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useCart } from '@/app/context/CartContext';
+import Image from "next/image";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const pathname = usePathname();
   const { cart } = useCart();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
-  };
-
-  // Fonction utilitaire pour déterminer la classe active
-  const getActiveClass = (path: string) => {
-    return pathname === path
-      ? "text-[#0cff20] font-bold border-b-2 border-[#0cff21]"
-      : "text-black";
   };
 
   return (
@@ -48,10 +40,12 @@ const Navbar = () => {
 
           {/* Logo */}
           <Link href="/">
-            <img
+            <Image
               src="/image/navbar/logo_navbar.png"
               alt="Logo"
-              className="h-12 md:h-16 cursor-pointer"
+              width={120}
+              height={64}
+              className="cursor-pointer"
             />
           </Link>
         </div>
@@ -62,34 +56,7 @@ const Navbar = () => {
             isMenuOpen ? "flex" : "hidden"
           } md:flex flex-col md:flex-row gap-6 md:gap-10 text-center absolute md:static top-20 left-0 w-full md:w-auto bg-white md:bg-transparent p-4 md:p-0`}
         >
-          {/* <Link
-            href="/"
-            className={`text-base md:text-lg transition hover:text-[#0cff21] hover:text-lg md:hover:text-xl no-underline ${getActiveClass("/")}`}
-            onClick={toggleMenu}
-          >
-            NOTRE LISTE
-          </Link>
-          <Link
-            href="/projets"
-            className={`text-base md:text-lg transition hover:text-[#0cff21] hover:text-lg md:hover:text-xl no-underline ${getActiveClass("/projets")}`}
-            onClick={toggleMenu}
-          >
-            PROJETS
-          </Link>
-          <Link
-            href="/event"
-            className={`text-base md:text-lg transition hover:text-[#0cff21] hover:text-lg md:hover:text-xl no-underline ${getActiveClass("/event")}`}
-            onClick={toggleMenu}
-          >
-            EVENTS
-          </Link> */}
-          {/* <Link
-            href="/shop"
-            className={`text-base md:text-lg transition hover:text-[#0cff21] hover:text-lg md:hover:text-xl no-underline ${getActiveClass("/shop")}`}
-            onClick={toggleMenu}
-          >
-            BOUTIQUE
-          </Link> */}
+          {/* Ajoutez vos liens ici */}
         </nav>
 
         {/* Right - Language & Cart */}
@@ -97,20 +64,36 @@ const Navbar = () => {
           <Link href="/shop/cart">
             <IconButton aria-label="cart">
               <Badge
-          badgeContent={cart.length.toString()}
-          color="primary"
-          sx={{
-            "& .MuiBadge-badge": {
-              backgroundColor: "#0cff21",
-            },
-          }}
+                badgeContent={cart.length.toString()}
+                color="primary"
+                sx={{
+                  "& .MuiBadge-badge": {
+                    backgroundColor: "#0cff21",
+                  },
+                }}
               >
-          <ShoppingCartOutlinedIcon className="text-black hover:text-[#0cff21]" />
+                <ShoppingCartOutlinedIcon className="text-black hover:text-[#0cff21]" />
               </Badge>
             </IconButton>
           </Link>
         </div>
       </div>
+
+      {/* Styles pour les media queries personnalisées */}
+      <style jsx>{`
+        @media (max-width: 768px) {
+          .custom-nav {
+            display: ${isMenuOpen ? "flex" : "none"};
+            flex-direction: column;
+            background-color: white;
+            width: 100%;
+            position: absolute;
+            top: 80px;
+            left: 0;
+            padding: 1rem;
+          }
+        }
+      `}</style>
     </div>
   );
 };

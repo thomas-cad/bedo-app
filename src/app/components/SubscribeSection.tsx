@@ -39,7 +39,7 @@ export default function SubscribeSection() {
         className="p-2 border border-gray-300 rounded-md"
       />
       <button onClick={handleSubscribe} className="px-4 py-2 bg-[#0CFF21] text-white rounded-md">
-        S'abonner
+        S&apos;abonner
       </button>
       {message && <p className="text-green-500">{message}</p>}
     </div>

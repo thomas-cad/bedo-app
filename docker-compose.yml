@@ -1,30 +1,32 @@
 version: "3.8"
+name: bedbusters
 
 services:
-  nextjs:
+  bedbusters_app:
     image: node:18-alpine
     working_dir: /app
     ports:
-      - "3000:3000"
+      - "${PORT}:${PORT}"
     environment:
       - NODE_ENV=${NODE_ENV}
       - DB_HOST=${DB_HOST}
       - DB_PORT=${DB_PORT}
       - DB_USER=${DB_USER}
       - DB_PASSWORD=${DB_PASSWORD}
+      - DB_URL=${DB_URL}
       - DB_NAME=${DB_NAME}
       - NEXT_PUBLIC_RECAPTCHA_SITE_KEY=${NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
       - RECAPTCHA_SECRET_KEY=${RECAPTCHA_SECRET_KEY}
-      - RESEND_KEY=${RESEND_KEY}
     volumes:
       - .:/app
       - /app/node_modules
-    command: sh -c "npm install && npx prisma generate && npm run dev"
+    command: 'sh -c "npm install && npx prisma generate && npm run build && npm start"'
     depends_on:
-      - db
+      - bedbusters_db
 
-  db:
-    image: postgres:17.3  # Latest stable PostgreSQL version
+  bedbusters_db:
+    image: postgres:17.3
+    restart: always
     environment:
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
@@ -35,17 +37,19 @@ services:
       - "5432:5432"
 
   pgadmin:
-    image: dpage/pgadmin4:latest  # Use the latest version of pgAdmin
+    image: dpage/pgadmin4:latest
+    profiles:
+      - dev  # Ce service ne s'exécute que si le profil "dev" est activé
     environment:
       - PGADMIN_DEFAULT_EMAIL=${PG_USER}
       - PGADMIN_DEFAULT_PASSWORD=${PG_PWD}
     ports:
       - "8080:80"
     depends_on:
-      - db
+      - bedbusters_db
     volumes:
-      - pgadmin_data:/var/lib/pgadmin
+      - pgadmin_data:/var/lib/pgadmin  # Volume pour pgAdmin
 
 volumes:
-  postgres_data:
-  pgadmin_data:
+  postgres_data: {}  # Définition du volume pour la base de données
+  pgadmin_data: {}   # Définition du volume pour pgAdmin

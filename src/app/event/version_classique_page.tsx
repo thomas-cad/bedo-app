@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 export default function EventsList() {
     const events = [
       {
@@ -28,7 +30,7 @@ export default function EventsList() {
               key={index}
               className="bg-gray-800 rounded-xl shadow-lg border border-gray-700 overflow-hidden hover:scale-105 transition-transform"
             >
-              <img src={event.image} alt={event.title} className="w-full h-40 object-cover" />
+              <Image src={event.image} alt={event.title} className="w-full h-40 object-cover" />
               <div className="p-6">
                 <p className="text-sm text-gray-400">{event.date} - {event.time}</p>
                 <h2 className="text-2xl font-bold text-[#0CFF21] mt-2">{event.title}</h2>

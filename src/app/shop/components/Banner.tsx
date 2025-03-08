@@ -1,12 +1,14 @@
 import React from "react";
-
+import Image from "next/image";
 const BannerShop = () => {
     return (
         <div className="relative w-full h-[75vh] overflow-hidden">
-            <img
+            <Image
                 src="/image/shop/banner.png"
                 alt="Banner"
-                className="w-full h-full object-cover object-top" // object-top pour aligner l'image en haut
+                layout="fill"
+                objectFit="cover"
+                objectPosition="top"
             />
         </div>
     );

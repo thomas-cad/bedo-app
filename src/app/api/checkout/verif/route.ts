@@ -107,7 +107,7 @@ export async function GET(req: Request) {
     let user
     try {
         const decoded = jwt.verify(token, process.env.TJW_SECRET_KEY as string) as { orderId: string; email: string };
-        const { orderId, email } = decoded;
+        const { orderId } = decoded;
 
         // Optionnel : récupérer la commande et vérifier l'email (pour renforcer la sécurité)
         order = await prisma.order.findUnique({ where: { id: orderId } });
@@ -121,12 +121,12 @@ export async function GET(req: Request) {
         user = await prisma.user.findUnique({where : { id: order.userId }})
     } catch (err) {
         return new Response(
-            JSON.stringify({ success: false, message: "Erreur prisma : commande search" }),
+            JSON.stringify({ success: false, message: err }),
             { status: 401 }
         );
     }
 
-    let orderDetail: OrderDetail[] = [];
+    const orderDetail: OrderDetail[] = [];
     // Edit stock
     try {
 
@@ -215,7 +215,7 @@ export async function GET(req: Request) {
         });
     } catch (err) {
         return new Response(
-            JSON.stringify({ success: false, message: "Erreur prisma : confirme commande" }),
+            JSON.stringify({ success: false, message: err }),
             { status: 401 }
         );
     }

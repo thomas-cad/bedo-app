@@ -112,7 +112,7 @@ export async function POST(req: Request) {
         body = await req.json() as RequestBody;
     } catch (error) {
         return new Response(
-            JSON.stringify({ success: false, message: "Invalid JSON payload" }),
+            JSON.stringify({ success: false, message: error }),
             { status: 400 }
         );
     }
@@ -164,7 +164,7 @@ export async function POST(req: Request) {
         }
     } catch (error) {
         return new Response(
-            JSON.stringify({ success: false, message: "Erreur lors de la vérification des produits" }),
+            JSON.stringify({ success: false, message: error }),
             { status: 400 }
         );
     }
@@ -201,7 +201,7 @@ export async function POST(req: Request) {
 
     } catch (error) {
         return new Response(
-            JSON.stringify({ success: false, message: "Erreur lors du check user" }),
+            JSON.stringify({ success: false, message: error }),
             { status: 400 }
         );
     }
@@ -221,7 +221,7 @@ export async function POST(req: Request) {
 
     } catch (error) {
         return new Response(
-            JSON.stringify({ success: false, message: "Erreur lors de la création de la commande" }),
+            JSON.stringify({ success: false, message: error }),
             { status: 400 }
         );
     }
@@ -238,7 +238,7 @@ export async function POST(req: Request) {
         }
     }catch (error) {
     return new Response(
-            JSON.stringify({ success: false, message: "Erreur lors de la création du détail de la commande" }),
+            JSON.stringify({ success: false, message: error }),
             { status: 400 }
         );
     }

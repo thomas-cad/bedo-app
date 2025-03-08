@@ -37,8 +37,8 @@
 
 "use client";
 
-import React, { useEffect } from 'react';
 import { useRouter } from 'next/navigation';  // Importing the useRouter hook
+import { useEffect } from 'react';
 
 const ShopRedirect = () => {
   const router = useRouter();  // Initialize the router

@@ -2,6 +2,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 interface Event {
   id: string;
@@ -30,8 +31,8 @@ export default function EventsPage() {
       
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
         {events.map((event) => (
-          <div key={event.id} className="bg-gray-800 p-4 rounded-lg shadow-md">
-            <img src={event.imageUrl} alt={event.title} className="w-full h-48 object-cover rounded-md" />
+          <div key={event.id} className="event-card">
+            <Image src={event.imageUrl} alt={event.title} width={500} height={200} className="w-full h-48 object-cover rounded-md" />
             <h2 className="text-2xl font-semibold mt-4">{event.title}</h2>
             <p className="text-gray-300">{event.description}</p>
             <p className="mt-2 text-[#0CFF21]">📅 {new Date(event.date).toLocaleString()}</p>

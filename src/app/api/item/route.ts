@@ -1,13 +1,13 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export async function GET(request: NextRequest) {
+export async function GET() {
     try {
         const items = await prisma.item.findMany();
         return NextResponse.json(items);
     } catch (error) {
-        return NextResponse.json({ error: 'Internal Server Error', details: (error as any).message}, { status: 500 });
+        return NextResponse.json({ error: error}, { status: 500 });
     }
 }

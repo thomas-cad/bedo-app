@@ -33,7 +33,7 @@ export async function POST(req: Request) {
       });
     }
   } catch (error) {
-    return new Response(JSON.stringify({ success: false, message: "Internal Server Error" }), {
+    return new Response(JSON.stringify({ success: false, message: error }), {
       status: 500,
     });
   }

@@ -1,13 +1,12 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
-import type { Metadata } from 'next';
 import Banner from './components/Banner';
 import Products from './components/Products';
 
 const Shop = () => {
   const [items, setItems] = useState([]);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -19,7 +18,11 @@ const Shop = () => {
         const data = await response.json();
         setItems(data);
       } catch (error) {
-        setError(error.message);
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError('An unknown error occurred');
+        }
       }
     };
 

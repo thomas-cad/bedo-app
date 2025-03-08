@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
-import type { Metadata } from 'next';
+import { Suspense } from 'react';
 
 
-const CommandePage = () => {
+const CommandePageContent = () => {
     const searchParams = useSearchParams();
     const router = useRouter();
     const id = searchParams.get('id');
@@ -40,11 +40,11 @@ const CommandePage = () => {
     }, [id, router]);
 
     if (loading) {
-        return <p className="text-center text-gray-600">Chargement en cours...</p>;
+        return <p className="text-center text-gray-600 mt-20">Chargement en cours...</p>;
     }
 
     if (error) {
-        return <p className="text-center text-red-500">{error}</p>;
+        return <p className="text-center text-red-500 mt-20">{error}</p>;
     }
 
     return (
@@ -52,7 +52,7 @@ const CommandePage = () => {
             <div className="bg-white p-8 rounded-lg shadow-md text-center max-w-md w-full">
                 <h1 className="text-2xl font-bold text-gray-800 mb-4">👻 Commande validée ! 👻</h1>
                 <p className="text-gray-600 mb-4">
-                    Votre commande avec l'ID{' '}
+                    Votre commande avec l&apos;ID{' '}
                     <strong style={{ color: '#0CFF21' }}>{id}</strong> a été confirmée.
                 </p>
                 <p className="text-gray-600 mb-6">
@@ -64,5 +64,13 @@ const CommandePage = () => {
         </div>
     );
 };
+
+const CommandePage = () => {
+    return (
+      <Suspense>
+        <CommandePageContent />
+      </Suspense>
+    )
+}
 
 export default CommandePage;
