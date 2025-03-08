@@ -1,3 +1,5 @@
+version: '3.8'  # Utilise une version compatible
+
 services:
   bedbusters_app:
     image: node:18-alpine
@@ -16,7 +18,7 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
-    command: sh -c "npm install && npx prisma generate && npm run ${START_COMMAND:-dev}"
+    command: 'sh -c "npm install && npx prisma generate && npm run ${START_COMMAND}"'
     depends_on:
       - bedbusters_db
 
@@ -32,9 +34,9 @@ services:
       - "5432:5432"
 
   pgadmin:
-    image: dpage/pgadmin4:latest  # Use the latest version of pgAdmin
+    image: dpage/pgadmin4:latest
     profiles:
-      - dev  # This service will only run if the profile "dev" is enabled
+      - dev  # Ce service ne s'exécute que si le profil "dev" est activé
     environment:
       - PGADMIN_DEFAULT_EMAIL=${PG_USER}
       - PGADMIN_DEFAULT_PASSWORD=${PG_PWD}
@@ -43,8 +45,8 @@ services:
     depends_on:
       - bedbusters_db
     volumes:
-      - pgadmin_data:/var/lib/pgadmin
+      - pgadmin_data:/var/lib/pgadmin  # Volume pour pgAdmin
 
 volumes:
-  postgres_data:
-  pgadmin_data:
+  postgres_data: {}  # Définition du volume pour la base de données
+  pgadmin_data: {}   # Définition du volume pour pgAdmin
