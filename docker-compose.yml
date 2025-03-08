@@ -20,7 +20,7 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
-    command: 'sh -c "npm install && npx prisma generate && npm run ${BUILD_COMMAND} && ${START_COMMAND}"'
+    command: 'sh -c "npm install && npx prisma generate && npm run build && npm start"'
     depends_on:
       - bedbusters_db
 
