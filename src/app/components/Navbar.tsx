@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Badge, IconButton } from "@mui/material";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
@@ -10,11 +10,25 @@ import Image from "next/image";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const { cart } = useCart();
 
+  // Fonction pour basculer le menu
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  // Détection de la taille de l'écran
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    handleResize(); // Vérifie au montage
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <div
@@ -28,15 +42,17 @@ const Navbar = () => {
         {/* Left - Hamburger Menu and Logo */}
         <div className="flex items-center gap-4">
           {/* Hamburger Menu for small screens */}
-          <div className="block md:hidden">
-            <IconButton
-              className="text-black"
-              onClick={toggleMenu}
-              aria-label="menu"
-            >
-              <MenuIcon />
-            </IconButton>
-          </div>
+          {isMobile && (
+            <div className="block md:hidden">
+              <IconButton
+                className="text-black"
+                onClick={toggleMenu}
+                aria-label="menu"
+              >
+                <MenuIcon />
+              </IconButton>
+            </div>
+          )}
 
           {/* Logo */}
           <Link href="/">
@@ -53,10 +69,13 @@ const Navbar = () => {
         {/* Center - Navigation */}
         <nav
           className={`${
-            isMenuOpen ? "flex" : "hidden"
+            isMenuOpen || !isMobile ? "flex" : "hidden"
           } md:flex flex-col md:flex-row gap-6 md:gap-10 text-center absolute md:static top-20 left-0 w-full md:w-auto bg-white md:bg-transparent p-4 md:p-0`}
         >
           {/* Ajoutez vos liens ici */}
+          <Link href="/" className="hover:text-[#0cff21]">Accueil</Link>
+          <Link href="/shop" className="hover:text-[#0cff21]">Boutique</Link>
+          <Link href="/about" className="hover:text-[#0cff21]">À propos</Link>
         </nav>
 
         {/* Right - Language & Cart */}
