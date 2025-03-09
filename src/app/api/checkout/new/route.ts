@@ -26,30 +26,36 @@ async function sendEmail(email: string, subject: string, body: string) {
     const transporter = nodemailer.createTransport({
         host: process.env.SMTP_HOST,
         port: Number(process.env.SMTP_PORT),
-        secure: process.env.SMTP_SECURE === 'true', // true pour 465, false pour 587
+        secure: true, // Utiliser TLS (port 465)
         auth: {
             user: process.env.SMTP_USER,
             pass: process.env.SMTP_PASS,
         },
+        tls: {
+            // Rejeter les connexions non autorisées
+            rejectUnauthorized: true,
+        },
     });
 
     try {
-        await transporter.sendMail({
+        const info = await transporter.sendMail({
             from: `"BedBusters" <${process.env.SMTP_USER}>`,
             to: email,
             subject: subject,
             text: body,
         });
 
+        console.log('Message sent: %s', info.messageId);
+
         return new Response(
-            JSON.stringify({ success: false, message: "Impossible d'envoyer le mail" }),
-            { status: 400 }
+            JSON.stringify({ success: true, message: "Email envoyé avec succès" }),
+            { status: 200 }
         );
     } catch (error) {
         console.error('Erreur envoi email:', error);
         return new Response(
             JSON.stringify({ success: false, message: "Impossible d'envoyer le mail" }),
-            { status: 400 }
+            { status: 500 } // Utiliser le code 500 pour les erreurs serveur
         );
     }
 }
