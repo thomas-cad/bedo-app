@@ -17,13 +17,14 @@ context = ssl.create_default_context()
 
 try:
     # Connexion au serveur SMTP
+    print(f"SMTP_HOST: {SMTP_HOST}")
+    print(f"SMTP_PORT: {SMTP_PORT}")
+    print(f"SMTP_USER: {SMTP_USER}")
+    print(f"SMTP_PASS: {SMTP_PASS}")
     with smtplib.SMTP_SSL(SMTP_HOST, SMTP_PORT, context=context) as server:
         print(f"Connexion réussie au serveur SMTP {SMTP_HOST}:{SMTP_PORT}")
         # Afficher les variables d'environnement
-        print(f"SMTP_HOST: {SMTP_HOST}")
-        print(f"SMTP_PORT: {SMTP_PORT}")
-        print(f"SMTP_USER: {SMTP_USER}")
-        print(f"SMTP_PASS: {SMTP_PASS}")
+        
         # Authentification
         server.login(SMTP_USER, SMTP_PASS)
         print("Authentification réussie.")
