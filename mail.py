@@ -1,5 +1,4 @@
 import smtplib
-import ssl
 from dotenv import load_dotenv
 import os
 
@@ -12,19 +11,20 @@ SMTP_PORT = int(os.getenv("SMTP_PORT"))
 SMTP_USER = os.getenv("SMTP_USER")
 SMTP_PASS = os.getenv("SMTP_PASS")
 
-# Contexte SSL pour sécuriser la connexion
-context = ssl.create_default_context()
-
 try:
     # Connexion au serveur SMTP
     print(f"SMTP_HOST: {SMTP_HOST}")
     print(f"SMTP_PORT: {SMTP_PORT}")
     print(f"SMTP_USER: {SMTP_USER}")
     print(f"SMTP_PASS: {SMTP_PASS}")
-    with smtplib.SMTP_SSL(SMTP_HOST, SMTP_PORT, context=context) as server:
+    with smtplib.SMTP(SMTP_HOST, SMTP_PORT) as server:
         print(f"Connexion réussie au serveur SMTP {SMTP_HOST}:{SMTP_PORT}")
         # Afficher les variables d'environnement
         
+        # Démarrer la connexion TLS si nécessaire
+        server.starttls()
+        print("Connexion TLS démarrée.")
+
         # Authentification
         server.login(SMTP_USER, SMTP_PASS)
         print("Authentification réussie.")
