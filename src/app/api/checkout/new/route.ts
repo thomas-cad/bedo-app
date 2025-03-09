@@ -23,36 +23,29 @@ function totalOrder(cart: CartItem[]): number {
 }
 
 async function sendEmail(email: string, subject: string, body: string) {
-    const transporter = nodemailer.createTransport({
-        host: process.env.SMTP_HOST,
-        port: Number(process.env.SMTP_PORT),
-        secure: process.env.SMTP_SECURE === 'true', // true pour 465, false pour 587
-        auth: {
-            user: process.env.SMTP_USER,
-            pass: process.env.SMTP_PASS,
-        },
-    });
-
     try {
-        await transporter.sendMail({
-            from: `"BedBusters" <${process.env.SMTP_USER}>`,
-            to: email,
-            subject: subject,
-            text: body,
-        });
-
-        return new Response(
-            JSON.stringify({ success: false, message: "Impossible d'envoyer le mail" }),
-            { status: 400 }
-        );
+    const transporter = nodemailer.createTransport({
+      host: process.env.SMTP_HOST,
+      port: parseInt(process.env.SMTP_PORT as string, 10),
+      secure: true, // true pour SSL/TLS
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
+      },
+    });
+  
+    const info = await transporter.sendMail({
+      from: `"BedBusters Shop" <${process.env.SMTP_USER}>`,
+      to: email,
+      subject: subject,
+      text: body,
+    });
+  
+      console.log("Email envoyé: ", info.messageId);
     } catch (error) {
-        console.error('Erreur envoi email:', error);
-        return new Response(
-            JSON.stringify({ success: false, message: "Impossible d'envoyer le mail" }),
-            { status: 400 }
-        );
+      console.error("Erreur lors de l'envoi de l'email:", error);
     }
-}
+};
 
 function generateOrderVerificationToken(orderId: string, email: string) {
     return jwt.sign(
