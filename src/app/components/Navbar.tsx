@@ -48,15 +48,16 @@ const Navbar = () => {
           </div>
 
           {/* Logo */}
-          <Link href="/">
+            <Link href="/">
             <Image
               src="/image/navbar/logo_navbar.png"
               alt="Logo"
+              layout="responsive"
               width={120} // Ajustez la largeur si nécessaire
               height={64} // Ajustez la hauteur si nécessaire
               className="cursor-pointer"
             />
-          </Link>
+            </Link>
         </div>
 
         {/* Center - Navigation */}
