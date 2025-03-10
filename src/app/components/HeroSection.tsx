@@ -8,9 +8,8 @@ export default function HeroSection() {
         alt="Team BDE"
         layout="fill"
         objectFit="cover"
-        className="opacity-70"
+        className=""
       />
-      <h1 className="relative text-8xl font-bold">BED Buster</h1>
     </div>
   );
 }

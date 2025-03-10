@@ -1,10 +1,24 @@
+import { Loader2 } from "lucide-react";
+
 export default function EventsPage() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 text-center p-4">
-      <h1 className="text-4xl font-bold text-[#0CFF21]">Les événements arrivent bientôt !</h1>
-      <p className="text-lg text-gray-600 mt-2">
-        Restez connectés, quelque chose d&apos;incroyable se prépare...
-      </p>
+    <div className="relative flex items-center justify-center min-h-screen bg-white">
+      {/* Image de fond */}
+      <div
+        className="absolute inset-0 bg-cover bg-center filter blur-sm brightness-50"
+        style={{ backgroundImage: "url('/Team-bed.jpg')" }}
+      />
+
+      {/* Contenu principal */}
+      <div className="relative w-full max-w-lg p-8 text-center bg-white/80 backdrop-blur-lg shadow-2xl rounded-2xl">
+        <h1 className="text-3xl font-bold text-gray-800">Nos projets events arrivent bientôt !</h1>
+        <p className="text-gray-600 mt-3">
+          On est en train de vous cook un banger 👻 !
+        </p>
+        <div className="flex justify-center mt-5">
+          <Loader2 className="w-12 h-12 text-[#0cff21] animate-spin" />
+        </div>
+      </div>
     </div>
   );
 }
