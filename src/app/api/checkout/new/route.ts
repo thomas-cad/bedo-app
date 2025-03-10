@@ -68,25 +68,76 @@ async function sendVerificationEmail(email: string, token: string) {
 }
 
 function generateVerificationEmailBody(verifyUrl: string): string {
-    let emailBody = `Salut ! 👻\n\n`;
+    let emailBody = `
+    <html>
+        <head>
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    background-color: #f4f4f4;
+                    padding: 20px;
+                }
+                .email-container {
+                    background-color: #ffffff;
+                    padding: 30px;
+                    border-radius: 8px;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                    width: 100%;
+                    max-width: 600px;
+                    margin: auto;
+                }
+                h1 {
+                    color: #333;
+                }
+                p {
+                    color: #555;
+                    line-height: 1.6;
+                }
+                .button {
+                    background-color: #007bff;
+                    color: white;
+                    padding: 12px 20px;
+                    border-radius: 5px;
+                    text-decoration: none;
+                    font-weight: bold;
+                    display: inline-block;
+                }
+                .button:hover {
+                    background-color: #0056b3;
+                }
+                .footer {
+                    text-align: center;
+                    margin-top: 20px;
+                    color: #aaa;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="email-container">
+                <p>Salut ! 👻</p>
 
-    emailBody += `On a bien reçu ta commande chez **BedBusters** et on est trop chauds de te compter parmi nous ! 🔥\n\n`;
+                <p>On a bien reçu ta commande chez <strong>BedBusters</strong> et on est trop chauds de te compter parmi nous ! 🔥</p>
 
-    emailBody += `🛡️ **Pour finaliser ta commande**, il te reste une petite étape : la **valider** en cliquant sur le lien ci-dessous. Ça nous permet de vérifier que c’est bien toi (et pas un fantôme qui passe commande à ta place 👀).\n\n`;
+                <p>🛡️ <strong>Pour finaliser ta commande</strong>, il te reste une petite étape : la <strong>valider</strong> en cliquant sur le lien ci-dessous. Ça nous permet de vérifier que c’est bien toi (et pas un fantôme qui passe commande à ta place 👀).</p>
 
-    emailBody += `👉 **Valide ta commande ici :**\n`;
-    emailBody += `${verifyUrl}\n\n`;
+                <p>👉 <strong>Valide ta commande ici :</strong></p>
+                <a href="${verifyUrl}" class="button">${verifyUrl}</a>
 
-    emailBody += `⚠️ **Attention**, ce lien expire dans **1 heure**, donc ne traîne pas trop !\n\n`;
+                <p>⚠️ <strong>Attention</strong>, ce lien expire dans <strong>1 heure</strong>, donc ne traîne pas trop !</p>
 
-    emailBody += `Si jamais tu n’es pas à l’origine de cette commande, ou si tu penses qu’il y a une erreur, n’hésite pas à nous contacter directement via **@bedbusters** sur Insta.\n\n`;
+                <p>Si jamais tu n’es pas à l’origine de cette commande, ou si tu penses qu’il y a une erreur, n’hésite pas à nous contacter directement via <strong>@bedbusters</strong> sur Insta.</p>
 
-    emailBody += `Merci encore pour ta confiance, et prépare-toi à recevoir des articles monstrueux ! 👻\n\n`;
+                <p>Merci encore pour ta confiance, et prépare-toi à recevoir des articles monstrueux ! 👻</p>
 
-    emailBody += `👻 La team BedBusters 👻`;
+                <p class="footer">👻 La team BedBusters 👻</p>
+            </div>
+        </body>
+    </html>
+    `;
 
     return emailBody;
 }
+
 
 
 // Validation du numéro de téléphone (exemple international simple)
