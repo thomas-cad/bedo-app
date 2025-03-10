@@ -39,7 +39,7 @@ async function sendEmail(email: string, subject: string, body: string) {
 function generateEmailBody(firstName: string, orderDetails: OrderDetail[], total: number) {
     const rib = process.env.RIB;
     
-    let emailBody = `<!DOCTYPE html>
+    const emailBody = `<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">

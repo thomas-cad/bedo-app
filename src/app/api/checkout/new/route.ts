@@ -68,7 +68,7 @@ async function sendVerificationEmail(email: string, token: string) {
 }
 
 function generateVerificationEmailBody(verifyUrl: string): string {
-    let emailBody = `
+    const emailBody = `
     <html>
         <head>
             <style>
