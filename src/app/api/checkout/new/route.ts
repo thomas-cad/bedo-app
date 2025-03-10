@@ -23,30 +23,31 @@ function totalOrder(cart: CartItem[]): number {
 }
 
 async function sendEmail(email: string, subject: string, body: string) {
+    // Configuration du transporteur SMTP
+    const transporter = nodemailer.createTransport({
+        host: process.env.SMTP_HOST, // Hôte SMTP depuis les variables d'environnement
+        port: parseInt(process.env.SMTP_PORT || '25'), // Port SMTP (par défaut 25)
+        secure: false, // false pour le port 25 (pas de SSL/TLS)
+        tls: {
+            rejectUnauthorized: false // Ignorer la vérification du certificat SSL
+        }
+    });
+
+    // Options de l'email
+    const mailOptions = {
+        from: process.env.SMTP_USER, // Adresse de l'expéditeur depuis les variables d'environnement
+        to: email, // Adresse du destinataire (passée en paramètre)
+        subject: subject, // Sujet de l'email (passé en paramètre)
+        text: body, // Corps du message en texte brut (passé en paramètre)
+        html: `<p>${body}</p>` // Corps du message en HTML (optionnel)
+    };
+
     try {
-        const transporter = nodemailer.createTransport({
-            host: process.env.SMTP_HOST,
-            port: parseInt(process.env.SMTP_PORT as string, 10),
-            secure: false, // false pour un SMTP non sécurisé (port 25)
-            auth: {
-                user: process.env.SMTP_USER,
-                pass: process.env.SMTP_PASS,
-            },
-            tls: {
-                rejectUnauthorized: false, // Accepter les connexions non sécurisées
-            }
-        });
-
-        const info = await transporter.sendMail({
-            from: `"BedBusters Shop" <${process.env.SMTP_USER}>`,
-            to: email,
-            subject: subject,
-            text: body,
-        });
-
-        console.log("Email envoyé: ", info.messageId);
+        // Envoyer l'email
+        const info = await transporter.sendMail(mailOptions);
+        console.log('Email envoyé: ', info.messageId);
     } catch (error) {
-        console.error("Erreur lors de l'envoi de l'email:", error);
+        console.error('Erreur lors de l\'envoi de l\'email: ', error);
     }
 };
 
