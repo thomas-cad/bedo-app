@@ -7,6 +7,7 @@ import { Badge, IconButton } from "@mui/material";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useCart } from '@/app/context/CartContext';
+import Image from 'next/image';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -47,13 +48,16 @@ const Navbar = () => {
           </div>
 
           {/* Logo */}
-          <Link href="/">
-            <img
-              src="/image/navbar/logo_navbar.png"
-              alt="Logo"
-              className="h-12 md:h-16 cursor-pointer"
-            />
-          </Link>
+            <Link href="/">
+              <Image
+                src="/image/navbar/logo_navbar.png"
+                alt="Logo"
+                width={60}
+                height={100}
+                sizes="100vw"
+                className="h-12 md:h-16 w-auto cursor-pointer"
+                />
+            </Link>
         </div>
 
         {/* Center - Navigation */}
