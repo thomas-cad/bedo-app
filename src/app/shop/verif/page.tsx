@@ -55,7 +55,7 @@ const VerifPageContent = () => {
                     Votre commande avec l&apos;ID{' '}
                     <strong style={{ color: '#0CFF21' }}>{id}</strong> a bien été confirmée.
                 </p>
-                <p>Si tes produits sont en stocks nous t'attendons dès maintenant. Si tes produits sont en <strong style={{ color: '#0CFF21' }}>précommandes ta commande ne sera validée qu'après réception de ton paiement</strong>.</p>
+                <p>Si tes produits sont en stocks nous t&apos;attendons dès maintenant. Si tes produits sont en <strong style={{ color: '#0CFF21' }}>précommandes ta commande ne sera validée qu&apos;après réception de ton paiement</strong>.</p>
             </div>
         </div>
     );
