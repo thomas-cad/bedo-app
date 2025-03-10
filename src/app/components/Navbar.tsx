@@ -125,20 +125,22 @@ const Navbar = () => {
       </div>
     </div>
     {isMenuOpen && (
-    <div className="fixed top-20 w-full z-50 backdrop-blur-md bg-white/10 h-48 flex justify-center items-center">
-      <div className="block md:hidden flex flex-col items-center space-y-2">
-      <Link href="/" onClick={() => setIsMenuOpen(false)}>
-        <span className={`block transition-all duration-300 ease-out h-1 w-32 rounded-sm mb-1 pb-4 text-center hover:cursor-pointer ${getActiveClassHamburger("/")}`}>NOTRE LISTE</span>
-      </Link>
-      <Link href="/projets" onClick={() => setIsMenuOpen(false)}>
-        <span className={`block transition-all duration-300 ease-out h-1 w-32 rounded-sm mb-1 py-4 text-center hover:cursor-pointer ${getActiveClassHamburger("/projets")}`}>NOTRE PROJET</span>
-      </Link>
-      <Link href="/event" onClick={() => setIsMenuOpen(false)}>
-        <span className={`block transition-all duration-300 ease-out h-1 w-32 rounded-sm py-4 text-center hover:cursor-pointer ${getActiveClassHamburger("/event")}`}>NOS EVENTS</span>
-      </Link>
-      <Link href="/shop" onClick={() => setIsMenuOpen(false)}>
-        <span className={`block transition-all duration-300 ease-out h-1 w-32 rounded-sm py-4 text-center hover:cursor-pointer ${getActiveClassHamburger("/shop")}`}>LA BOUTIQUE</span>
-      </Link>
+    <div className="block md:hidden">
+      <div className="fixed top-20 w-full z-50 backdrop-blur-md bg-white/10 h-48 flex justify-center items-center">
+        <div className="flex flex-col items-center space-y-2">
+        <Link href="/" onClick={() => setIsMenuOpen(false)}>
+          <span className={`block transition-all duration-300 ease-out h-1 w-32 rounded-sm mb-1 pb-4 text-center hover:cursor-pointer ${getActiveClassHamburger("/")}`}>NOTRE LISTE</span>
+        </Link>
+        <Link href="/projets" onClick={() => setIsMenuOpen(false)}>
+          <span className={`block transition-all duration-300 ease-out h-1 w-32 rounded-sm mb-1 py-4 text-center hover:cursor-pointer ${getActiveClassHamburger("/projets")}`}>NOTRE PROJET</span>
+        </Link>
+        <Link href="/event" onClick={() => setIsMenuOpen(false)}>
+          <span className={`block transition-all duration-300 ease-out h-1 w-32 rounded-sm py-4 text-center hover:cursor-pointer ${getActiveClassHamburger("/event")}`}>NOS EVENTS</span>
+        </Link>
+        <Link href="/shop" onClick={() => setIsMenuOpen(false)}>
+          <span className={`block transition-all duration-300 ease-out h-1 w-32 rounded-sm py-4 text-center hover:cursor-pointer ${getActiveClassHamburger("/shop")}`}>LA BOUTIQUE</span>
+        </Link>
+        </div>
       </div>
     </div>
     )}
