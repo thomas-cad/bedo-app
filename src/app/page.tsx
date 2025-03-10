@@ -29,7 +29,7 @@ export default function HomePage() {
 
       {showSubscribe && <SubscribeSection />}
       {showVideo && <VideoSection />}
-      {showTeam && <TeamSection />} 
+      {showTeam && <TeamSection />}  
       {showTeam && <TextSection />} 
     </div>
   );
