@@ -94,16 +94,17 @@ function generateVerificationEmailBody(verifyUrl: string): string {
                     line-height: 1.6;
                 }
                 .button {
-                    background-color: #007bff;
+                    background-color: #0CFF21;
                     color: white;
                     padding: 12px 20px;
                     border-radius: 5px;
                     text-decoration: none;
                     font-weight: bold;
                     display: inline-block;
+                    text-align: center;
                 }
                 .button:hover {
-                    background-color: #0056b3;
+                    background-color: #0CFF21;
                 }
                 .footer {
                     text-align: center;
@@ -121,7 +122,9 @@ function generateVerificationEmailBody(verifyUrl: string): string {
                 <p>🛡️ <strong>Pour finaliser ta commande</strong>, il te reste une petite étape : la <strong>valider</strong> en cliquant sur le lien ci-dessous. Ça nous permet de vérifier que c’est bien toi (et pas un fantôme qui passe commande à ta place 👀).</p>
 
                 <p>👉 <strong>Valide ta commande ici :</strong></p>
-                <a href="${verifyUrl}" class="button">${verifyUrl}</a>
+                <a href="${verifyUrl}" class="button">Clique ici</a>
+
+                <p>Si le bouton de ne fonctionne pas c'est ici 😉 : ${verifyUrl}</p>
 
                 <p>⚠️ <strong>Attention</strong>, ce lien expire dans <strong>1 heure</strong>, donc ne traîne pas trop !</p>
 

@@ -36,50 +36,100 @@ async function sendEmail(email: string, subject: string, body: string) {
     }
 };
 
-function generateEmailBody(firstName: string, orderDetails: OrderDetail[], total: number): string {
-    // Construction du message
-    let emailBody = `Salut ${firstName} ! 👻\n\n`;
-    emailBody += `Un grand **merci** pour ta commande chez nous ! 💖 On est super heureux de t’avoir parmi nos clients et on espère que tu vas adorer ce que tu as choisi. 😊\n\n`;
-
-    // Tableau des détails de la commande
-    emailBody += `**Détails de ta commande :**\n`;
-    emailBody += `| Nom                | Référence | Description         | Quantité | Prix   |\n`;
-    emailBody += `|--------------------|-----------|---------------------|----------|--------|\n`;
-    orderDetails.forEach((item) => {
-        emailBody += `| ${item.name.padEnd(20)} | ${item.id.padEnd(10)} | ${item.description.padEnd(20)} | ${item.quantity.toString().padEnd(8)} | ${item.price.toFixed(2).padEnd(6)} € |\n`;
-    });
-    emailBody += `\n**Total de la commande : ${total.toFixed(2)} €**\n\n`;
-
-    // Vérification des articles en précommande
-    const preorderItems = orderDetails.filter((item) => item.stockToOrder > 0);
-    if (preorderItems.length > 0) {
-        emailBody += `**⚠️ Informations sur les articles en précommande :**\n`;
-        emailBody += `Certains articles de ta commande sont actuellement en précommande. Ils seront disponibles sous **2 semaines**. Voici la liste :\n`;
-        preorderItems.forEach((item) => {
-            emailBody += `- **${item.name}** (Réf: ${item.id}) : ${item.stockToOrder} unité(s) en précommande.\n`;
-        });
-        emailBody += `\n`;
-    }
-
-    // Options de paiement
-    emailBody += `Pour le règlement, tu as plusieurs options :\n`;
+function generateEmailBody(firstName: string, orderDetails: OrderDetail[], total: number) {
     const rib = process.env.RIB;
-    emailBody += `✅ **Par virement** : Tu trouveras ci-joint notre RIB pour effectuer le paiement : ${rib}\n`;
-    emailBody += `✅ **Via Lydia QR code** : Tu pourras payer directement au moment de récupérer ta commande.\n`;
-    emailBody += `✅ **En espèces** : Tu peux aussi régler sur place lors de la récupération.\n\n`;
-
-    // Instructions pour récupérer la commande
-    emailBody += `Pour récupérer ta commande, tu peux passer **durant les perms au local** 🏠 ou, si tu préfères, envoyer un **DM à @bedbusers** sur instagram. 📩\n\n`;
-
-    // Appel à voter pour BedBusters
-    emailBody += `Enfin, on a une petite faveur à te demander… 😇 Si tu as aimé ton expérience avec nous, n’hésite pas à **voter pour 👻👻BedBusters👻👻** !;`
-
-    // Signature
-    emailBody += `Merci encore pour ta confiance, et à très vite ! 🚀\n\n`;
-    emailBody += `BedBusters 👻`;
+    
+    let emailBody = `<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmation de Commande</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #0CFF21;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #000;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Salut ${firstName} ! 👻</h1>
+        <p>Un grand <strong>merci</strong> pour ta commande chez nous ! 💖 On est super heureux de t’avoir parmi nos clients et on espère que tu vas adorer ce que tu as choisi. 😊</p>
+        
+        <h2>Détails de ta commande :</h2>
+        <table>
+            <tr>
+                <th>Nom</th>
+                <th>Référence</th>
+                <th>Description</th>
+                <th>Quantité</th>
+                <th>Prix</th>
+            </tr>
+            ${orderDetails.map((item: OrderDetail) => `
+            <tr>
+                <td>${item.name}</td>
+                <td>${item.id}</td>
+                <td>${item.description}</td>
+                <td>${item.quantity}</td>
+                <td>${item.price.toFixed(2)} €</td>
+            </tr>`).join('')}
+        </table>
+        
+        <p><strong>Total de la commande :</strong> ${total.toFixed(2)} €</p>
+        
+        ${orderDetails.some((item: OrderDetail) => item.stockToOrder > 0) ? `
+        <div>
+            <h2>⚠️ Informations sur les articles en précommande :</h2>
+            <p>Certains articles de ta commande sont actuellement en précommande. Ils seront disponibles sous <strong>2 semaines</strong>. Voici la liste :</p>
+            <ul>
+                ${orderDetails.filter((item: OrderDetail) => item.stockToOrder > 0).map((item: OrderDetail) => `<li><strong>${item.name}</strong> (Réf: ${item.id}) : ${item.stockToOrder} unité(s) en précommande.</li>`).join('')}
+            </ul>
+        </div>` : ''}
+        
+        <h2>Options de paiement :</h2>
+        <ul>
+            <li>✅ <strong>Par virement</strong> : Tu trouveras ci-joint notre RIB pour effectuer le paiement : ${rib}</li>
+            <li>✅ <strong>Via Lydia QR code</strong> : Tu pourras payer directement au moment de récupérer ta commande.</li>
+            <li>✅ <strong>En espèces</strong> : Tu peux aussi régler sur place lors de la récupération.</li>
+        </ul>
+        
+        <h2>Récupération de la commande :</h2>
+        <p>Pour récupérer ta commande, tu peux passer <strong>durant les perms au local</strong> 🏠 ou, si tu préfères, envoyer un <strong>DM à @bedbusers</strong> sur Instagram. 📩</p>
+        
+        <h2>Vote pour BedBusters !</h2>
+        <p>Enfin, on a une petite faveur à te demander… 😇 Si tu as aimé ton expérience avec nous, n’hésite pas à <strong>voter pour 👻👻BedBusters👻👻</strong> !</p>
+        
+        <p>Merci encore pour ta confiance, et à très vite ! 🚀</p>
+        <p><strong>BedBusters 👻</strong></p>
+    </div>
+</body>
+</html>`;
 
     return emailBody;
-}
+};
+
 
 function totalOrder(cart: OrderDetail[]): number {
     let total = 0;
