@@ -57,7 +57,7 @@ function generateOrderVerificationToken(orderId: string, email: string) {
 
 async function sendVerificationEmail(email: string, token: string) {
     const url = process.env.PUBLIC_URL;
-    const verifyUrl = url + `/api/checkout/verif?token=${token}`;
+    const verifyUrl = url + `/shop/verif?token=${token}`;
     const body = generateVerificationEmailBody(verifyUrl)
     const subject = "👻 BedBusters - Confirme ta commande (c’est rapide !)"; 
     await sendEmail(email, subject, body)
