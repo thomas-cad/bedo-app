@@ -16,6 +16,7 @@ const Navbar = () => {
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+    console.log("Menu is now", isMenuOpen ? "open" : "closed");
   };
 
   // Fonction utilitaire pour déterminer la classe active
@@ -25,7 +26,14 @@ const Navbar = () => {
       : "text-black";
   };
 
+  const getActiveClassHamburger = (path: string) => {
+    return pathname === path
+      ? "text-[#0cff20] font-bold"
+      : "text-black";
+  };
+
   return (
+    <div>
     <div
       className="fixed top-0 w-full z-50 backdrop-blur-md bg-white/10 h-20"
       style={{
@@ -37,7 +45,7 @@ const Navbar = () => {
         {/* Left - Hamburger Menu and Logo */}
         <div className="flex items-center gap-4">
           {/* Hamburger Menu for small screens */}
-          <div className="block md:hidden">
+            <div className="block md:hidden">
             <IconButton
               className="text-black"
               onClick={toggleMenu}
@@ -45,7 +53,7 @@ const Navbar = () => {
             >
               <MenuIcon />
             </IconButton>
-          </div>
+            </div>
 
           {/* Logo */}
             <Link href="/">
@@ -116,7 +124,27 @@ const Navbar = () => {
         </div>
       </div>
     </div>
+    {isMenuOpen && (
+    <div className="fixed top-20 w-full z-50 backdrop-blur-md bg-white/10 h-48 flex justify-center items-center">
+      <div className="block md:hidden flex flex-col items-center space-y-2">
+      <Link href="/" onClick={() => setIsMenuOpen(false)}>
+        <span className={`block transition-all duration-300 ease-out h-1 w-32 rounded-sm mb-1 pb-4 text-center hover:cursor-pointer ${getActiveClassHamburger("/")}`}>NOTRE LISTE</span>
+      </Link>
+      <Link href="/projets" onClick={() => setIsMenuOpen(false)}>
+        <span className={`block transition-all duration-300 ease-out h-1 w-32 rounded-sm mb-1 py-4 text-center hover:cursor-pointer ${getActiveClassHamburger("/projets")}`}>NOTRE PROJET</span>
+      </Link>
+      <Link href="/event" onClick={() => setIsMenuOpen(false)}>
+        <span className={`block transition-all duration-300 ease-out h-1 w-32 rounded-sm py-4 text-center hover:cursor-pointer ${getActiveClassHamburger("/event")}`}>NOS EVENTS</span>
+      </Link>
+      <Link href="/shop" onClick={() => setIsMenuOpen(false)}>
+        <span className={`block transition-all duration-300 ease-out h-1 w-32 rounded-sm py-4 text-center hover:cursor-pointer ${getActiveClassHamburger("/shop")}`}>LA BOUTIQUE</span>
+      </Link>
+      </div>
+    </div>
+    )}
+    </div>
   );
 };
 
 export default Navbar;
+
