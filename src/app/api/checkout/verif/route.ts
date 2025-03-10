@@ -102,7 +102,7 @@ function generateEmailBody(firstName: string, orderDetails: OrderDetail[], total
         ${orderDetails.some((item: OrderDetail) => item.stockToOrder > 0) ? `
         <div>
             <h2>⚠️ Informations sur les articles en précommande :</h2>
-            <p>Certains articles de ta commande sont actuellement en précommande. Ils seront disponibles sous <strong>2 semaines</strong>. Voici la liste :</p>
+            <p>Certains articles de ta commande sont actuellement en précommande, ta commande ne sera validée qu'<strong>après réception du paiement</strong>. Ils seront disponibles sous <strong>2 semaines</strong>. Voici la liste :</p>
             <ul>
                 ${orderDetails.filter((item: OrderDetail) => item.stockToOrder > 0).map((item: OrderDetail) => `<li><strong>${item.name}</strong> (Réf: ${item.id}) : ${item.stockToOrder} unité(s) en précommande.</li>`).join('')}
             </ul>
@@ -116,7 +116,7 @@ function generateEmailBody(firstName: string, orderDetails: OrderDetail[], total
         </ul>
         
         <h2>Récupération de la commande :</h2>
-        <p>Pour récupérer ta commande, tu peux passer <strong>durant les perms au local</strong> 🏠 ou, si tu préfères, envoyer un <strong>DM à @bedbusers</strong> sur Instagram. 📩</p>
+        <p>Pour récupérer ta commande, tu peux passer <strong>durant les perms au local</strong> 🏠 ou, si tu préfères, envoyer un <strong>DM à @bedbusters</strong> sur Instagram. 📩</p>
         
         <h2>Vote pour BedBusters !</h2>
         <p>Enfin, on a une petite faveur à te demander… 😇 Si tu as aimé ton expérience avec nous, n’hésite pas à <strong>voter pour 👻👻BedBusters👻👻</strong> !</p>

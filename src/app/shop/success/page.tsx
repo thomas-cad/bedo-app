@@ -50,7 +50,7 @@ const CommandePageContent = () => {
     return (
         <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 p-4">
             <div className="bg-white p-8 rounded-lg shadow-md text-center max-w-md w-full">
-                <h1 className="text-2xl font-bold text-gray-800 mb-4">👻 Commande validée ! 👻</h1>
+                <h1 className="text-2xl font-bold text-gray-800 mb-4">👻 Encore une dernière étape ! 👻</h1>
                 <p className="text-gray-600 mb-4">
                     Votre commande avec l&apos;ID{' '}
                     <strong style={{ color: '#0CFF21' }}>{id}</strong> a été confirmée.
