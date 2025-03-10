@@ -24,26 +24,29 @@ function totalOrder(cart: CartItem[]): number {
 
 async function sendEmail(email: string, subject: string, body: string) {
     try {
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: parseInt(process.env.SMTP_PORT as string, 10),
-      secure: true, // true pour SSL/TLS
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
-    });
-  
-    const info = await transporter.sendMail({
-      from: `"BedBusters Shop" <${process.env.SMTP_USER}>`,
-      to: email,
-      subject: subject,
-      text: body,
-    });
-  
-      console.log("Email envoyé: ", info.messageId);
+        const transporter = nodemailer.createTransport({
+            host: process.env.SMTP_HOST,
+            port: parseInt(process.env.SMTP_PORT as string, 10),
+            secure: false, // false pour un SMTP non sécurisé (port 25)
+            auth: {
+                user: process.env.SMTP_USER,
+                pass: process.env.SMTP_PASS,
+            },
+            tls: {
+                rejectUnauthorized: false, // Accepter les connexions non sécurisées
+            }
+        });
+
+        const info = await transporter.sendMail({
+            from: `"BedBusters Shop" <${process.env.SMTP_USER}>`,
+            to: email,
+            subject: subject,
+            text: body,
+        });
+
+        console.log("Email envoyé: ", info.messageId);
     } catch (error) {
-      console.error("Erreur lors de l'envoi de l'email:", error);
+        console.error("Erreur lors de l'envoi de l'email:", error);
     }
 };
 
@@ -57,7 +60,7 @@ function generateOrderVerificationToken(orderId: string, email: string) {
 
 async function sendVerificationEmail(email: string, token: string) {
     const url = process.env.PUBLIC_URL;
-    const verifyUrl = url + `/api/checkout/verif?token=${token}`;
+    const verifyUrl = url + `/shop/verif?token=${token}`;
     const body = generateVerificationEmailBody(verifyUrl)
     const subject = "👻 BedBusters - Confirme ta commande (c’est rapide !)"; 
     await sendEmail(email, subject, body)
