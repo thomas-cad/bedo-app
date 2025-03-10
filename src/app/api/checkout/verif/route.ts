@@ -165,6 +165,13 @@ export async function GET(req: Request) {
             );
         }
 
+        if (order.status === 'CONFIRMED') {
+            return new Response(
+                JSON.stringify({ success: false, message: "Already confirmed" }),
+                { status: 403 }
+            );
+        }
+
         user = await prisma.user.findUnique({where : { id: order.userId }})
     } catch (err) {
         return new Response(
