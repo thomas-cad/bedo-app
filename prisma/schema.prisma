@@ -11,11 +11,16 @@ model event {
   id            String     @id @unique @default(cuid())
   start_date    DateTime
   end_date      DateTime
-  title         String?    @unique
+  title         String     @unique
   description   String?
-  bill          Bytes
-  event_typeId  String
-  event_type_id event_type @relation(fields: [event_typeId], references: [id])
+  bill          Float      // Changed from Bytes
+  event_typeId String
+  event_type    event_type @relation(fields: [event_typeId], references: [id])
+}
+
+model api_user {
+  id   String  @id @unique @default(cuid())
+  name String  @unique
 }
 
 model event_type {
@@ -40,12 +45,13 @@ model size {
 }
 
 model item_size {
-  id              String            @id @unique @default(cuid())
-  stock           Int
-  itemId          String
-  sizeId          String
-  item_id         item              @relation(fields: [itemId], references: [id])
-  size_id         size              @relation(fields: [sizeId], references: [id])
+  id          String     @id @unique @default(cuid())
+  stock       Int
+  preorder    Int @default(0)
+  itemId      String
+  sizeId      String
+  item        item       @relation(fields: [itemId], references: [id])
+  size        size       @relation(fields: [sizeId], references: [id])
   order_item_size order_item_size[]
 }
 
@@ -55,24 +61,26 @@ model user {
   last_name  String
   email      String
   phone      String
-  order      order[]
+  orders     order[]
 }
 
 model order {
   id              String            @id @unique @default(cuid())
   status          String
   order_date      DateTime
-  userId          String
+  userId         String
   total           Float
-  user_id         user              @relation(fields: [userId], references: [id])
+  user            user              @relation(fields: [userId], references: [id])
   order_item_size order_item_size[]
 }
 
 model order_item_size {
-  id           String    @id @unique @default(cuid())
-  orderId      String
-  item_sizeId  String
-  quantity     Int
-  item_size_id item_size @relation(fields: [item_sizeId], references: [id])
-  order_id     order     @relation(fields: [orderId], references: [id])
+  id                 String     @id @unique @default(cuid())
+  orderId            String
+  item_sizeId        String
+  stock_quantity     Int @default(0)
+  preorder_quantity  Int @default(0)
+  total_quantity     Int @default(0) // Added default value
+  item_size          item_size @relation(fields: [item_sizeId], references: [id])
+  order              order     @relation(fields: [orderId], references: [id])
 }
