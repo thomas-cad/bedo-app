@@ -5,8 +5,7 @@ services:
   bedbusters_app:
     image: node:18-alpine
     profiles:
-      - prod 
-      - prod_test
+      - prod
     working_dir: /app
     ports:
       - "${PORT}:${PORT}"
@@ -30,9 +29,6 @@ services:
 
   bedbusters_db:
     image: postgres:17.3
-    profiles:
-      - prod
-      - dev
     restart: always
     environment:
       - POSTGRES_USER=${DB_USER}
