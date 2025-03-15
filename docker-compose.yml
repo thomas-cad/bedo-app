@@ -5,7 +5,8 @@ services:
   bedbusters_app:
     image: node:18-alpine
     profiles:
-      - prod  # Ce service ne s'exécute que si le profil "dev" est activé
+      - prod 
+      - prod_test
     working_dir: /app
     ports:
       - "${PORT}:${PORT}"
@@ -29,6 +30,9 @@ services:
 
   bedbusters_db:
     image: postgres:17.3
+    profiles:
+      - prod
+      - dev
     restart: always
     environment:
       - POSTGRES_USER=${DB_USER}
