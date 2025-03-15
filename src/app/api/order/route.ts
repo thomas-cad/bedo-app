@@ -5,9 +5,20 @@ const prisma = new PrismaClient();
 
 const STATUS_VALUES = ['PENDING', 'COMPLETED', 'PAID', 'CANCELLED', 'DELIVERED'];
 
+interface ProductOrder{
+  productId: string;
+  quantity_total: number;
+  quantity_stock: number;
+  quantiy_preorder: number;
+  size: string;
+  sizeId: string;
+  name: string;
+  itemId: string;
+  price: number;
+  description: string;
+}
 
-
-async function updateStock(orderItem: any) {
+async function updateStock(orderItem: ProductOrder) {
   const itemStock = await prisma.item_size.findUnique({ where: { id: orderItem.productId } });
   if (!itemStock) throw new Error(`Item ${orderItem.productId} not found`);
 

@@ -206,13 +206,13 @@ export async function GET(req: Request) {
             let stockAvailable;
             let stockToOrder;
             let newStock;
-            if(item_stock && item_stock.stock >= item.quantity){
-                stockAvailable =  item_stock.stock - item.quantity;
+            if(item_stock && item_stock.stock >= item.total_quantity){
+                stockAvailable =  item_stock.stock - item.total_quantity;
                 stockToOrder = 0;
-                newStock = item_stock.stock - item.quantity;
-            } else if(item_stock && item_stock.stock < item.quantity){
+                newStock = item_stock.stock - item.total_quantity;
+            } else if(item_stock && item_stock.stock < item.total_quantity){
                 stockAvailable =  item_stock.stock;
-                stockToOrder = item.quantity - item_stock.stock;
+                stockToOrder = item.total_quantity - item_stock.stock;
                 newStock = 0;
             } else {
                 return new Response(
@@ -225,9 +225,9 @@ export async function GET(req: Request) {
                 id: item.id,
                 stockAvailable: stockAvailable,
                 stockToOrder: stockToOrder,
-                quantity: item.quantity,
+                quantity: item.total_quantity,
                 name: item_product?.title ?? '',
-                price: item.quantity * (item_product?.price ?? 0),
+                price: item.total_quantity * (item_product?.price ?? 0),
                 description: item_product?.description ?? '',
             }
 

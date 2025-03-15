@@ -283,7 +283,7 @@ export async function POST(req: Request) {
                 data: {
                     item_sizeId: item.id,
                     orderId: orderId,
-                    quantity: item.quantity,
+                    total_quantity: item.quantity,
                 },
             });
         }
