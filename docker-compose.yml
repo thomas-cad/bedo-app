@@ -4,6 +4,8 @@ name: bedbusters
 services:
   bedbusters_app:
     image: node:18-alpine
+    profiles:
+      - prod  # Ce service ne s'exécute que si le profil "dev" est activé
     working_dir: /app
     ports:
       - "${PORT}:${PORT}"
