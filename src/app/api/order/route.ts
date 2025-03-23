@@ -1,22 +1,12 @@
 import { type NextRequest, NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
+import {ProductOrder} from "@/interfaces"
 
 const prisma = new PrismaClient();
 
-const STATUS_VALUES = ['PENDING', 'COMPLETED', 'PAID', 'CANCELLED', 'DELIVERED'];
+const STATUS_VALUES = ['COMPLETED', 'PAID', 'PENDING'];
 
-interface ProductOrder{
-  productId: string;
-  quantity_total: number;
-  quantity_stock: number;
-  quantiy_preorder: number;
-  size: string;
-  sizeId: string;
-  name: string;
-  itemId: string;
-  price: number;
-  description: string;
-}
+
 
 async function updateStock(orderItem: ProductOrder) {
   const itemStock = await prisma.item_size.findUnique({ where: { id: orderItem.productId } });
@@ -48,11 +38,11 @@ async function updateStock(orderItem: ProductOrder) {
 
 /** GET: Retrieve Orders */
 export async function GET(request: NextRequest) {
-  const apiKey = request.headers.get("x-api-key");
+  // const apiKey = request.headers.get("x-api-key");
 
-  if (!apiKey || apiKey !== process.env.API_KEY) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+  // if (!apiKey || apiKey !== process.env.API_KEY) {
+  //   return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  // }
 
   const id = request.nextUrl.searchParams.get('id') || undefined;
 
@@ -88,10 +78,12 @@ export async function GET(request: NextRequest) {
         quantity_preorder: item.preorder_quantity,
         size: item.item_size.size.size,
         sizeId: item.item_size.sizeId,
-        name: item.item_size.item.title,
+        name_fr: item.item_size.item.title_fr,
+        name_en : item.item_size.item.title_en,
         itemId: item.item_size.itemId,
         price: item.item_size.item.price,
-        description: item.item_size.item.description,
+        description_fr: item.item_size.item.description_fr,
+        description_en: item.item_size.item.description_en,
       })),
     }));
 
@@ -134,27 +126,53 @@ export async function PATCH(request: NextRequest) {
       return NextResponse.json({ error: 'Invalid order status' }, { status: 400 });
     }
 
-    await prisma.$transaction([
-      prisma.order_item_size.deleteMany({ where: { orderId: id } }),
-    ]);
-
-    let total = 0;
-    for (const orderItem of newOrder.products) {
-      const { quantity_stock, quantity_preorder } = await updateStock(orderItem);
-      total += orderItem.quantity_total * orderItem.price;
-      await prisma.order_item_size.create({
-        data: {
-          orderId: id,
-          total_quantity: orderItem.quantity_total,
-          stock_quantity: quantity_stock,
-          preorder_quantity: quantity_preorder,
-          item_sizeId: orderItem.productId,
-        },
-      });
+    if (!newOrder.orderStatus){
+      newOrder.orderStatus = existingOrder.status
     }
 
-    await prisma.order.update({ where: { id }, data: { status: newOrder.orderStatus, total } });
-    return NextResponse.json({ message: `Order ${id} updated successfully` }, { status: 200 });
+    let total = 0;
+    if (newOrder.products){
+      await prisma.order_item_size.deleteMany({ where: { orderId: id } })
+
+      for (const orderItem of newOrder.products as ProductOrder[]) {
+        const productData =  await prisma.item_size.findUnique({where : {id:orderItem.productId}})
+        if (!productData){
+          return NextResponse.json({ error: 'Product not found' }, { status: 500 });
+        }
+
+        const itemData = await prisma.item.findUnique({ where: { id: productData.itemId } });
+        if (!itemData){
+          return NextResponse.json({ error: 'Item not found' }, { status: 500 });
+        }
+        const { quantity_stock, quantity_preorder } = await updateStock(orderItem);
+
+        if (quantity_preorder===null || quantity_preorder === null){
+          return NextResponse.json({ error: 'Update stock' }, { status: 500 });
+        }
+
+        total += orderItem.quantity_total * itemData.price;
+        await prisma.order_item_size.create({
+          data: {
+            orderId: id,
+            total_quantity: orderItem.quantity_total ?? 0,
+            stock_quantity: quantity_stock ?? 0,
+            preorder_quantity: quantity_preorder ?? 0,
+            item_sizeId: orderItem.productId,
+          },
+        });        
+        
+      }
+    }else{
+      total = existingOrder.total
+    }
+    
+
+    const updatedOrder = await prisma.order.update({ where: { id }, data: { status: newOrder.orderStatus, total: total } });
+
+    if (!updatedOrder) {
+      return NextResponse.json({ error: 'Failed to update order' }, { status: 500 });
+    }
+    return NextResponse.json({ message: `Order ${id} updated successfully ${newOrder.orderStatus}` }, { status: 200 });
   } catch (error) {
     console.error(error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
@@ -180,20 +198,30 @@ export async function POST(request: NextRequest) {
     });
 
     for (const orderItem of newOrder.products) {
+      const productData =  await prisma.item_size.findUnique({where : {id:orderItem.productId}})
+        if (!productData){
+          return NextResponse.json({ error: 'Product not found' }, { status: 500 });
+        }
+
+        const itemData = await prisma.item.findUnique({ where: { id: productData.itemId } });
+        if (!itemData){
+          return NextResponse.json({ error: 'Item not found' }, { status: 500 });
+        }
       const { quantity_stock, quantity_preorder } = await updateStock(orderItem);
-      total += orderItem.quantity_total * orderItem.price;
+
+      total += orderItem.quantity_total * itemData.price;
       await prisma.order_item_size.create({
         data: {
           orderId: order.id,
-          total_quantity: orderItem.quantity_total,
-          stock_quantity: quantity_stock,
-          preorder_quantity: quantity_preorder,
+          total_quantity: orderItem.quantity_total ?? 0,
+          stock_quantity: quantity_stock ?? 0,
+          preorder_quantity: quantity_preorder ?? 0,
           item_sizeId: orderItem.productId,
         },
-      });
+      });   
     }
 
-    await prisma.order.update({ where: { id: order.id }, data: { total } });
+    await prisma.order.update({ where: { id: order.id }, data: { total: total } });
     return NextResponse.json({ message: `Order ${order.id} created successfully` }, { status: 200 });
   } catch (error) {
     console.error(error);

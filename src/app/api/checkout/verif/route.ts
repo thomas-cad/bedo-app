@@ -226,9 +226,9 @@ export async function GET(req: Request) {
                 stockAvailable: stockAvailable,
                 stockToOrder: stockToOrder,
                 quantity: item.total_quantity,
-                name: item_product?.title ?? '',
+                name: item_product?.title_fr ?? '',
                 price: item.total_quantity * (item_product?.price ?? 0),
-                description: item_product?.description ?? '',
+                description: item_product?.description_fr ?? '',
             }
 
             orderDetail.push(newItem);

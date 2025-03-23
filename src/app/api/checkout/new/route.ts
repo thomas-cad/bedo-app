@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { CartItem } from '@/app/context/CartContext';
+import { CartItem } from '@/app/[locale]/context/CartContext';
 import jwt from 'jsonwebtoken';
 import nodemailer from 'nodemailer';
 

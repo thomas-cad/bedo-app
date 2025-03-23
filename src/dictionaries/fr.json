@@ -1,0 +1,38 @@
+{
+    "home": {
+        "title": "Bonjour le monde",
+        "desc": "C'est ici"
+    },
+    "navbar": {
+        "list": "Notre Liste",
+        "project": "Projet",
+        "events": "Événements",
+        "shop": "Boutique"
+    },
+    "footer": {
+        "source_code": "Code Source",
+        "documentation": "Documentation",
+        "social_networks": "Réseaux Sociaux"
+    },
+    "product": {
+        "description": {
+            "from": "À partir de ",
+            "tva": " TVA incluse"
+        },
+        "add_to_cart":{
+            "size":"Votre taille",
+            "add": "Ajouter au panier"
+        }
+    },
+    "cart":{
+        "cart":"Votre panier",
+        "summary":"Resumé de votre commande",
+        "order":"Commander",
+        "error":"Erreur",
+        "loading":"Loading...",
+        "product":"Produit",
+        "size":"Taille",
+        "delete":"Supprimer",
+        "empty":"Votre panier est vide"
+    }
+}

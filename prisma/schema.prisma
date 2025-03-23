@@ -30,12 +30,14 @@ model event_type {
 }
 
 model item {
-  id          String      @id @unique @default(cuid())
-  title       String      @unique
-  description String
-  price       Float
-  image       String
-  item_size   item_size[]
+  id             String      @id @unique @default(cuid())
+  title_fr       String      @unique
+  title_en       String      @default("Unknown")
+  description_fr String      @default("Unknown")
+  description_en String      @default("Unknown")
+  price          Float
+  image          String
+  item_size      item_size[]
 }
 
 model size {
@@ -47,7 +49,7 @@ model size {
 model item_size {
   id          String     @id @unique @default(cuid())
   stock       Int
-  preorder    Int @default(0)
+  preorder    Int        @default(0)
   itemId      String
   sizeId      String
   item        item       @relation(fields: [itemId], references: [id])
@@ -68,7 +70,7 @@ model order {
   id              String            @id @unique @default(cuid())
   status          String
   order_date      DateTime
-  userId         String
+  userId          String
   total           Float
   user            user              @relation(fields: [userId], references: [id])
   order_item_size order_item_size[]

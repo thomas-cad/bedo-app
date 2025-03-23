@@ -1,0 +1,38 @@
+{
+    "home": {
+        "title": "Helo World",
+        "desc": "It is here"
+    },
+    "navbar": {
+        "list": "Our List",
+        "project": "Project",
+        "events": "Events",
+        "shop": "shop"
+    },
+    "footer":{
+        "source_code": "Source Code",
+        "documentation": "Documentation",
+        "social_networks" : "Social Networks"
+    },
+    "product":{
+        "description":{
+            "from": "From ",
+            "tva": " VAT included"
+        },
+        "add_to_cart": {
+            "size": "Your size",
+            "add": "Add to cart"
+        }
+    },
+    "cart": {
+        "cart": "Your cart",
+        "summary": "Order summary",
+        "order": "Order",
+        "error": "Error",
+        "loading": "Loading...",
+        "product": "Product",
+        "size": "Size",
+        "delete": "Delete",
+        "empty": "Your cart is empty"
+    }
+}
