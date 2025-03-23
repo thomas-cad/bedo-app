@@ -1,6 +1,6 @@
 
 
-COPY public.order_item_size (id, "orderId", "item_sizeId", stock_quantity, preorder_quantity, total_quantity) FROM stdin;
+COPY public.order_item_size (id, "orderId", "item_sizeId", "stock_quantity", "preorder_quantity", "total_quantity") FROM stdin;
 cm835p7gr0004siq7zfpaqzzg	cm835p7eu0002siq7b466830m	cl5y2hx39h8s2000000000000	1   0   1
 cm837tvk30004nkq0arukjwu4	cm837tvj10002nkq0z9qr1yvl	cl5y2hx39h8s3000000000000	1   0   1
 cm8381rmh0009nkq0en7e9xox	cm8381rm50007nkq0jkuv36el	cl5y2hx39h8s3000000000000	20  0   0
