@@ -3,15 +3,18 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import NavbarWrapper from "@/app/[locale]/components/NavbarWrapper";
 import FooterWrapper from "@/app/[locale]/components/FooterWrapper";
-import { CartProvider } from '@/app/[locale]/context/CartContext';
+import CartProviderWrapper from "@/app/[locale]/components/CartProviderWrapper"; // New client wrapper
+import SessionProviderWrapper from "@/app/[locale]/components/SessionProviderWrapper"
+import { getSession } from "next-auth/react";
 
 interface LangParams {
   locale: string;
 }
 
-export async function generateStaticParams() {
-  return [{ lang: "en" }, { lang: "fr" }];
-}
+export const metadata: Metadata = {
+  title: "BedBusters",
+  description: "BedBusters official web site",
+};
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,11 +26,6 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "BedBusters",
-  description: "BedBusters official web site",
-};
-
 export default async function RootLayout({
   children,
   params,
@@ -35,19 +33,21 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: LangParams;
 }>) {
-  const { locale } = await params; // Await params before destructuring
+  const { locale } = await params
+  const session = await getSession()
 
   return (
     <html lang={locale}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {/* Wrap the entire content with CartProvider */}
-        <CartProvider>
-          <NavbarWrapper locale={locale}/>
-          <main className="flex-1">{children}</main>
-          <FooterWrapper locale={locale}/>
-        </CartProvider>
+        <SessionProviderWrapper session={session}>
+          <CartProviderWrapper>
+            <NavbarWrapper locale={locale} />
+              <main className="flex-1">{children}</main>
+            <FooterWrapper locale={locale} />
+          </CartProviderWrapper>
+        </SessionProviderWrapper>
       </body>
     </html>
   );

@@ -6,8 +6,8 @@ export default function HeroSection() {
       <Image
         src="/image/Team-bed.jpg" // ✅ Toujours depuis public/
         alt="Team BDE"
-        layout="fill"
-        objectFit="cover"
+        fill
+        style={{ objectFit: "cover" }}
         className=""
       />
     </div>
