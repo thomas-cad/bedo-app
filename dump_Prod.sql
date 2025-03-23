@@ -1,4 +1,30 @@
+COPY public."user" (id, first_name, last_name, email, phone) FROM stdin;
+cm835p7eh0000siq753zr0gpr	Yahya	Moustahsane	yahya.moustahsane@telecom-paris.fr	0767296140
+cm837tvip0000nkq0sb25y2hd	test	test	ijosijqsodjq@telecom-paris.fr	0102030405
+cm8381rls0005nkq0xrz5q2e8	coucou	au revoir	jesuisunadministrateur@telecom-paris.fr	0000000000
+cm83acwtt000ankq0xfggu1xo	Antoine	Huther	antoine.huther@telecom-paris.fr	0628272576
+cm84gpl6u0000o2q05syvv55e	Emile	Fourcin	emile.fourcin@telecom-paris.fr	0635383773
+cm84sseux000ao2q06dpo0die	Eya	Mami	eya.mami@telecom-paris.fr	0749673964
+cm84t1m33000fo2q03nnx0oqp	Mehdi 	El Kouarati 	mehdi.elkouarati@telecom-paris.fr	0783391023
+cm84uakiv000ko2q0rlqxsqug	Théo	Lartigau	theo.lartigau@telecom-paris.fr	0641807658
+cm84utnla000po2q0fxpdouao	Thomas	Velard	thomas.velard@telecom-paris.fr	0628761365
+cm84so5xx0005o2q0olytdjjj	Thomas	Revol	thomas.revol@telecom-paris.fr	0768990496
+cm88j47qn000yo2q0yuvdb69p	Mathilde	Duval Alfonso	mathilde.duval@telecom-paris.fr	0782114663
+cm8d33yji0000qnqtsn86va1j	Maël	Messin	mael.messin@telecom-paris.fr	0644029841
+\.
 
+
+--
+-- Data for Name: size; Type: TABLE DATA; Schema: public; Owner: bedbusters_app
+--
+
+COPY public.size (id, size) FROM stdin;
+cl5y2hx38g7r	S
+cl5y2hx39h8s	M
+cl5y2hx40k9t	L
+cl5y2hx41l2u	XL
+cl5y2hx42m3v	U
+\.
 
 
 --
@@ -61,35 +87,7 @@ cm88j47rc0012o2q0kiu6qppt	cm88j47r00010o2q0w27pwbit	cl5y2hx38g7r3000000000000	1
 cm8d33yr60004qnqt8teepdpr	cm8d33ymr0002qnqta6eonmgi	cl5y2hx39h8s2000000000000	1
 \.
 
-
---
--- Data for Name: size; Type: TABLE DATA; Schema: public; Owner: bedbusters_app
---
-
-COPY public.size (id, size) FROM stdin;
-cl5y2hx38g7r	S
-cl5y2hx39h8s	M
-cl5y2hx40k9t	L
-cl5y2hx41l2u	XL
-cl5y2hx42m3v	U
-\.
-
-
 --
 -- Data for Name: user; Type: TABLE DATA; Schema: public; Owner: bedbusters_app
 --
 
-COPY public."user" (id, first_name, last_name, email, phone) FROM stdin;
-cm835p7eh0000siq753zr0gpr	Yahya	Moustahsane	yahya.moustahsane@telecom-paris.fr	0767296140
-cm837tvip0000nkq0sb25y2hd	test	test	ijosijqsodjq@telecom-paris.fr	0102030405
-cm8381rls0005nkq0xrz5q2e8	coucou	au revoir	jesuisunadministrateur@telecom-paris.fr	0000000000
-cm83acwtt000ankq0xfggu1xo	Antoine	Huther	antoine.huther@telecom-paris.fr	0628272576
-cm84gpl6u0000o2q05syvv55e	Emile	Fourcin	emile.fourcin@telecom-paris.fr	0635383773
-cm84sseux000ao2q06dpo0die	Eya	Mami	eya.mami@telecom-paris.fr	0749673964
-cm84t1m33000fo2q03nnx0oqp	Mehdi 	El Kouarati 	mehdi.elkouarati@telecom-paris.fr	0783391023
-cm84uakiv000ko2q0rlqxsqug	Théo	Lartigau	theo.lartigau@telecom-paris.fr	0641807658
-cm84utnla000po2q0fxpdouao	Thomas	Velard	thomas.velard@telecom-paris.fr	0628761365
-cm84so5xx0005o2q0olytdjjj	Thomas	Revol	thomas.revol@telecom-paris.fr	0768990496
-cm88j47qn000yo2q0yuvdb69p	Mathilde	Duval Alfonso	mathilde.duval@telecom-paris.fr	0782114663
-cm8d33yji0000qnqtsn86va1j	Maël	Messin	mael.messin@telecom-paris.fr	0644029841
-\.
