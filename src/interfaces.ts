@@ -147,6 +147,7 @@ export interface Membre {
     last_name: string
     role_fr: string
     role_en: string
+    image:string
     poles:PoleMembre[]
 }
 
@@ -177,6 +178,7 @@ export interface MembrePole {
     role_fr: string
     role_en: string
     respo: boolean
+    image:string
 }
 
 export interface PolePatch{
@@ -196,4 +198,22 @@ export interface MembrePolePatch {
     role_fr?: string
     role_en?: string
     respo?: boolean
+}
+
+export interface NewUser {
+    id? : string
+    first_name:string
+    last_name:string
+    email:string
+    phone:string
+    isAdmin:boolean
+}
+
+export interface UserPatch {
+    id? : string
+    first_name?:string
+    last_name?:string
+    email?:string
+    phone?:string
+    isAdmin?:boolean
 }

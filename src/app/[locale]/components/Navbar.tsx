@@ -12,7 +12,7 @@ import PersonIcon from '@mui/icons-material/Person';
 
 const locales = ["en", "fr"];
 
-const Navbar = ({ t }: { t: { navbar: { list: string; project: string; events: string; shop: string } } }) => {
+const Navbar = ({ t }: { t: { navbar: { list: string; project: string; team: string; shop: string } } }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
   const { cart } = useCart();

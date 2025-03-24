@@ -30,6 +30,7 @@ export async function GET(request: NextRequest) {
             last_name: membre.last_name,
             role_fr: membre.role_fr,
             role_en: membre.role_en,
+            image: membre.image ?? '',
             poles: membre.pole_membre.map((poleMembre): PoleMembre => ({
                 id: poleMembre.pole.id,
                 name_fr: poleMembre.pole.name_fr,

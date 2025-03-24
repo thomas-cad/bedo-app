@@ -38,6 +38,7 @@ export async function GET(request: NextRequest) {
                 role_fr: poleMembre.membre.role_fr,
                 role_en: poleMembre.membre.role_en,
                 respo: poleMembre.respo,
+                image: poleMembre.membre.image ?? ''
             })),
         }));
 
