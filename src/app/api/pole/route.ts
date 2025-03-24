@@ -30,6 +30,7 @@ export async function GET(request: NextRequest) {
             name_en: pole.name_en,
             description_fr: pole.description_fr ?? '',
             description_en: pole.description_en ?? '',
+            show:pole.show,
             membres: pole.pole_membre.map((poleMembre): MembrePole => ({
                 id: poleMembre.membre.id,
                 first_name: poleMembre.membre.first_name,
@@ -59,6 +60,7 @@ export async function PATCH(request: NextRequest) {
         
         let newDesciptionFr:string
         let newDesciptionEn:string
+        let newShow:boolean
 
         if (!newPole.description_en){
             newDesciptionEn=existingPole.description_en ?? ''
@@ -72,10 +74,16 @@ export async function PATCH(request: NextRequest) {
             newDesciptionFr=newPole.description_fr ?? ''
         }
 
+        if (newPole.show === null){
+            newShow=existingPole.show
+        }else{
+            newShow=newPole.show ?? existingPole.show
+        }
+
 
         await prisma.pole.update({
             where: { id: id },
-            data: { description_fr: newDesciptionFr, description_en:newDesciptionEn }
+            data: { description_fr: newDesciptionFr, description_en:newDesciptionEn, show:newShow }
         });
 
         return NextResponse.json({}, { status: 200 });

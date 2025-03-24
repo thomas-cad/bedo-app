@@ -111,11 +111,11 @@ const Navbar = ({ t }: { t: { navbar: { list: string; project: string; events: s
               {t.navbar.project.toUpperCase()}
             </Link>
             <Link
-              href="/event"
-              className={`text-base md:text-lg transition hover:text-[#0cff21] hover:text-lg md:hover:text-xl no-underline ${getActiveClass("/event")}`}
+              href="/team"
+              className={`text-base md:text-lg transition hover:text-[#0cff21] hover:text-lg md:hover:text-xl no-underline ${getActiveClass("/team")}`}
               onClick={toggleMenu}
             >
-              {t.navbar.events.toUpperCase()}
+              {t.navbar.team.toUpperCase()}
             </Link>
             <Link
               href="/shop"
@@ -165,7 +165,7 @@ const Navbar = ({ t }: { t: { navbar: { list: string; project: string; events: s
                 <span className={`block transition-all duration-300 ease-out h-1 w-32 rounded-sm mb-1 py-4 text-center hover:cursor-pointer ${getActiveClassHamburger("/projets")}`}>{t.navbar.project.toUpperCase()}</span>
               </Link>
               <Link href="/event" onClick={() => setIsMenuOpen(false)}>
-                <span className={`block transition-all duration-300 ease-out h-1 w-32 rounded-sm py-4 text-center hover:cursor-pointer ${getActiveClassHamburger("/event")}`}>{t.navbar.events.toUpperCase()}</span>
+                <span className={`block transition-all duration-300 ease-out h-1 w-32 rounded-sm py-4 text-center hover:cursor-pointer ${getActiveClassHamburger("/team")}`}>{t.navbar.team.toUpperCase()}</span>
               </Link>
               <Link href="/shop" onClick={() => setIsMenuOpen(false)}>
                 <span className={`block transition-all duration-300 ease-out h-1 w-32 rounded-sm py-4 text-center hover:cursor-pointer ${getActiveClassHamburger("/shop")}`}>{t.navbar.shop.toUpperCase()}</span>

@@ -21,13 +21,18 @@ const Sidebar = () => {
         {/* Sidebar content */}
         <div className="flex flex-col items-center py-2">
             <Link href="/orders">
-              <p className="text-black hover:text-[#0CFF21]">
+              <p className="text-black hover:text-[#0CFF21] py-2">
               Commandes
               </p>
             </Link>
             <Link href="/stock">
-              <p className="text-black hover:text-[#0CFF21]">
+              <p className="text-black hover:text-[#0CFF21] py-2">
               Stock
+              </p>
+            </Link>
+            <Link href="/pole">
+              <p className="text-black hover:text-[#0CFF21] py-2">
+              Pole
               </p>
             </Link>
           </div>

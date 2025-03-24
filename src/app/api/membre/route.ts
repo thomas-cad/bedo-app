@@ -37,6 +37,7 @@ export async function GET(request: NextRequest) {
                 description_fr: poleMembre.pole.description_fr ?? '',
                 description_en: poleMembre.pole.description_en ?? '',
                 respo: poleMembre.respo,
+                show: poleMembre.pole.show
             })),
         }));
 

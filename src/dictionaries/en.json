@@ -6,7 +6,7 @@
     "navbar": {
         "list": "Our List",
         "project": "Project",
-        "events": "Events",
+        "team": "The Team",
         "shop": "shop"
     },
     "footer":{
@@ -34,5 +34,11 @@
         "size": "Size",
         "delete": "Delete",
         "empty": "Your cart is empty"
+    },
+    "projet": {
+        "title": "Discover our project! 👻"
+    },
+    "team":{
+        "title":"Our team ! 👻"
     }
 }

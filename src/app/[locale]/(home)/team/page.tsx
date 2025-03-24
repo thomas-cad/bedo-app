@@ -1,5 +1,4 @@
 import { getDictionary } from "@/app/lib/dictionaries";
-import Projects from "./components/Projects"
 
 type Params = Promise<{ locale: string }>;
 
@@ -9,9 +8,9 @@ export default async function ProjetPage({ params }: { params : Params } ) {
 
   return (
     <div className="mt-24">
-      <h1 className="text-2xl font-bold text-center">{t.projet.title}</h1>
+      <h1 className="text-2xl font-bold text-center">{t.team.title}</h1>
       <div>
-        <Projects locale={locale} />
+
       </div>
     </div>
   );

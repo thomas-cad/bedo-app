@@ -28,7 +28,8 @@ export function middleware(request: NextRequest) {
     // 1️⃣ Skip requests that should not be processed
     if (
         pathname.startsWith("/_next") || // Static files, chunks, assets
-        pathname.startsWith("/api") // API routes
+        pathname.startsWith("/api") || // API routes
+        pathname === "/favicon.ico" // Favicon
     ) {
         return NextResponse.next();
     }
@@ -56,5 +57,7 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-    matcher: ['/((?!api|_next/static|_next/image|image|public|favicon.ico).*)']
-  }
+    matcher: [
+        '/((?!_next/static|_next/image|image|public|favicon.ico).*)'
+    ]
+};

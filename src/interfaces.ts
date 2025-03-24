@@ -1,5 +1,3 @@
-import { StringDecoder } from "string_decoder";
-
 export interface ProductOrder{
     productId: string;
     quantity_total: number;
@@ -159,6 +157,7 @@ export interface PoleMembre{
     description_fr?:string
     description_en?:string
     respo:boolean
+    show:boolean
 }
 
 export interface Pole{
@@ -167,6 +166,7 @@ export interface Pole{
     name_en:string
     description_fr?:string
     description_en?:string
+    show:boolean
     membres: MembrePole[]
 }
 
@@ -185,6 +185,7 @@ export interface PolePatch{
     name_en?:string
     description_fr?:string
     description_en?:string
+    show?:boolean
     membres?: MembrePole[]
 }
 
