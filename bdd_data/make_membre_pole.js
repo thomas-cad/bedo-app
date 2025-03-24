@@ -9,25 +9,52 @@ async function main() {
   const membrePoleData = JSON.parse(fs.readFileSync(jsonFilePath, 'utf8'));
 
   for (const pole of membrePoleData) {
-    const { pole_id, pole_name_fr, membres } = pole;
+    const { pole_name_fr, membres } = pole;
 
     console.log(`Processing pole: ${pole_name_fr}`);
 
+    // Récupérer le pôle par son champ unique `name_fr`
+    const poleRecord = await prisma.pole.findUnique({
+      where: { name_fr: pole_name_fr },
+    });
+
+    if (!poleRecord) {
+      console.error(`Pole with name "${pole_name_fr}" not found.`);
+      continue;
+    }
+
     for (const membre of membres) {
-      const { membre_id, respo } = membre;
+      const { first_name, last_name, respo } = membre;
+
+      // Récupérer le membre par ses champs uniques `first_name` et `last_name`
+      const membreRecord = await prisma.membre.findFirst({
+        where: {
+          first_name: first_name,
+          last_name: last_name,
+        },
+      });
+
+      if (!membreRecord) {
+        console.error(
+          `Membre with name "${first_name} ${last_name}" not found.`
+        );
+        continue;
+      }
 
       try {
         await prisma.pole_membre.create({
           data: {
-            poleId: pole_id,
-            membreId: membre_id,
-            respo: respo, // Add this field if it exists in your schema
+            poleId: poleRecord.id,
+            membreId: membreRecord.id,
+            respo: respo, // Ce champ doit exister dans votre schéma
           },
         });
-        console.log(`Linked membre ${membre_id} to pole ${pole_id}`);
+        console.log(
+          `Linked membre "${first_name} ${last_name}" to pole "${pole_name_fr}"`
+        );
       } catch (error) {
         console.error(
-          `Error linking membre ${membre_id} to pole ${pole_id}:`,
+          `Error linking membre "${first_name} ${last_name}" to pole "${pole_name_fr}":`,
           error
         );
       }
