@@ -1,3 +1,5 @@
+import { StringDecoder } from "string_decoder";
+
 export interface ProductOrder{
     productId: string;
     quantity_total: number;
@@ -139,4 +141,58 @@ export interface User {
     email: string;
     phone: string;
     isAdmin: boolean;
+}
+
+export interface Membre {
+    id: string
+    first_name: string
+    last_name: string
+    role_fr: string
+    role_en: string
+    poles:PoleMembre[]
+}
+
+export interface PoleMembre{
+    id:string
+    name_fr:string
+    name_en:string
+    description_fr?:string
+    description_en?:string
+    respo:boolean
+}
+
+export interface Pole{
+    id:string
+    name_fr:string
+    name_en:string
+    description_fr?:string
+    description_en?:string
+    membres: MembrePole[]
+}
+
+export interface MembrePole {
+    id: string
+    first_name: string
+    last_name: string
+    role_fr: string
+    role_en: string
+    respo: boolean
+}
+
+export interface PolePatch{
+    id?:string
+    name_fr?:string
+    name_en?:string
+    description_fr?:string
+    description_en?:string
+    membres?: MembrePole[]
+}
+
+export interface MembrePolePatch {
+    id?: string
+    first_name?: string
+    last_name?: string
+    role_fr?: string
+    role_en?: string
+    respo?: boolean
 }

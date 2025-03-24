@@ -7,26 +7,33 @@ datasource db {
   url      = env("DB_URL")
 }
 
-model event {
-  id            String     @id @unique @default(cuid())
-  start_date    DateTime
-  end_date      DateTime
-  title         String     @unique
-  description   String?
-  bill          Float      // Changed from Bytes
-  event_typeId String
-  event_type    event_type @relation(fields: [event_typeId], references: [id])
+model pole{
+  id              String @id @unique @default(cuid())
+  name_fr         String @unique
+  name_en         String @unique
+  description_fr  String?
+  description_en  String?
+  show            Boolean @default(false)
+  pole_membre     pole_membre[]
 }
 
-model api_user {
-  id   String  @id @unique @default(cuid())
-  name String  @unique
+model membre{
+  id              String @id @unique @default(cuid())
+  first_name      String
+  last_name       String
+  image           String?
+  role_fr         String @default("Membre")
+  role_en         String @default("Member")
+  pole_membre     pole_membre[]
 }
 
-model event_type {
-  id    String  @id @unique @default(cuid())
-  type  String  @unique
-  event event[]
+model pole_membre {
+  id        String @id @unique @default(cuid())
+  poleId    String
+  membreId  String
+  respo     Boolean
+  pole      pole   @relation(fields: [poleId], references: [id])
+  membre    membre @relation(fields: [membreId], references: [id])
 }
 
 model item {
