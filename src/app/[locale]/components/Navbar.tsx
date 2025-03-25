@@ -98,28 +98,28 @@ const Navbar = ({ t }: { t: { navbar: { list: string; project: string; team: str
           >
             <Link
               href="/"
-              className={`text-base md:text-lg transition hover:text-[#0cff21] hover:text-lg md:hover:text-xl no-underline ${getActiveClass("/")}`}
+              className={`text-base md:text-lg transition hover:text-[#0cff21] hover:text-lg md:hover:text-xl no-underline ${getActiveClass("/" + currentLocale)}`}
               onClick={toggleMenu}
             >
               {t.navbar.list.toUpperCase()}
             </Link>
             <Link
               href="/projets"
-              className={`text-base md:text-lg transition hover:text-[#0cff21] hover:text-lg md:hover:text-xl no-underline ${getActiveClass("/projets")}`}
+              className={`text-base md:text-lg transition hover:text-[#0cff21] hover:text-lg md:hover:text-xl no-underline ${getActiveClass("/" + currentLocale + "/projets")}`}
               onClick={toggleMenu}
             >
               {t.navbar.project.toUpperCase()}
             </Link>
             <Link
               href="/team"
-              className={`text-base md:text-lg transition hover:text-[#0cff21] hover:text-lg md:hover:text-xl no-underline ${getActiveClass("/team")}`}
+              className={`text-base md:text-lg transition hover:text-[#0cff21] hover:text-lg md:hover:text-xl no-underline ${getActiveClass("/" + currentLocale + "/team")}`}
               onClick={toggleMenu}
             >
               {t.navbar.team.toUpperCase()}
             </Link>
             <Link
               href="/shop"
-              className={`text-base md:text-lg transition hover:text-[#0cff21] hover:text-lg md:hover:text-xl no-underline ${getActiveClass("/shop")}`}
+              className={`text-base md:text-lg transition hover:text-[#0cff21] hover:text-lg md:hover:text-xl no-underline ${getActiveClass("/" + currentLocale + "/shop")}`}
               onClick={toggleMenu}
             >
               {t.navbar.shop.toUpperCase()}
@@ -159,16 +159,16 @@ const Navbar = ({ t }: { t: { navbar: { list: string; project: string; team: str
           <div className="fixed top-20 w-full z-50 backdrop-blur-md bg-white/10 h-48 flex justify-center items-center">
             <div className="flex flex-col items-center space-y-2">
               <Link href="/" onClick={() => setIsMenuOpen(false)}>
-                <span className={`block transition-all duration-300 ease-out h-1 w-32 rounded-sm mb-1 pb-4 text-center hover:cursor-pointer ${getActiveClassHamburger("/")}`}>{t.navbar.list.toUpperCase()}</span>
+                <span className={`block transition-all duration-300 ease-out h-1 w-32 rounded-sm mb-1 pb-4 text-center hover:cursor-pointer ${getActiveClassHamburger("/" + currentLocale)}`}>{t.navbar.list.toUpperCase()}</span>
               </Link>
               <Link href="/projets" onClick={() => setIsMenuOpen(false)}>
-                <span className={`block transition-all duration-300 ease-out h-1 w-32 rounded-sm mb-1 py-4 text-center hover:cursor-pointer ${getActiveClassHamburger("/projets")}`}>{t.navbar.project.toUpperCase()}</span>
+                <span className={`block transition-all duration-300 ease-out h-1 w-32 rounded-sm mb-1 py-4 text-center hover:cursor-pointer ${getActiveClassHamburger("/" + currentLocale + "/projets")}`}>{t.navbar.project.toUpperCase()}</span>
               </Link>
               <Link href="/event" onClick={() => setIsMenuOpen(false)}>
-                <span className={`block transition-all duration-300 ease-out h-1 w-32 rounded-sm py-4 text-center hover:cursor-pointer ${getActiveClassHamburger("/team")}`}>{t.navbar.team.toUpperCase()}</span>
+                <span className={`block transition-all duration-300 ease-out h-1 w-32 rounded-sm py-4 text-center hover:cursor-pointer ${getActiveClassHamburger("/" + currentLocale + "/team")}`}>{t.navbar.team.toUpperCase()}</span>
               </Link>
               <Link href="/shop" onClick={() => setIsMenuOpen(false)}>
-                <span className={`block transition-all duration-300 ease-out h-1 w-32 rounded-sm py-4 text-center hover:cursor-pointer ${getActiveClassHamburger("/shop")}`}>{t.navbar.shop.toUpperCase()}</span>
+                <span className={`block transition-all duration-300 ease-out h-1 w-32 rounded-sm py-4 text-center hover:cursor-pointer ${getActiveClassHamburger("/" + currentLocale + "/shop")}`}>{t.navbar.shop.toUpperCase()}</span>
               </Link>
             </div>
           </div>
