@@ -4,7 +4,7 @@ import { Pole } from "@/interfaces";
 export default function Project({ project, locale }: { project: Pole, locale: string }) {
     return (
         <div className='pb-16'>
-            <div className="relative max-w-md mx-auto mt-10 bg-white rounded-xl shadow-md overflow-visible">
+            <div className="relative max-w-4xl mx-auto mt-10 bg-white rounded-xl shadow-md overflow-visible">
                 {/* Contenu principal */}
                 <div className="p-6 pb-16 text-center">
                     <h2 className="text-2xl font-bold text-gray-800 mb-3">
