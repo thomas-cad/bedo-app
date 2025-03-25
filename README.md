@@ -34,6 +34,13 @@
 - 🏆 **Défis sérieux**
 - 🎭 **Défis funs**
 
+### Description
+Le site regroupe la majorité des informations de la liste. On y trouve bien sûr les membres des BedBusters ainsi que leurs pôles, mais il est aussi possible d'y trouver notre boutique en ligne afin d'acheter nos goodies.
+Nous avons étudié l'option de faire passer les acheteurs par lydia, néanmoins nous avons décidé de ne pas suivre cette route car nous aurions eu besoin de payer l'abonnement lydia pro.
+Ainsi, pour assurer que les gens paient le panier qu'ils ont confirmé, nous avons implémenté l'authentification des télécomiens grâce au sso de Rezel, permettant ainsi de s'assurer que ce sont des télécomiens que nous connaissons qui puissent acheter des goodies, garantissant l'intégrité du stock affiché.
+
+
+
 ### Page Admin (Si le temps) 🔧
 
 ---
@@ -67,3 +74,4 @@ DB_URL=
 - **DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME**: Database connection details.
 - **PG_USER, PG_PWD**: PostgreSQL user credentials.
 - **DB_URL**: The full URL for connecting to the PostgreSQL database.
+
