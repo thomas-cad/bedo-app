@@ -20,6 +20,7 @@ services:
       - NEXT_PUBLIC_RECAPTCHA_SITE_KEY=${NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
       - RECAPTCHA_SECRET_KEY=${RECAPTCHA_SECRET_KEY}
       - API_KEY=${API_KEY}
+      - NEXTAUTH_URL=${NEXTAUTH_URL}
     volumes:
       - .:/app
       - /app/node_modules
