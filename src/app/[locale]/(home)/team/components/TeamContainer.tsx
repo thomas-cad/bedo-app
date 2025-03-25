@@ -6,7 +6,7 @@ import Filter from "./Filter";
 
 export default function TeamContainer({ locale, t }: { 
   locale: string, 
-  t: any 
+  t: {team:{select:string, all:string}} 
 }) {
   const [selectedPole, setSelectedPole] = useState('all');
 

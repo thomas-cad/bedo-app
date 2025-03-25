@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from 'react';
-import { Card, CardContent, Grid, Typography } from '@mui/material';
+import { Card, CardContent, Grid } from '@mui/material';
 import Member from './Member';
 import {Membre} from "@/interfaces"
 

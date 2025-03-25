@@ -31,7 +31,7 @@ const OrderContent = () => {
                 }
                 const data = await response.json();
                 setOrder(data["order"]); // Set the order data
-                if (!order){
+                if (!data["order"]) {
                     setError(true); // Set error state
                     console.log("Order not found");
                 }
@@ -42,7 +42,7 @@ const OrderContent = () => {
         };
 
         fetchItem();
-    }, [id]);
+    }, [id]); // Ensure only 'id' is in the dependency array
 
     if (!order) {
         return <div className="flex flex-col items-center px-1 mt-20">Chargement...</div>;
