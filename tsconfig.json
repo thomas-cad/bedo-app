@@ -22,6 +22,15 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/lib/dictionaries.js", "src/app/api/auth/[...nextauth]/route.ts", "bdd_data/make_membre.js"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "src/app/lib/dictionaries.js",
+    "src/app/api/auth/[...nextauth]/route.ts",
+    "bdd_data/make_membre.js",
+    "src/types/**/*.d.ts" // Add this line to include the custom declaration files
+  ],
   "exclude": ["node_modules"]
 }
