@@ -39,6 +39,8 @@
         "title": "Discover our project! 👻"
     },
     "team":{
-        "title":"Our team ! 👻"
+        "title": "It seems they are the best 😉👻",
+        "select":"Sélectionnez un pôle",
+        "all":"Tout"
     }
 }

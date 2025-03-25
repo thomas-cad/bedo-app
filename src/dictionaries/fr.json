@@ -39,6 +39,8 @@
         "title":"Découvrez notre projet ! 👻"
     },
     "team":{
-        "title":"Notre équipe ! 👻"
+        "title":"Il parrait que ce sont les meilleurs 😉👻",
+        "select": "Select a division",
+        "all":"All"
     }
 }
