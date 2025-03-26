@@ -166,7 +166,7 @@ const Navbar = ({ t }: { t: { navbar: { list: string; project: string; team: str
               <Link href="/projets" onClick={() => setIsMenuOpen(false)}>
                 <span className={`block transition-all duration-300 ease-out h-1 w-32 rounded-sm mb-1 py-4 text-center hover:cursor-pointer ${getActiveClassHamburger("/" + currentLocale + "/projets")}`}>{t.navbar.project.toUpperCase()}</span>
               </Link>
-              <Link href="/event" onClick={() => setIsMenuOpen(false)}>
+              <Link href="/team" onClick={() => setIsMenuOpen(false)}>
                 <span className={`block transition-all duration-300 ease-out h-1 w-32 rounded-sm py-4 text-center hover:cursor-pointer ${getActiveClassHamburger("/" + currentLocale + "/team")}`}>{t.navbar.team.toUpperCase()}</span>
               </Link>
               <Link href="/shop" onClick={() => setIsMenuOpen(false)}>
