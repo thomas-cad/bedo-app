@@ -3,9 +3,11 @@ import { PrismaClient } from '@prisma/client';
 import { NextRequest } from 'next/server';
 import { Membre, PoleMembre } from "@/interfaces"
 
+
 const prisma = new PrismaClient();
 
 export async function GET(request: NextRequest) {
+    
     const id = request.nextUrl.searchParams.get('id') || undefined;
 
     try {

@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 import { NextRequest } from 'next/server';
 import { Pole, MembrePole, PolePatch } from "@/interfaces"
+import { sessionUtils } from "@/utils/session"
 
 const prisma = new PrismaClient();
 
@@ -50,6 +51,14 @@ export async function GET(request: NextRequest) {
 }
 
 export async function PATCH(request: NextRequest) {
+    if (await sessionUtils.isConnected() === false){
+        return NextResponse.json({ error: 'Access denied' }, { status: 403 });
+    }
+
+    if (await sessionUtils.isAdminConnected() === false){
+        return NextResponse.json({ error: 'Access denied' }, { status: 403 });
+    }
+
     const id = request.nextUrl.searchParams.get('id');
     if (!id) return NextResponse.json({ error: 'Missing order ID' }, { status: 400 });
 

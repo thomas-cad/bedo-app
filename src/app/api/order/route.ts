@@ -1,6 +1,8 @@
 import { type NextRequest, NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 import {ProductOrder} from "@/interfaces"
+import { sessionUtils } from "@/utils/session"
+
 
 const prisma = new PrismaClient();
 
@@ -38,11 +40,13 @@ async function updateStock(orderItem: ProductOrder) {
 
 /** GET: Retrieve Orders */
 export async function GET(request: NextRequest) {
-  // const apiKey = request.headers.get("x-api-key");
+  if (await sessionUtils.isConnected() === false){
+      return NextResponse.json({ error: 'Access denied' }, { status: 403 });
+  }
 
-  // if (!apiKey || apiKey !== process.env.API_KEY) {
-  //   return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  // }
+  if (await sessionUtils.isAdminConnected() === false){
+      return NextResponse.json({ error: 'Access denied' }, { status: 403 });
+  }
 
   const id = request.nextUrl.searchParams.get('id') || undefined;
 
@@ -96,6 +100,14 @@ export async function GET(request: NextRequest) {
 
 /** DELETE: Remove an Order */
 export async function DELETE(request: NextRequest) {
+  if (await sessionUtils.isConnected() === false){
+    return NextResponse.json({ error: 'Access denied' }, { status: 403 });
+}
+
+if (await sessionUtils.isAdminConnected() === false){
+    return NextResponse.json({ error: 'Access denied' }, { status: 403 });
+}
+
   const id = request.nextUrl.searchParams.get('id');
   if (!id) return NextResponse.json({ error: 'Missing order ID' }, { status: 400 });
 
@@ -114,6 +126,14 @@ export async function DELETE(request: NextRequest) {
 
 /** PATCH: Update an Order */
 export async function PATCH(request: NextRequest) {
+  if (await sessionUtils.isConnected() === false){
+    return NextResponse.json({ error: 'Access denied' }, { status: 403 });
+}
+
+if (await sessionUtils.isAdminConnected() === false){
+    return NextResponse.json({ error: 'Access denied' }, { status: 403 });
+}
+
   const id = request.nextUrl.searchParams.get('id');
   if (!id) return NextResponse.json({ error: 'Missing order ID' }, { status: 400 });
 
@@ -181,6 +201,14 @@ export async function PATCH(request: NextRequest) {
 
 /** POST: Create an Order */
 export async function POST(request: NextRequest) {
+  if (await sessionUtils.isConnected() === false){
+    return NextResponse.json({ error: 'Access denied' }, { status: 403 });
+}
+
+if (await sessionUtils.isAdminConnected() === false){
+    return NextResponse.json({ error: 'Access denied' }, { status: 403 });
+}
+
   const newOrder = await request.json();
   let total = 0;
 

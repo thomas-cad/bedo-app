@@ -127,9 +127,11 @@ const Navbar = ({ t }: { t: { navbar: { list: string; project: string; team: str
           </nav>
 
           <div className="flex items-center gap-4 md:gap-5">
-              <IconButton aria-label="cart">  
+            <Link href="/my-account">
+              <IconButton aria-label="account">  
                 <PersonIcon className="text-black hover:text-[#0cff21]" />
               </IconButton>
+            </Link>
             <span
               className={`px-4 py-2 rounded hover:text-[#0cff21] cursor-pointer`}
               onClick={() => switchLanguage()}

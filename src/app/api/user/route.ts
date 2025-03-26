@@ -2,10 +2,19 @@ import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 import { NextRequest } from 'next/server';
 import { User, NewUser, UserPatch } from "@/interfaces"
+import { sessionUtils } from '@/utils/session';
 
 const prisma = new PrismaClient();
 
 export async function GET(request: NextRequest) {
+    if (await sessionUtils.isConnected() === false){
+        return NextResponse.json({ error: 'Access denied' }, { status: 403 });
+    }
+
+    if (await sessionUtils.isAdminConnected() === false){
+        return NextResponse.json({ error: 'Access denied' }, { status: 403 });
+    }
+
     const email = request.nextUrl.searchParams.get('email');
     if (!email) return NextResponse.json({ error: 'Missing user email' }, { status: 400 });
 
@@ -35,6 +44,14 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
+    if (await sessionUtils.isConnected() === false){
+        return NextResponse.json({ error: 'Access denied' }, { status: 403 });
+    }
+
+    if (await sessionUtils.isAdminConnected() === false){
+        return NextResponse.json({ error: 'Access denied' }, { status: 403 });
+    }
+
     try {
         const newUser:NewUser = await request.json();
 
@@ -42,7 +59,7 @@ export async function POST(request: NextRequest) {
             data: { 
                 first_name:newUser.first_name,
                 last_name:newUser.last_name,
-                email:newUser.email,
+                email: newUser.email ?? '',
                 phone:newUser.phone,
                 isAdmin:false
              }
@@ -56,8 +73,16 @@ export async function POST(request: NextRequest) {
 }
 
 export async function PATCH(request: NextRequest) {
+    if (await sessionUtils.isConnected() === false){
+        return NextResponse.json({ error: 'Access denied' }, { status: 403 });
+    }
+
+    if (await sessionUtils.isAdminConnected() === false){
+        return NextResponse.json({ error: 'Access denied' }, { status: 403 });
+    }
+
     const id = request.nextUrl.searchParams.get('id');
-    if (!id) return NextResponse.json({ error: 'Missing order ID' }, { status: 400 });
+    if (!id) return NextResponse.json({ error: 'Missing user ID' }, { status: 400 });
 
 
     try {

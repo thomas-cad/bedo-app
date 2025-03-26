@@ -204,7 +204,7 @@ export interface NewUser {
     id? : string
     first_name:string
     last_name:string
-    email:string
+    email?:string
     phone:string
     isAdmin:boolean
 }

@@ -42,5 +42,31 @@
         "title":"Il parrait que ce sont les meilleurs 😉👻",
         "select": "Select a division",
         "all":"All"
+    },
+    "login":{
+        "connect":"Connectez vous à votre comptre",
+        "rezel":"Se conncter avec Rezel"
+    },
+    "my-account":{
+        "my-account":"Mon compte",
+        "admin":"Administrateur",
+        "user":"Utilisateur",
+        "pannel":"Panneau d'administration",
+        "disconnect":"Déconnexion"
+    },
+    "signup":{
+        "create":"Créer votre compte",
+        "complete":"Complétez vos informations pour finaliser votre inscription",
+        "first_name":"Prénom",
+        "last_name":"Nom",
+        "phone":"Phone",
+        "progress":"Création en cours...",
+        "create_account":"Créer mon compte"
+    },
+    "checkout":{
+        "step":"Encore une étape 👻",
+        "engagement":"Je m'engage à payer le montant de la commande auprès des BedBusters",
+        "empty":"Votre panier est vide. Ajoutez des articles avant de passer la commande.",
+        "order":"Passer la commande"
     }
 }

@@ -1,6 +1,7 @@
 import Negotiator from "negotiator";
 import { match } from "@formatjs/intl-localematcher";
 import { NextRequest, NextResponse } from "next/server";
+import { getToken } from "next-auth/jwt";
 
 const locales = ["en", "fr"];
 const defaultLocale = "fr";
@@ -22,13 +23,24 @@ function getLocale(request: NextRequest): string {
     return match(languages, locales, defaultLocale);
 }
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
     const { pathname } = request.nextUrl;
+    const session = await getToken({ req: request });
+
+    // 0️⃣ Handle NextAuth.js routes
+    const nextAuthPaths = [
+        "/api/auth",
+        "/login",
+    ];
+    
+    if (nextAuthPaths.some(path => pathname.startsWith(path))) {
+        return NextResponse.next();
+    }
 
     // 1️⃣ Skip requests that should not be processed
     if (
         pathname.startsWith("/_next") || // Static files, chunks, assets
-        pathname.startsWith("/api") || // API routes
+        pathname.startsWith("/api") || // API routes (except NextAuth)
         pathname === "/favicon.ico" // Favicon
     ) {
         return NextResponse.next();
@@ -39,18 +51,29 @@ export function middleware(request: NextRequest) {
         (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
     );
 
-    if (pathnameHasLocale) {
-        return NextResponse.next(); // Allow request to proceed
+    // 3️⃣ If no locale is in the URL, determine the user's preferred locale
+    const locale = pathnameHasLocale 
+        ? pathname.split('/')[1] 
+        : getLocale(request);
+
+    // 4️⃣ Handle protected routes
+    const protectedPaths = ["en/pole", "en/orders", "en/stock","fr/pole", "fr/orders", "fr/stock", "/shop/cart", "/shop/checkout"];
+    const isProtected = protectedPaths.some(path => pathname.startsWith(path));
+
+    if (isProtected && !session) {
+        const signInUrl = new URL(`/${locale}/login`, request.url);
+        signInUrl.searchParams.set("callbackUrl", encodeURI(request.url));
+        return NextResponse.redirect(signInUrl);
     }
 
-    // 3️⃣ If no locale is in the URL, determine the user's preferred locale
-    const locale = getLocale(request);
+    // If we already have a locale in the URL, proceed
+    if (pathnameHasLocale) {
+        return NextResponse.next();
+    }
+
+    // 5️⃣ Redirect to localized version if no locale in URL
     const newUrl = new URL(`/${locale}${pathname}`, request.url);
-
-    // 4️⃣ Create a response that redirects the user to the localized page
     const response = NextResponse.redirect(newUrl);
-
-    // 5️⃣ Save the user's locale preference in a cookie (optional: set expiration)
     response.cookies.set(cookieName, locale, { path: "/" });
 
     return response;

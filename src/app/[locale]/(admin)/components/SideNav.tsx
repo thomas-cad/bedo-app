@@ -35,6 +35,11 @@ const Sidebar = () => {
               Pole
               </p>
             </Link>
+            <Link href="/user">
+              <p className="text-black hover:text-[#0CFF21] py-2">
+              Admin
+              </p>
+            </Link>
           </div>
           {/* Add more sidebar items here */}
         </div>

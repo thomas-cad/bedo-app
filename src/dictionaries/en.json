@@ -7,15 +7,15 @@
         "list": "Our List",
         "project": "Our Project",
         "team": "The Team",
-        "shop": "shop"
+        "shop": "Shop"
     },
-    "footer":{
+    "footer": {
         "source_code": "Source Code",
         "documentation": "Documentation",
-        "social_networks" : "Social Networks"
+        "social_networks": "Social Networks"
     },
-    "product":{
-        "description":{
+    "product": {
+        "description": {
             "from": "From ",
             "tva": " VAT included"
         },
@@ -35,12 +35,29 @@
         "delete": "Delete",
         "empty": "Your cart is empty"
     },
-    "projet": {
+    "project": {
         "title": "Discover our project! 👻"
     },
-    "team":{
+    "team": {
         "title": "It seems they are the best 😉👻",
-        "select":"Sélectionnez un pôle",
-        "all":"Tout"
+        "select": "Select a division",
+        "all": "All"
+    },
+    "login": {
+        "connect": "Log in to your account",
+        "rezel": "Log in with Rezel"
+    },
+    "my-account": {
+        "my-account": "My account",
+        "admin": "Administrator",
+        "user": "User",
+        "pannel": "Admin panel",
+        "disconnect": "Logout"
+    },
+    "checkout": {
+        "step": "One more step 👻",
+        "engagement": "I commit to paying the order amount to the BedBusters",
+        "empty": "Your cart is empty. Add items before placing the order.",
+        "order": "Place the order"
     }
 }
