@@ -9,7 +9,6 @@ const VerifPageContent = () => {
     const searchParams = useSearchParams();
     const router = useRouter();
     const token = searchParams.get('token');
-    const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const [id, setId] = useState("")
 
@@ -31,17 +30,11 @@ const VerifPageContent = () => {
             } catch (err) {
                 setError('Une erreur est survenue lors de la vérification de la commande.');
                 console.error(err);
-            } finally {
-                setLoading(false);
             }
         };
 
         checkOrderExistence();
     }, [token, router]);
-
-    if (loading) {
-        return <p className="text-center text-gray-600 mt-20">Chargement en cours...</p>;
-    }
 
     if (error) {
         return <p className="text-center text-red-500 mt-20">{error}</p>;
