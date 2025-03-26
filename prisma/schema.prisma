@@ -7,30 +7,44 @@ datasource db {
   url      = env("DB_URL")
 }
 
-model event {
-  id            String     @id @unique @default(cuid())
-  start_date    DateTime
-  end_date      DateTime
-  title         String?    @unique
-  description   String?
-  bill          Bytes
-  event_typeId  String
-  event_type_id event_type @relation(fields: [event_typeId], references: [id])
+model pole{
+  id              String @id @unique @default(cuid())
+  name_fr         String @unique
+  name_en         String @unique
+  description_fr  String?
+  description_en  String?
+  show            Boolean @default(false)
+  pole_membre     pole_membre[]
 }
 
-model event_type {
-  id    String  @id @unique @default(cuid())
-  type  String  @unique
-  event event[]
+model membre{
+  id              String @id @unique @default(cuid())
+  first_name      String
+  last_name       String
+  image           String?
+  role_fr         String @default("Membre")
+  role_en         String @default("Member")
+  pole_membre     pole_membre[]
+}
+
+model pole_membre {
+  id        String @id @unique @default(cuid())
+  poleId    String
+  membreId  String
+  respo     Boolean
+  pole      pole   @relation(fields: [poleId], references: [id])
+  membre    membre @relation(fields: [membreId], references: [id])
 }
 
 model item {
-  id          String      @id @unique @default(cuid())
-  title       String      @unique
-  description String
-  price       Float
-  image       String
-  item_size   item_size[]
+  id             String      @id @unique @default(cuid())
+  title_fr       String      @unique
+  title_en       String      @default("Unknown")
+  description_fr String      @default("Unknown")
+  description_en String      @default("Unknown")
+  price          Float
+  image          String
+  item_size      item_size[]
 }
 
 model size {
@@ -40,12 +54,13 @@ model size {
 }
 
 model item_size {
-  id              String            @id @unique @default(cuid())
-  stock           Int
-  itemId          String
-  sizeId          String
-  item_id         item              @relation(fields: [itemId], references: [id])
-  size_id         size              @relation(fields: [sizeId], references: [id])
+  id          String     @id @unique @default(cuid())
+  stock       Int
+  preorder    Int        @default(0)
+  itemId      String
+  sizeId      String
+  item        item       @relation(fields: [itemId], references: [id])
+  size        size       @relation(fields: [sizeId], references: [id])
   order_item_size order_item_size[]
 }
 
@@ -53,9 +68,10 @@ model user {
   id         String  @id @unique @default(cuid())
   first_name String
   last_name  String
-  email      String
+  email      String  @unique
   phone      String
-  order      order[]
+  isAdmin    Boolean @default(false)
+  orders     order[]
 }
 
 model order {
@@ -64,15 +80,17 @@ model order {
   order_date      DateTime
   userId          String
   total           Float
-  user_id         user              @relation(fields: [userId], references: [id])
+  user            user              @relation(fields: [userId], references: [id])
   order_item_size order_item_size[]
 }
 
 model order_item_size {
-  id           String    @id @unique @default(cuid())
-  orderId      String
-  item_sizeId  String
-  quantity     Int
-  item_size_id item_size @relation(fields: [item_sizeId], references: [id])
-  order_id     order     @relation(fields: [orderId], references: [id])
+  id                 String     @id @unique @default(cuid())
+  orderId            String
+  item_sizeId        String
+  stock_quantity     Int @default(0)
+  preorder_quantity  Int @default(0)
+  total_quantity     Int @default(0) // Added default value
+  item_size          item_size @relation(fields: [item_sizeId], references: [id])
+  order              order     @relation(fields: [orderId], references: [id])
 }

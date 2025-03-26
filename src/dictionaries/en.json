@@ -1,0 +1,63 @@
+{
+    "home": {
+        "title": "Our project",
+        "presentation": "<h1>The BDE: At the heart of student life 🎓🎉</h1> <p>The BDE is the association at the center of student life. Much like a presidency, its mission is to ensure that all students feel included and heard within the associative life 🤝. It also ensures the proper functioning of the various associations, both individually and collectively.</p><br/><h2>📌 Strengthening communication with associations</h2><p>We plan to hold more frequent meetings with the various associations at Télécom 📆, to ensure everything is going well and to listen to their expectations of the BDE 🗣️.</p><br/><h2>📌 A BDE by and for students</h2><p>The BDE is above all a student association 👨‍🎓👩‍🎓. This means making decisions without imposing them on others. We are not business leaders 💼, but students, and we can make mistakes. It is therefore essential that BDE members know how to question themselves and listen to all opinions 👂. We trust that our list is capable of this 💪.</p><br/><h2>📌 Facilitating the integration of all students</h2><p>We want the BDE to be as close as possible to the students. Some students struggle to integrate 😕, and we want to make associative life more welcoming 🏡.</p><p>📍 Today, joining an association often depends on being noticed by the 2A, getting along with them, and helping with logistics. This system has its advantages, but sometimes motivated individuals are left in the shadows. We therefore propose that associations implement <strong>challenges</strong> related to their mission to get to know the 1A better 🎯. Of course, this is only a suggestion, as associations remain independent.</p><br/><h2>📌 Creating a stronger bond with international students 🌍</h2><p>International students are often underrepresented in associative life 😞. Only about ten of them participate in events, and this is not normal. We therefore want to organize more events with the <strong>BDI</strong> to introduce them to associations and integrate them more 🎊.</p><br/><h2>📌 Opening Télécom to other schools</h2><p>We want to strengthen ties with IPP and other major engineering schools 🤝. Events with AgroParisTech are a success, and we want to <strong>generalize them with other schools</strong>. However, large parties at Télécom are limited to <strong>three per year</strong> according to the prefecture ⚠️. We will therefore explore other solutions:</p><ul><li>✅ Organizing parties in partner schools 🎓</li><li>✅ Working with clubs in Paris through sponsors 🏙️</li></ul><p>We are even considering creating <strong>a dedicated team for these events</strong> to ensure their smooth running 🎭.</p><br/><h2>📌 Making the parties more attractive 🍻</h2><p>We want to give a real identity to the parties to attract more students 🎨. Some events like the <strong>Grosse Potion</strong>, the <strong>Rainpot</strong>, or <strong>Champagne & Potilletes</strong> already have a strong concept, making them more entertaining. We want to strengthen this dynamic through:</p><ul><li>🌟 <strong>Sponsor themes</strong> (like FruitZ for the APT monthly event)</li><li>🌟 <strong>Special guests</strong>, as other BDEs already do</li></ul><br/><h2>📌 Revitalizing daytime associative life 🌞</h2><p>Associative life should not be limited to parties 🎶. Those who are not fans of parties should also be able to enjoy friendly activities. We therefore want to:</p><ul><li>✅ Organize inter-school activities during the day 🎾🎤</li><li>✅ Bring back real energy to <strong>Maxi-Mardi</strong>, which has lost momentum over time 💡</li></ul><br/><p>We are committed to building an <strong>inclusive, dynamic, and attentive BDE for all students</strong>. Together, let's make Télécom an even more vibrant school! 🚀"
+    },
+    "navbar": {
+        "list": "Our List",
+        "project": "Our Project",
+        "team": "The Team",
+        "shop": "Shop"
+    },
+    "footer": {
+        "source_code": "Source Code",
+        "documentation": "Documentation",
+        "social_networks": "Social Networks"
+    },
+    "product": {
+        "description": {
+            "from": "From ",
+            "tva": " VAT included"
+        },
+        "add_to_cart": {
+            "size": "Your size",
+            "add": "Add to cart"
+        }
+    },
+    "cart": {
+        "cart": "Your cart",
+        "summary": "Order summary",
+        "order": "Order",
+        "error": "Error",
+        "loading": "Loading...",
+        "product": "Product",
+        "size": "Size",
+        "delete": "Delete",
+        "empty": "Your cart is empty"
+    },
+    "project": {
+        "title": "Discover our project! 👻"
+    },
+    "team": {
+        "title": "It seems they are the best 😉👻",
+        "select": "Select a division",
+        "all": "All"
+    },
+    "login": {
+        "connect": "Log in to your account",
+        "rezel": "Log in with Rezel"
+    },
+    "my-account": {
+        "my-account": "My account",
+        "admin": "Administrator",
+        "user": "User",
+        "pannel": "Admin panel",
+        "disconnect": "Logout"
+    },
+    "checkout": {
+        "step": "One more step 👻",
+        "engagement": "I commit to paying the order amount to the BedBusters",
+        "empty": "Your cart is empty. Add items before placing the order.",
+        "order": "Place the order"
+    }
+}

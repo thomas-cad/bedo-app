@@ -4,6 +4,8 @@ name: bedbusters
 services:
   bedbusters_app:
     image: node:18-alpine
+    profiles:
+      - prod
     working_dir: /app
     ports:
       - "${PORT}:${PORT}"
@@ -17,6 +19,22 @@ services:
       - DB_NAME=${DB_NAME}
       - NEXT_PUBLIC_RECAPTCHA_SITE_KEY=${NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
       - RECAPTCHA_SECRET_KEY=${RECAPTCHA_SECRET_KEY}
+      - API_KEY=${API_KEY}
+      - NEXTAUTH_URL=${NEXTAUTH_URL}
+      - SERVER_IP=${SERVER_IP}
+      - PORT=${PORT}
+      - PUBLIC_URL=${PUBLIC_URL}
+      - SMTP_HOST=${SMTP_HOST}
+      - SMTP_PORT=${SMTP_PORT}
+      - SMTP_USER=${SMTP_USER}
+      - SMTP_PASS=${SMTP_PASS}
+      - SMTP_SECURE=${SMTP_SECURE}
+      - RIB=${RIB}
+      - TJW_SECRET_KEY=${TJW_SECRET_KEY}
+      - AUTH_SECRET=${AUTH_SECRET}
+      - AUTH_OIDC_ISSUER=${AUTH_OIDC_ISSUER}
+      - AUTH_OIDC_CLIENT_ID=${AUTH_OIDC_CLIENT_ID}
+      - AUTH_OIDC_CLIENT_SECRET=${AUTH_OIDC_CLIENT_SECRET}
     volumes:
       - .:/app
       - /app/node_modules

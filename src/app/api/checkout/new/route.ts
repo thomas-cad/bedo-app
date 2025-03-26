@@ -1,7 +1,8 @@
 import { PrismaClient } from '@prisma/client';
-import { CartItem } from '@/app/context/CartContext';
+import { CartItem } from '@/app/[locale]/context/CartContext';
 import jwt from 'jsonwebtoken';
 import nodemailer from 'nodemailer';
+import { sessionUtils } from "@/utils/session"
 
 const prisma = new PrismaClient();
 
@@ -150,6 +151,11 @@ function isValidPhoneNumber(phone: string): boolean {
 }
 
 export async function POST(req: Request) {
+    if (await sessionUtils.isConnected() === false){
+        JSON.stringify({ success: false, message: "Access denied" }),
+            { status: 403 }
+    }
+        
     
     if (req.method !== "POST") {
         return new Response(
@@ -283,7 +289,7 @@ export async function POST(req: Request) {
                 data: {
                     item_sizeId: item.id,
                     orderId: orderId,
-                    quantity: item.quantity,
+                    total_quantity: item.quantity,
                 },
             });
         }

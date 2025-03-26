@@ -1,0 +1,72 @@
+{
+    "home": {
+        "title": "Notre projet",
+        "presentation": "<h1>Le BDE : Au cœur de la vie étudiante 🎓🎉</h1> <p>Le BDE est l’association au centre de la vie étudiante. Un peu comme la présidence, il a pour mission de faire en sorte que tous les étudiants se sentent inclus et écoutés au sein de la vie associative 🤝. Il veille aussi au bon fonctionnement des différentes associations, que ce soit individuellement ou entre elles.</p><br/><h2>📌 Renforcer la communication avec les associations</h2><p>Nous prévoyons d’effectuer des réunions plus récurrentes avec les différentes associations de Télécom 📆, afin de s’assurer que tout se passe bien et d’écouter leurs attentes vis-à-vis du BDE 🗣️.</p><br/><h2>📌 Un BDE par et pour les étudiants</h2><p>Le BDE est avant tout une association étudiante 👨‍🎓👩‍🎓. Cela signifie qu’il faut savoir prendre des décisions sans les imposer aux autres. Nous ne sommes pas des dirigeants d’entreprise 💼, mais des étudiants, et nous pouvons faire des erreurs. Il est donc essentiel que les membres du BDE sachent se remettre en question et écouter toutes les opinions 👂. Nous avons confiance dans le fait que notre liste en est capable 💪.</p><br/><h2>📌 Faciliter l’intégration de tous les étudiants</h2><p>Nous voulons que le BDE soit le plus proche possible des élèves. Certains étudiants ont du mal à s’intégrer 😕, et nous souhaitons rendre la vie associative plus accueillante 🏡.</p><p>📍 Aujourd’hui, intégrer une association repose souvent sur le fait d’être remarqué par les 2A, de sympathiser avec eux et de les aider à la manutention. Ce système a ses avantages, mais il laisse parfois des personnes motivées dans l’ombre. Nous proposons donc que les associations mettent en place <strong>des défis</strong> liés à leur mission pour apprendre à mieux connaître les 1A 🎯. Bien entendu, il ne s’agit que d’une suggestion, les associations restant indépendantes.</p><br/><h2>📌 Créer un lien plus fort avec les internationaux 🌍</h2><p>Les étudiants internationaux sont souvent sous-représentés dans la vie associative 😞. Seule une dizaine d’entre eux participent aux événements, et ce n’est pas normal. Nous souhaitons donc organiser plus d’événements avec le <strong>BDI</strong> pour leur faire découvrir les associations et les intégrer davantage 🎊.</p><br/><h2>📌 Ouvrir Télécom aux autres écoles</h2><p>Nous souhaitons renforcer les liens avec l’IPP et les grandes écoles d’ingénieurs 🤝. Les événements avec AgroParisTech sont une réussite, et nous voulons <strong>les généraliser avec d’autres écoles</strong>. Cependant, les grandes soirées à Télécom sont limitées à <strong>trois par an</strong> selon la préfecture ⚠️. Nous allons donc explorer d’autres solutions :</p><ul><li>✅ Organiser des soirées dans des écoles partenaires 🎓</li><li>✅ Travailler avec des clubs à Paris grâce à des sponsors 🏙️</li></ul><p>Nous envisageons même de créer <strong>un pôle dédié à ces événements</strong> afin de garantir leur bon déroulement 🎭.</p><br/><h2>📌 Rendre les pots plus attractifs 🍻</h2><p>Nous voulons donner une véritable identité aux pots pour attirer plus d’étudiants 🎨. Certains événements comme la <strong>Grosse Potion</strong>, le <strong>Rainpot</strong> ou <strong>Champagne & Potilletes</strong> ont déjà un concept fort, les rendant plus divertissants. Nous souhaitons renforcer cette dynamique à travers :</p><ul><li>🌟 <strong>Des thèmes de sponsors</strong> (comme FruitZ pour la mensu d’APT)</li><li>🌟 <strong>Des invités spéciaux (guests)</strong>, comme d’autres BDE le font déjà</li></ul><br/><h2>📌 Revitaliser la vie associative diurne 🌞</h2><p>La vie associative ne doit pas se limiter aux soirées 🎶. Ceux qui ne sont pas fans de fêtes doivent aussi pouvoir profiter d’activités conviviales. Nous voulons donc :</p><ul><li>✅ Organiser des activités inter-écoles en journée 🎾🎤</li><li>✅ Redonner une vraie dynamique aux <strong>Maxi-Mardi</strong>, qui se sont essoufflés avec le temps 💡</li></ul><br/><p>Nous avons à cœur de bâtir un <strong>BDE inclusif, dynamique et à l’écoute de tous les étudiants</strong>. Ensemble, faisons de Télécom une école encore plus vivante ! 🚀" 
+    },
+    "navbar": {
+        "list": "Notre Liste",
+        "project": "Notre Projet",
+        "team": "L'Equipe",
+        "shop": "Boutique"
+    },
+    "footer": {
+        "source_code": "Code Source",
+        "documentation": "Documentation",
+        "social_networks": "Réseaux Sociaux"
+    },
+    "product": {
+        "description": {
+            "from": "À partir de ",
+            "tva": " TVA incluse"
+        },
+        "add_to_cart":{
+            "size":"Votre taille",
+            "add": "Ajouter au panier"
+        }
+    },
+    "cart":{
+        "cart":"Votre panier",
+        "summary":"Resumé de votre commande",
+        "order":"Commander",
+        "error":"Erreur",
+        "loading":"Loading...",
+        "product":"Produit",
+        "size":"Taille",
+        "delete":"Supprimer",
+        "empty":"Votre panier est vide"
+    },
+    "projet":{
+        "title":"Découvrez notre projet ! 👻"
+    },
+    "team":{
+        "title":"Il parrait que ce sont les meilleurs 😉👻",
+        "select": "Select a division",
+        "all":"All"
+    },
+    "login":{
+        "connect":"Connectez vous à votre comptre",
+        "rezel":"Se conncter avec Rezel"
+    },
+    "my-account":{
+        "my-account":"Mon compte",
+        "admin":"Administrateur",
+        "user":"Utilisateur",
+        "pannel":"Panneau d'administration",
+        "disconnect":"Déconnexion"
+    },
+    "signup":{
+        "create":"Créer votre compte",
+        "complete":"Complétez vos informations pour finaliser votre inscription",
+        "first_name":"Prénom",
+        "last_name":"Nom",
+        "phone":"Phone",
+        "progress":"Création en cours...",
+        "create_account":"Créer mon compte"
+    },
+    "checkout":{
+        "step":"Encore une étape 👻",
+        "engagement":"Je m'engage à payer le montant de la commande auprès des BedBusters",
+        "empty":"Votre panier est vide. Ajoutez des articles avant de passer la commande.",
+        "order":"Passer la commande"
+    }
+}
