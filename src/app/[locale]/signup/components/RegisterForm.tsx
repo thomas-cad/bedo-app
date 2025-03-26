@@ -41,7 +41,7 @@ export default function RegisterForm({ t }: { t: { signup: { create: string; com
                 throw new Error(data.error || 'Registration failed');
             }
 
-            router.push('/dashboard');
+            router.push('/');
         } catch (err) {
             setError(err instanceof Error ? err.message : 'Une erreur inconnue est survenue');
         } finally {
