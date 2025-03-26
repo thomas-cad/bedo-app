@@ -6,15 +6,19 @@ import { getDictionary } from "@/app/lib/dictionaries";
 
 type Params = Promise<{ locale: string }>;
 
-export default async function RegisterPage({ params }: { params : Params }) {
-  // Check session on server side
-  const userExists = await sessionUtils.userFromSessionExist();
-  const locale = (await params).locale;
-  const t = await getDictionary(locale);
+export default async function RegisterPage({ params }: { params: Params }) {
+  try {
+    const userExists = await sessionUtils.userFromSessionExist();
+    const locale = (await params).locale;
+    const t = await getDictionary(locale);
 
-  if (userExists) {
-    redirect("/" + locale + '/');
+    if (userExists) {
+      redirect("/" + locale + "/");
+    }
+
+    return <RegisterForm t={t} />;
+  } catch (error) {
+    console.error("Error in RegisterPage:", error);
+    return <div>Error loading page</div>;
   }
-
-  return <RegisterForm t= {t}/>;
 }
