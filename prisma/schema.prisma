@@ -94,3 +94,8 @@ model order_item_size {
   item_size          item_size @relation(fields: [item_sizeId], references: [id])
   order              order     @relation(fields: [orderId], references: [id])
 }
+
+generator erd {
+  provider = "prisma-erd-generator"
+  output   = "./ERD.svg"
+}
