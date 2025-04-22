@@ -1,10 +1,9 @@
-// app/orders/page.tsx (Server Component)
 import { Order } from "@/interfaces";
 import OrderWrapper from "./components/OrderWrapper";
 
 const fetchOrders = async (): Promise<Order[]> => {
   try {
-    const response = await fetch("/api/order", { method: 'GET' });
+    const response = await fetch("http://localhost:3000/api/order", { method: 'GET' });
 
     if (!response.ok) {
       throw new Error('Network response was not ok');

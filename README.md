@@ -1,4 +1,4 @@
-# Bedo App
+# BedBusters App
 
 ## Description
 

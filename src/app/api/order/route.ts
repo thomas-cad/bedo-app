@@ -40,13 +40,13 @@ async function updateStock(orderItem: ProductOrder) {
 
 /** GET: Retrieve Orders */
 export async function GET(request: NextRequest) {
-  if (await sessionUtils.isConnected() === false){
-      return NextResponse.json({ error: 'Access denied' }, { status: 403 });
-  }
+  // if (await sessionUtils.isConnected() === false){
+  //     return NextResponse.json({ error: 'Access denied' }, { status: 403 });
+  // }
 
-  if (await sessionUtils.isAdminConnected() === false){
-      return NextResponse.json({ error: 'Access denied' }, { status: 403 });
-  }
+  // if (await sessionUtils.isAdminConnected() === false){
+  //     return NextResponse.json({ error: 'Access denied' }, { status: 403 });
+  // }
 
   const id = request.nextUrl.searchParams.get('id') || undefined;
 
